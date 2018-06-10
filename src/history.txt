@@ -1,0 +1,667 @@
+****************************************
+IBIS VERSION HISTORY FILE
+*****************************************
+Note - When updating the file, please include at least the following information:
+1) Approximate date of change or release of new beta version
+2) Person who made the change and tested it
+3) Fortran file, subroutines affected by change, 
+   Line numbers (start and end) in new code having the change
+4) Additional remarks about the change
+
+-------------------------------------------------------------------------
+IBIS 2.1 ---> IBIS 2.5b0
+------------------------
+10/27/00
+N.Ramankutty
+Changes:
+1) makefile, --, lines 7-10
+   removed -Ofast compiler option, and replaced with -O2 option
+2) io.f, readit, lines 4189-4190,4195
+   replaced variable name 'rhum' with 'rh' to match CRU05 NetCDF file name
+3) io.f, rdanom, lines 5025-5026,5031
+   replaced variable name 'rhum' with 'rh' to match CRU05 NetCDF file name
+
+-------------------------------------------------------------------------
+IBIS 2.5b0 ---> IBIS 2.5b1
+--------------------------
+11/10 
+C. Delire
+General changes:
+1) introduced implicit none (as implicit.h) in all .f files except ies-io.f 
+2) added the necessary variable declaration in the  .f files
+3) in the variable declaration part : separated variables passed as argument 
+   of the subroutine and local variables
+4) added the necessary variable declaration in all common blocks ( .h files)
+
+Additional changes:
+1) makefile, line 6
+   added implicit.h
+2) biogeochem.f, line 460, 657
+   replaced nleach by ynleach (annual total, added in comsum)
+3) initial.f, initial, line 46, 240-370
+   added call to  subroutine inisum
+4) initial.f, inisum, lines 240-370
+   new subroutine to initialize summation variables used in sumday,
+   summonth and sumyear.
+4) main.f, main, line 277
+   added initialization of istop
+5) physiology.f, stomata, line 389, 748
+   zweight = exp (-1 / 10*24) replaced by zweight = exp (-1 / 10*86400/dtime)
+   to be correct with another timestep than 1 hour.
+6) physiology.f, stomata, lines 712, 800
+   limit csl4 and cscl4 to a minimum value of 1e-8 to avoid division by zero 
+    in computation of gsl4 and gscl4
+7) stats.f, sumday, line 495-501, 547-553
+   added limit on litter and soil carbon decomposition factor to avoid 
+   division by zero at temperatures = 227.13 
+8) stats.f, sumday, lines 515, 567
+   added parenthesis around -800 (necessary for some compilers)
+9) stats.f, sumyear, lines 930-951
+   added calculation of aydwtot : total water recharge in soil+vegetation+snow
+   in 1 year. Added also wtotp and wtot used to calculate aydwtot.
+10) stats.f, gdiag, lots of lines
+    added calculation of total NEE (gnee) and global water recharge (gdwtot)
+11) stats.f, vdiag, lots of lines
+    added calculation of total NEE (vnee) per vegetation type. 
+12) stats-mac.f : same as stats.f
+13) weather.f, daily, lines 302-312
+    rewrote old fortran in fortran 77 
+14) comhyd.h, 
+    added wtot
+15) comsum.h,
+    added aydwtot
+
+-------------------------------------------------------------------------
+IBIS 2.5b1 ---> IBIS 2.5b2
+--------------------------
+11/20
+T. Twine
+Changes:
+The following changes allow two input soil texture files to be read instead
+of one. One is for sand percent and one is for clay percent. 
+Model output from this run is the same as that of 2.5b1. 
+
+1)  comsoi.h, lines 48-51
+    removed tex, added sandpct, claypct, sand, clay
+2)  comsoi.h, common/comsoi5/, line 58-59
+    removed tex, added sandpct, claypct, sand, clay
+3)  biogeochem.f, soilbgc, lines 422-423
+    replaced msand and mclay assignments from old soita.nc input soil texture
+    file with new ones that will assign sand and clay percents from new 
+    soita.sand.nc and soita.clay.nc input files
+4)  initial.f, inisoil, lines 637-638
+    replaced msand and mclay assignments from old soita.nc input soil texture
+    file with new ones that will assign sand and clay percents from new 
+    soita.sand.nc and soita.clay.nc input files for soil surface
+5)  initial.f, inisoil, lines 672-673, 675-676
+    replaced msand and mclay assignments from old soita.nc input soil texture
+    file with new ones that will assign sand and clay percents from new 
+    soita.sand.nc and soita.clay.nc input files for all soil layers
+6)  io.f, readit, lines 4150-4180
+    In reading '3-d soil texture array', changed reading of input file, 
+    soita.nc(variable tex) to soita.sand.nc(variable sand) and 
+    soita.clay.nc(variable clay)
+7)  soil.f, setsoi, lines 51-52
+    replaced msand and mclay assignments from old soita.nc input soil texture
+    file with new ones that will assign sand and clay percents from new 
+    soita.sand.nc and soita.clay.nc input files for all soil layers
+
+-------------------------------------------------------------------------
+IBIS 2.5b2 ---> IBIS 2.5b3
+--------------------------
+11/24
+T. Twine
+Changes:
+This version uses the new weather generator.
+Also, the option of reading daily NCEP anomaly data has been added. 
+A minor change was made to the near infrared reflectance of lower canopy leaves.
+
+New weather generator changes:
+1)  comatm.h, lines 39-40
+    added precipday(npoi,31), precipdaysum(npoi)
+2)  comatm.h, /comatm4/, lines 42-43
+    added precipday, precipdaysum
+3)  comatm.h, lines 52-53
+    added iwetday(npoi,31), iwetdaysum(npoi)
+4)  comatm.h, /comatm6/, line 55
+    added iwetday, iwetdaysum
+5)  initial.f, inisurf, line 75
+    added j
+6)  initial.f, inisurf, lines 107-110
+    added to initialization loop
+7)  main.f, lines 388,390
+    changed call daily to include nanom, iyrlast, nrun in passed
+    variables
+8)  main.f, line 484
+    changed call sumday to include plens in passed variables
+9)  stats.f, sumday, line 279
+    changed subroutine sumday to include plens
+10) stats.f, sumday, lines 323-326
+    added precipfac, plens, niter
+11) stats.f, sumday, lines 371-383
+    added verification of weather generator
+12) weather.f, daily, line 10
+    added nanom, iyrlast, nrun to passed variables
+13) weather.f, daily, lines 135-142
+    added nanom, iyrlast, nrun, precipfac, dif
+14) weather.f, daily, line 244, 254-502
+    changed pwet statement
+    and added block to figure out daily precip for month
+15) weather.f, daily, lines 584-589, 720-728
+    added dataset consistency checks
+16) weather.f, diurnal, lines 935-939
+    added integer checkP, niter, plen, plenmin, plenmax
+17) weather.f, diurnal, line 980
+    added 9001 continue
+18) weather.f, diurnal, lines 1189-1219
+    added block to check hourly precip
+
+NCEP anomaly changes:
+1)  combcs.h, lines 41-55
+    added real declarations to new daily anomaly variables and
+    put them in a new common block, /combcs5/
+2)  io.f, rdday, lines 5326-5418
+    changed filenames, ERROR statements, iyear statement, and arr2vec
+    for all new daily anomaly data variables: prec, temp, trange, cld, 
+    wspd, and sphum
+3)  io-hdf.f, lines 4277-4357 
+    same as 2)
+4)  io-mac-hdf.f, lines 4442-4522
+    same as 2)
+5)  main.f, lines 61, 119, 267, 386, 542
+    changed name of variable, ndprecy, to ndanomy
+6)  main.f, lines 268
+    call new name of daily anomaly file
+7)  main.f, lines 60, 110, 268-269, 387, 543
+    same as 5) and 6)
+7)  weather.f, daily, lines 143-144
+    added real declaration for new local variables
+8)  weather.f, daily, lines 831-882
+    Added new calculations for all weather variables.
+    This new algorithm allows NCEP daily data
+    to be used along with monthly CRU data to calculate better daily data
+    than the CRU monthly data alone. The NCEP data that is read in io.f
+    is not true data but anomalies of the NCEP data (fractional or additive).
+    These statements add or multiply the CRU data by these anomalies. For
+    example, if a particular day's NCEP precipitation is 0.5 mm/day and the 
+    NCEP total month's precipitation is 4.0 mm/day, the day's anomaly is
+    0.125. In the model, the CRU monthly preciptitation is multiplied by 
+    0.125 so that this day's precipitation is 0.125 the monthly value.
+9)  weather.f, daily, lines 862-863
+    note that the calculation for psurf has been moved up since it is
+    needed earlier in the code than before.
+
+Additional change:
+1)  initial.f, iniveg, line 1572
+    corrected rhoveg of lower story, nir leaf reflectance to be equal to value
+    given in Sellers et al., 1996 (was 0.60, now 0.58--minor)
+
+-------------------------------------------------------------------------
+IBIS 2.5b3 ---> IBIS 2.5b4
+--------------------------
+01/11/2001
+J. Lenters
+General changes:
+1) New routine for evaporation from bare soil. Uses the "beta" method (see
+   documentation in code), converted to the "alpha" method for use in IBIS.
+   Tunable parameters in canopy.f include zwopt (currently set to 1.0) and
+   zwdry (currently set to the wilting point). These are the assumed values
+   of surface moisture (soil+puddle) at which soil evaporation is maximum
+   and minimum (~zero), respectively. The new evaporation routine also
+   includes a correction factor to account for the proper "temperature of
+   the evaporating surface" (based on Milly 1992). Finally, the partitioning
+   of soil evaporation between puddle and soil has been modified so that it
+   is proportional to the (assumed) fraction of surface area covered by
+   soil/puddle and liquid/ice. The parameter "zwpmax" in soil.f is currently
+   set to 0.5, but can be considered tunable. It is the assumed fraction of
+   soil surface area covered by puddle when wpud+wipud>=wpudmax.
+2) The lowest sigma level in IBIS has been changed from 0.995 to 0.999 to
+   more closely approximate the 10-m level.
+3) The "dsat" function in comsat.h has been changed to "dqsat" and is now
+   the exact derivation of d(qsat)/dT (no approximations, as in 2.5b3).
+4) New code from Christine Molling has been added to set the rain temperature
+   equal to the wet bulb temperature (instead of air temperature, as before).
+5) Monthly mean air temperature has been added as an output variable. This
+   is because the input and output can be different when the wxgen is used.
+6) Total soil depth has been changed from 12m to 4m.
+7) Modified the reading of monthly anomaly files so that if the end of an
+   anomaly file is reached, IBIS loops back to the beginning of the file.
+   This is for doing long runs by repeatedly using detrended anomaly files.
+8) Minor changes to variable names and comments.
+
+Soil evaporation:
+1) canopy.f
+   - lines 523-526, 604(old): modified list of declared variables
+   - lines 705-730(old): removed old calculation of soil evaporation
+   - lines 792-860: added new calculation of soil evaporation
+2) soil.f
+   - lines 35-41: modified list of declared variables
+   - lines 88-156: changed calculation of fraction of soil evap
+   - lines 306-308: changed comment to warn of negative puddle depths
+
+Lowest sigma level:
+1) canopy.f
+   - lines 118-121: changed siga to 0.999; changed comment
+
+Derivative of saturated specific humidity:
+1) canopy.f
+   - lines 767, 772, 777, 782, 787: changed dsat(t,p) to dqsat(t,q)
+2) comsat.h
+   - lines 61, 65-67: added/modified variable declarations
+   - lines 87-97: changed dsat to desat (derivative of esat, not qsat)
+   - lines 106-110: added function dqsat (like old dsat, but no approx)
+
+Rain temperature:
+1) canopy.f
+   - lines 1721-1723: added variable/function declarations
+   - lines 1753-1761: sets rain temperature to wet bulb temperature
+   - lines 2328-2397: added function twet3 to calculate wet bulb temp
+
+Monthly output of air temperature:
+1) initial.f
+   - line 309: added initialization of variable "amtemp"
+2) io.f (similarly for io-hdf.f, io-hdf-mac.f)
+   - lines 2196-2219: added code to write out "amtemp" every month
+3) stats.f
+   - line 707: calculates monthly mean air temperature (amtemp)
+4) comsum.h
+   - line 47: added declaration of amtemp
+   - lines 80-81: added amtemp to common statement
+
+Soil depth:
+1) initial.f
+   - lines 610-611(old): removed bottom 2 soil layers so that total = 4m
+   - line 664: changed comment
+2) io.f (similarly for io-hdf.f, io-hdf-mac.f)
+   - lines 5509, 5551-5556, 5648, 5762-5783: removed extra diagnostic
+     variables associated with previously deeper soil layers
+3) main.f
+   - lines 27-28: same as for io.f
+4) compar.h
+   - line 72: changed nsoilay from 8 to 6
+
+Monthly anomaly looping; minor comment/variable changes:
+1) io.f (similarly for io-hdf.f, io-hdf-mac.f)
+   - lines 4997, 5026-5031, 5042, 5059: changed old "nanom" to "iyranom,"
+     removed "istop," and added new "nanom" (# of years in anomaly files),
+     "iy2" (last year of run), "jyear" (looping index).
+   - line 5008: change in spacing
+   - line 5056-5062: corrected mistake where anomalies were not being read
+     in correctly at beginning of run.
+   - lines 5063-5085: added contingency that if it's the last month of the
+     run and of the anomaly files, then climatologies are used for January
+     (rather than simply stopping the run when no anomalies are available)
+   - line 5084(old): removed "istop" (for reasons above)
+   - lines 5094-5100, 5104: changed indexing so IBIS loops back to beginning
+     when end of anomaly file is reached (set by nanom in ibis.infile)
+   - lines 5081-5085(old): replaced "istop" with regular stop condition
+2) main.f
+   - lines 45-46, 59, 118, 120, 187, 263, 268: changed old "nanom" to
+     "iyranom," removed "istop," changed "ndanomy" to "iyrdaily," and added
+     new "nanom" (# of years in anomaly files).
+   - lines 276-280, 365: removed istop and added variables in call to rdanom
+   - lines 384, 386, 388, 540: changed variable names ("ndanomy" ->
+     "iyrdaily", "nanom" -> "iyranom")
+   - lines 579-585(old): removed istop condition since looping is allowed
+3) weather.f
+   - lines 10, 64-65, 137, 191, 228, 442, 499, 587, 726: changed variable
+     names ("ipprec" -> "jdaily", "nanom" -> "iyranom")
+4) ibis.infile
+   - lines 4-6: changed "nanom" to "iyranom" and "ndanomy" to "iyrdaily".
+     Also added line 5 to set value for new "nanom" (total number of years
+     in the anomaly files; if the anomaly files differ in length, choose
+     the smallest)
+
+-------------------------------------------------------------------------
+IBIS 2.5b4 ---> IBIS 2.5b5
+--------------------------
+C. Kucharik
+01/18/01
+Detailed Changes
+
+1) biogeochem.f
+   soilbgc
+   - added comatm.h as include file for precip(npoi)
+   - checked changes made by Christine D. and Tracy T.  
+   - line 904: changed value of .014 to 0.014 
+   - changed nitrogen deposition and fixation equations to be called
+     daily instead of once each month (daily precipitation)
+   - lines 1039-1040: changed deposn and fixsoin to be reflective of
+     daily increments depending on daily precipitation
+   - removed cnrf(10) factor from code : removed lines 374-397 to calculate
+     the factor (it was always set to one in the code)
+   - removed cnrf(n) factor from each equation that was computing decomposition
+     and assimilation of carbon (differential equations)
+   - line 1035 : changed value of .012 to 0.012
+
+2) initial.f
+     subroutine inisoil
+   - deleted original lines 710-727 on calculating the minimum distance from
+     soil texture fractions to the nearest corresponding textural class
+   - replaced this logic with call to two functions:
+     lines 749-906  function textcls - assigns textural class
+     lines 907-1054 function inpoly  - checks to see which polygon the sand and
+     clay fractions fall within
+   - lines 1120-1173 moved carbon allocation coefficients here from vegetation.f 
+
+3) comveg.h
+   - added aleaf, aroot, and awood as common block variables
+
+4) vegetation.f
+   - removed declaration of carbon allocation coefficients - they are now placed
+     in initial.f (aleaf(npft), aroot(npft), awood(npft))
+   - made aleaf, aroot, and awood global common variables
+
+5) stats.f
+   - lines 54 and 78: changed units from mol_CO2/m2/s to mol_C/m2/s
+   - lines 59,60    : changed 365.0 to ndaypy
+   - lines 387, 389, 391, 393, 447, 449, 481, 487, 613,
+           705, 707, 709, 712, 714, 716, 734, 736, 738,
+           740, 742,
+           806-829, 843, 849, 872, 963, 971, 985-989
+           1079-1102, 1117-1139, 1165, 1198
+           changed text to be less than 72 characters per line
+
+6) radiation.f
+   iirad
+   - line 872 changed comment about soil and snow emmissivities to 0.95
+
+-------------------------------------------------------------------------
+IBIS 2.5b5 ---> IBIS 2.5b6
+--------------------------
+This step got skipped, because we weren't ready to include the changes
+suggested for this version.
+
+-------------------------------------------------------------------------
+IBIS 2.5b5 ---> IBIS 2.5b7
+--------------------------
+2/12/01
+C. Molling
+General changes:
+
+Updated makefile to include all relevant files in the tardist
+statement; alphabetized it.  Corrected some bugs for workspace
+variable that show up sometimes if you run only a few points.  Put all
+diagnostics activity into a single file called diagnostics.f
+
+Specifics:
+1)makefile
+   - updated version number
+   - added diagnostics.f to appropriate places
+   - rearranged all .h and .f files into alphabetical order
+   - got rid of the hdf and mac versions due to lack of interest
+   - added history to tardist line
+
+2)diagnostics.f
+   - new file which contains all diagnostics-related logic and
+     activities.
+
+3)diag.infile
+   - changed to reflect 6 soil layers instead of 8
+
+4)main.f
+   - moved diagnostics stuff (lines 27-28, 91-92, 138-169, 291-299)
+     to diagnostics.f
+   - included comdiag.h
+   - added call to inidiag
+   - removed call to diaginit
+   - changed call to wdiag
+
+5)io.f
+   - in each subroutine, changed equivalence statements so that
+     workspace is properly allocated if nlon is less than nsoilay
+     or npft (use ndim4 instead of nlon).
+
+6)comwork.h
+   - created ndim4, commented that this must be max of 
+     (nband,nsoilay,nsnolay,npft,nlon,nlat).
+
+-------------------------------------------------------------------------
+IBIS 2.5b7 ---> IBIS 2.5 (final version to be released)
+--------------------------
+2/23/01
+N. Ramankutty
+General Changes:
+This version was created to test the IBIS code with a 300-yr long run at 
+4.0 deg resolution, and change some things before release.
+1) found 2 minor bugs and fixed them. 
+2) made some changes in the README files.
+3) created a 'READMEnotes.txt' file to include some notes on parameter choices
+
+Specifics:
+1) makefile, line 6, included comdiag.h in the list of COMFILES
+2) stats.f, gdiag, line 1351, 
+   * redirected the variable 'gdwtot' to be written to standard output 
+   rather than to fort.200
+3) README-1st.txt:
+   * removed references to the HDF and Mac versions because we are not including 
+   it as part of this release
+   * included the Kucharik et al. (2000) reference.
+4) READMEnotes.txt:
+   * added notes sent by Christine Molling on choice of 'wpudmax'
+   * added notes on soil depth choices
+-------------------------------------------------------------------------
+IBIS 2.5 ---> IBIS 2.5dp (final version to be released)
+--------------------------
+2/23/01
+D. Polzin 
+General Changes:
+1) Did some clean up of the README and the bug found by D.Price in
+   Initial.f the exclamation mark in column 2 of INPOLY causes problems 
+   with the SUN f77 compiler. 
+2) Changed the README files to reflect Soita.sand.nc and Soita.clay.nc
+   * changed from 12 to 13 the number of input files.
+3) Took Main-Mac.f out of the makefile for tardist.
+
+Specifics:
+1) initial.f, lines 913 to 946,
+   * took out the ! and put a C in column 1. 
+2) changed README-1st from 12 to 13 input files.
+3) Changed the list of input files in READMEnet.txt
+-------------------------------------------------------------------------
+3/30/01
+D. Polzin
+1) Exclamation marks deleted on lines
+     initial.f  857,
+2) Use D. Price version of ies-io.f changing the 'netcdf.inc'
+3) Use the D.Price versionof comsat.h
+   duplicate variables declared and fixed.
+     >     p1,       ! pressure argument of function 
+     >     e1,       ! vapor pressure argument of function
+     >     q1,       ! saturation specific humidity argument of function
+4) Take out ko12 in line 84 in physiology.f not used.
+5) Convert Comwork.h to a form that does not have embedded max functions in 
+   parameter statements.
+-------------------------------------------------------------------------
+10/18/01
+D. Polzin
+1) Fixed and checked bug in weather.f that gave bad rainfall in 
+mode without anomalyf
+line 442
+ was    if (iyranom .le. iyrlast+nrun) then
+ DELETE
+ 
+line 498
+ was    end if            !end of the iyranom loop
+ DELETE
+ 
+line 587  (585)
+ was   if ((iday.eq.1).and.(iyranom .le. iyrlast+nrun)) then
+ now   if (iday.eq.1) then
+ 
+line 726  (724)
+ was   if ((iday.eq.1).and.(iyranom .le. iyrlast+nrun)) then
+ now   if (iday.eq.1) then
+
+2) commented out lines in Weather.f that aurelie put in Ibis.out file. 
+c          if (precip(i) .gt. 360) then
+c            print *, 'WARNING: daily precip exceeds 360mm for'
+c            print *, 'year, month, day, gridcell = '
+c            print *, iyear, imonth, iday, i
+c          endif
+-------------------------------------------------------------------------
+11/1/01
+D. Price
+Changes by David Price for IBIS 2.6b1
+
+IBIS Source files:
+
+1. Modified:
+comsoi.h     [added bperm and zwpmax to comsoi1 COMMON block]
+initial.f    [extensive changes in INISOIL and INIVEG designed to replace
+                initialization statements by values obtained
+                from common block variables]
+biogeochem.f [changes in SOILBGC related mainly to soil and litter pools
+                and decay coefficients.
+                Also some comments by Mustapha regarding organic soil
+                -- but I have removed his mods to ensure that code
+               is comparable with the original  \IBIS 2.5 release]
+climate.f    [changes in subroutine EXISTENCE related to climatic constraints]
+physiology.f [extensive changes in STOMATA related to initialization of
+                stomatal and photosynthetic parameters
+                and the determination of Vmax values for different  PFTs]
+soil.f       [small changes in SETSOI and SOILH2O related to    
+                initialization of bperm and zwpmaz]
+vegetation.f [extensive changes throughout DYNAVEG, some of which are
+                related to ACME implementation although
+                I have removed these from the file here.]
+main.f        Add call for rd_param at top of program.
+
+2. New files
+    comtex.h    contains data definitions for soil texture variables
+    compft.h    ditto for PFT parameters (some canopy stuff here too --
+                  could be separated or split with comveg.h)
+    combgc.h    ditto for biogeochem.f
+    comage.h        
+    readpars.f  code to read in parameters from external files. Uses the   
+                three header files to get values into common blocks.
+
+3. Parameter files
+   params.can   canopy parameters
+   params.soi   soil parameters
+   params.veg   vegetation (PFT) parameters. Could be adjustment between
+                t  his and params.can
+   params.hyd      (blank at this point) hydrology parameters
+
+-------------------------------------------------------------------------
+IBIS 2.6b1 ---> IBIS 2.6b2
+--------------------------
+N.Ramankutty & M. El Maayar
+12/06/2001 & 03/14/2002
+To reduce the C02 sensitivity.
+
+Detailed Changes
+1) params.can
+   == change c3 and c4 physiology.
+   - line 64, change alpha3 from 0.6 to 0.8
+   - line 65, change theta3 from 0.97 to 0.95
+   - new line 66, beta3 0.990 ! C3 photosyntheis coupling coefficient
+2) readpars.f
+   - new lines 108-111: 
+   - line 104, change to: goto 1686
+   - added to read in beta3
+3) compft.h
+   - new line 16 & 29, add beta3  
+4) physiology.f
+   - line 164 & 508,  temperature sensitivity coefficient 
+        changed from -5000.0 to -4500.0
+   - line 166 & 510, temperature sensitivity coefficient 
+        changed from  1400.0 to 1500.0
+   - new lines 250-266, added to include sucrose synthesis
+        limited rate of of photosynthesis
+   - new lines 346-362, added to include sucrose synthesis
+        limited rate of of photosynthesis    
+   - new lines 612-628, added to include sucrose synthesis
+        limited rate of of photosynthesis  
+   - new lines 696-712, added to include sucrose synthesis
+        limited rate of of photosynthesis    
+
+-------------------------------------------------------------------------
+IBIS 2.6b2  --- finish 2.6b2
+------------------------
+M. El Maayar
+03/14/2002
+To reduce the C02 sensitivity.
+
+1) Photosynthesis limitation due to inadequate utilization of triose-phosphate
+   was introduced and tested both at leaf and ecosystem scales.
+2) A new equation was added to subroutine co2 in physiology.f. This equation
+   reproduces projected increase of atmospheric co2 based on the IPCC-1996
+   estimates. The old equation was based on the IPCC-92 estimates. IPCC-1996
+   estimates an atm. co2 concentration of 710 ppm while IPCC-1992 projected 
+   an atm. co2 concentration of 800 ppm by year 2100. 
+   
+-------------------------------------------------------------------------
+IBIS 2.6b2  ---> IBIS 2.6b3
+------------------------
+D. Polzin
+03/15-27/2002
+
+1) history.txt 
+   clean up history file with Navin and El Maayar changes.
+2) updated README-1st.txt
+3) io.f - new simdate subroutine 
+   - new lines 5486-5502, uses the fdate (long 24 char date)
+     This eliminates numerous pesky Y2K warning messages.
+   - lines 174, 1574, 2159, 2845 changed to call simdate
+   - lines 117, 1520, 2111, 2794 from char*10 to char*11
+4) comwork.h
+   - ndim4 = nlon instead of max(nlon,nlat,nband, etc
+5) makefile
+   - added info on building on 
+      OS X g77, OS X absoft f77, intel Pentium III g77
+6) io.f 
+   - remove reference to location of netcdf.inc
+   - remove aname
+   - remove lines 5266-5271 which declare nf_open as integer
+7) initial.f 
+   - remove dmin variable not referenced.
+8) stats.f
+   - line 543, fix moist = exp((wfps - 60.0)**2 / (-800.0))
+9) weather.f
+   - line 864, fix data type mismatch, needed 0.
+             cloud(i) = max (0.0, cloud(i))
+10) Created a comprehensive INPUT file readme
+   README_IBIS_INPUT.txt
+
+-------------------------------------------------------------------------
+IBIS 2.6b3  ---> IBIS 2.6b4
+------------------------
+D. Polzin
+09/18/02 
+
+1) igrass bug Aurelie & David Price initial.f bug 22 July
+   - subroutine iniveg (isimveg, irestart)
+   - Aurelie Fix
+*            plai(i,11) = exist(i,11) / float(igrass) * 
+*    >                   plai_init(4,inveg)
+*            plai(i,12) = exist(i,12) / float(igrass) * 
+*    >                   plai_init(4,inveg)
+INSERT
+            if ((inveg.eq.9).or.(inveg.eq.10)) then
+              if (tw(i).gt.22.0) then
+                plai(i,11) = exist(i,11) * 0.80 * plai_init(4,inveg)
+                plai(i,12) = exist(i,12) * 0.20 * plai_init(4,inveg)
+              else
+                plai(i,11) = exist(i,11) * 0.00 * plai_init(4,inveg)
+                plai(i,12) = exist(i,12) * 1.00 * plai_init(4,inveg)
+              endif
+            else
+              plai(i,11) = exist(i,11) / float(igrass) *
+     >                   plai_init(4,inveg)
+              plai(i,12) = exist(i,12) / float(igrass) *
+     >                   plai_init(4,inveg)
+            endif
+2) Stats.f computing GPP badly
+   Navin Ramankutty Sept 02
+   - added new variable in comveg.h nppdummy(npoi,npft)
+      canopy NPP before accounting for stem and root respiration
+   -  added calculation for nppdummy before tgpp for 12 pft's
+   -  changed tgpp to usee agXXX rather than anXXX for 12 pft's
+   -  changed tnpp calculation to utilize nppdummy for 12 pft's 
+   
+    
+-------------------------------------------------------------------------     
+
+
+

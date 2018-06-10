@@ -1,0 +1,213 @@
+c IBIS is written so that diagnostic files containing variable values can
+c be generated during the model run.  These files are space delimited
+c ASCII files which can be imported easily into a spreadsheet or
+c viewed using any text editor.
+c
+c A maximum of 10 files may be output, each corresponding to a specific
+c grid cell, as defined by the user.  Each file, in turn, may contain a
+c maximum of 12 variables.  If variables contain multiple levels of data
+c each level is considered a separate variable.  Values at each requested 
+c time step will be given for each variable.  The user specifies at what
+c year diagnostic output will begin and end. 
+c
+c If no diagnostic output is desired a value of zero should be supplied
+c for the variable idiag in ibis.infile otherwise input the number of 
+c diagnostic files to be generated.
+c
+c For each file that will be generated designate a latitude and longitude
+c value as well as a start and stop year for output. The latitude and
+c longitude should be within the ranges of -180 to 180 longitude and 90 
+c to -90 latitude.  Since output for each time step could be excessive, 
+c nfreq allows the user to output diagnostics for selected time steps.  
+c NOTE: nfreq must be an even factor of niter (niter = int(86400.0/dtime).
+c i.e. mod(niter,nfreq) = 0.
+c For example, if dtime = 3600 sec (1 hour) and nfreq = 24 (niter =24)
+c diagnostic output would be provided once every 24 hours.
+c
+-4.         ! diaglat0      latitude for file 0
+-58.        ! diaglon0      longitude for file 0
+1901        ! diagstart0    begin year for file 0
+1901        ! diagend0      end year for file 0
+24           ! nfreq0        frequency of diagnostic output
+c
+-4.          ! diaglat1      latitude for file 1
+-58.        ! diaglon1      longitude for file 1
+1901        ! diagstart1    begin year for file 1
+1901        ! diagend1      end year for file 1
+24           ! nfreq1        frequency of diagnostic output
+c
+0.          ! diaglat2      latitude for file 2
+0.          ! diaglon2      longitude for file 2
+1901         ! diagstart2    begin year for file 2
+1901        ! diagend2      end year for file 2
+24           ! nfreq2        frequency of diagnostic output
+c
+45.          ! diaglat3      latitude for file 3
+-90.          ! diaglon3      longitude for file 3
+1901           ! diagstart3    begin year for file 3
+1901        ! diagend3      end year for file 3
+24           ! nfreq3        frequency of diagnostic output
+c
+0.          ! diaglat4      latitude for file 4
+0.          ! diaglon4      longitude for file 4
+0           ! diagstart4    begin year for file 4
+0           ! diagend4      end year for file 4
+0           ! nfreq4        frequency of diagnostic output
+c
+0.          ! diaglat5      latitude for file 5
+0.          ! diaglon5      longitude for file 5
+0           ! diagstart5    begin year for file 5
+0           ! diagend5      end year for file 5
+0           ! nfreq5        frequency of diagnostic output
+c
+0.          ! diaglat6      latitude for file 6
+0.          ! diaglon6      longitude for file 6
+0           ! diagstart6    begin year for file 6
+0           ! diagend6      end year for file 6
+0           ! nfreq6        frequency of diagnostic output
+c
+0.          ! diaglat7      latitude for file 7
+0.          ! diaglon7      longitude for file 7
+0           ! diagstart7    begin year for file 7
+0           ! diagend7      end year for file 7
+0           ! nfreq7        frequency of diagnostic output
+c
+0.          ! diaglat8      latitude for file 8
+0.          ! diaglon8      longitude for file 8
+0           ! diagstart8    begin year for file 8
+0           ! diagend8      end year for file 8
+0           ! nfreq8        frequency of diagnostic output
+c
+0.          ! diaglat9      latitude for file 9
+0.          ! diaglon9      longitude for file 9
+0           ! diagstart9    begin year for file 9
+0           ! diagend9      end year for file 9
+0           ! nfreq9        frequency of diagnostic output
+c
+c To select the variables to be output put in a value of 1 in the array
+c below which corresponds to the appropriate variable as listed to the
+c right and the appropriate file as listed at the top of the array.
+c
+c
+c                file - ibis.diag0-9
+c  0    1    2    3    4    5    6    7    8    9
+c--------------------------------------------------
+   1    0    0    0    0    0    0    0    0    0    adco2mic
+   0    0    0    0    0    0    0    0    0    0    adco2root
+   0    1    0    0    0    0    0    0    0    0    adco2soi
+   0    0    0    0    0    0    0    0    0    0    adneetot
+   0    0    0    0    0    0    0    0    0    0    adtsoic
+   0    0    1    0    0    0    0    0    0    0    adwsoic
+   0    0    0    0    0    0    0    0    0    0    amco2root
+   0    0    0    0    0    0    0    0    0    0    amco2soi
+   0    0    0    0    0    0    0    0    0    0    ancl3
+   0    0    0    0    0    0    0    0    0    0    ancl4
+   0    0    0    0    0    0    0    0    0    0    ancub
+   0    0    0    0    0    0    0    0    0    0    ancuc
+   0    0    0    0    0    0    0    0    0    0    asurd nband=1
+   0    0    0    0    0    0    0    0    0    0    asurd nband=2
+   0    0    0    0    0    0    0    0    0    0    asuri nband=1
+   0    0    0    0    0    0    0    0    0    0    asuri nband=2
+   0    0    0    0    0    0    0    0    0    0    ayco2soi
+   0    0    0    0    0    0    0    0    0    0    biomass npft=1
+   0    0    0    0    0    0    0    0    0    0    biomass npft=2
+   0    0    0    0    0    0    0    0    0    0    biomass npft=3
+   0    0    0    0    0    0    0    0    0    0    biomass npft=4
+   0    0    0    0    0    0    0    0    0    0    biomass npft=5
+   0    0    0    0    0    0    0    0    0    0    biomass npft=6
+   0    0    0    0    0    0    0    0    0    0    biomass npft=7
+   0    0    0    0    0    0    0    0    0    0    biomass npft=8
+   0    0    0    0    0    0    0    0    0    0    biomass npft=9
+   0    0    0    0    0    0    0    0    0    0    biomass npft=10
+   0    0    0    0    0    0    0    0    0    0    biomass npft=11
+   0    0    0    0    0    0    0    0    0    0    biomass npft=12
+   0    0    0    0    0    0    0    0    0    0    cloud
+   0    0    0    0    0    0    0    0    0    0    coszen
+   0    0    0    0    0    0    0    0    0    0    fi
+   0    0    0    0    0    0    0    0    0    0    fira
+   0    0    0    0    0    0    0    0    0    0    firb
+   0    0    0    0    0    0    0    0    0    0    frac npft=1
+   0    0    0    0    0    0    0    0    0    0    frac npft=2
+   0    0    0    0    0    0    0    0    0    0    frac npft=3
+   0    0    0    0    0    0    0    0    0    0    frac npft=4
+   0    0    0    0    0    0    0    0    0    0    frac npft=5
+   0    0    0    0    0    0    0    0    0    0    frac npft=6
+   0    0    0    0    0    0    0    0    0    0    frac npft=7
+   0    0    0    0    0    0    0    0    0    0    frac npft=8
+   0    0    0    0    0    0    0    0    0    0    frac npft=9
+   0    0    0    0    0    0    0    0    0    0    frac npft=10
+   0    0    0    0    0    0    0    0    0    0    frac npft=11
+   0    0    0    0    0    0    0    0    0    0    frac npft=12
+   0    0    0    0    0    0    0    0    0    0    gadjust
+   0    0    0    0    0    0    0    0    0    0    gdrain
+   0    0    0    0    0    0    0    0    0    0    ginvap
+   0    0    0    0    0    0    0    0    0    0    grunof
+   0    0    0    0    0    0    0    0    0    0    gsuvap
+   0    0    0    0    0    0    0    0    0    0    gtrans
+   0    0    0    0    0    0    0    0    0    0    gtransl
+   0    0    0    0    0    0    0    0    0    0    gtransu
+   0    0    0    0    0    0    0    0    0    0    hsno nsnolay=1
+   0    0    0    0    0    0    0    0    0    0    hsno nsnolay=2
+   0    0    0    0    0    0    0    0    0    0    hsno nsnolay=3
+   0    0    0    0    0    0    0    0    0    0    hsnotop 
+   0    0    0    0    0    0    0    0    0    0    plai npft=1
+   0    0    0    0    0    0    0    0    0    0    plai npft=2
+   0    0    0    0    0    0    0    0    0    0    plai npft=3
+   0    0    0    0    0    0    0    0    0    0    plai npft=4
+   0    0    0    0    0    0    0    0    0    0    plai npft=5
+   0    0    0    0    0    0    0    0    0    0    plai npft=6
+   0    0    0    0    0    0    0    0    0    0    plai npft=7
+   0    0    0    0    0    0    0    0    0    0    plai npft=8
+   0    0    0    0    0    0    0    0    0    0    plai npft=9
+   0    0    0    0    0    0    0    0    0    0    plai npft=10
+   0    0    0    0    0    0    0    0    0    0    plai npft=11
+   0    0    0    0    0    0    0    0    0    0    plai npft=12
+   0    0    0    0    0    0    0    0    0    0    precip
+   0    0    0    0    0    0    0    0    0    0    psurf
+   0    0    0    0    0    0    0    0    0    0    qa
+   0    0    0    0    0    0    0    0    0    0    raina
+   0    0    0    0    0    0    0    0    0    0    snowa
+   0    0    0    0    0    0    0    0    0    0    solad nband=1
+   0    0    0    0    0    0    0    0    0    0    solad nband=2
+   0    0    0    0    0    0    0    0    0    0    solai nband=1
+   0    0    0    0    0    0    0    0    0    0    solai nband=2
+   0    0    0    0    0    0    0    0    0    0    ta
+   0    0    0    0    0    0    0    0    0    0    td
+   0    0    0    0    0    0    0    0    0    0    tl
+   0    0    0    0    0    0    0    0    0    0    totalit
+   0    0    0    0    0    0    0    0    0    0    totcmic
+   0    0    0    0    0    0    0    0    0    0    totcsoi
+   0    0    0    0    0    0    0    0    0    0    totrlit
+   0    0    0    0    0    0    0    0    0    0    trng
+   0    0    0    0    0    0    0    0    0    0    ts
+   0    0    0    0    0    0    0    0    0    0    tsno nsnolay=1
+   0    0    0    0    0    0    0    0    0    0    tsno nsnolay=2
+   0    0    0    0    0    0    0    0    0    0    tsno nsnolay=3
+   0    0    0    0    0    0    0    0    0    0    tsoi nsoilay=1
+   0    0    0    0    0    0    0    0    0    0    tsoi nsoilay=2
+   0    0    0    0    0    0    0    0    0    0    tsoi nsoilay=3
+   0    0    0    0    0    0    0    0    0    0    tsoi nsoilay=4
+   0    0    0    0    0    0    0    0    0    0    tsoi nsoilay=5
+   0    0    0    0    0    0    0    0    0    0    tsoi nsoilay=6
+   0    0    0    0    0    0    0    0    0    0    tu
+   0    0    0    0    0    0    0    0    0    0    wet
+   0    0    0    0    0    0    0    0    0    0    wipud
+   0    0    0    0    0    0    0    0    0    0    wisoi nsoilay=1
+   0    0    0    0    0    0    0    0    0    0    wisoi nsoilay=2
+   0    0    0    0    0    0    0    0    0    0    wisoi nsoilay=3
+   0    0    0    0    0    0    0    0    0    0    wisoi nsoilay=4
+   0    0    0    0    0    0    0    0    0    0    wisoi nsoilay=5
+   0    0    0    0    0    0    0    0    0    0    wisoi nsoilay=6
+   0    0    0    0    0    0    0    0    0    0    wliql
+   0    0    0    0    0    0    0    0    0    0    wliqs
+   0    0    0    0    0    0    0    0    0    0    wliqu
+   0    0    0    0    0    0    0    0    0    0    wpud
+   0    0    0    0    0    0    0    0    0    0    wsnol
+   0    0    0    0    0    0    0    0    0    0    wsnos
+   0    0    0    0    0    0    0    0    0    0    wsnou
+   0    0    0    0    0    0    0    0    0    0    wsoi nsoilay=1
+   0    0    0    0    0    0    0    0    0    0    wsoi nsoilay=2
+   0    0    0    0    0    0    0    0    0    0    wsoi nsoilay=3
+   0    0    0    0    0    0    0    0    0    0    wsoi nsoilay=4
+   0    0    0    0    0    0    0    0    0    0    wsoi nsoilay=5
+   0    0    0    1    0    0    0    0    0    0    wsoi nsoilay=6
