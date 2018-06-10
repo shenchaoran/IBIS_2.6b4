@@ -1110,6 +1110,10 @@
       ierr = NF_INQ_VARID(idies,varname,idvar)
       if (ierr .ne. NF_NOERR) then
          print *, 'Error in readvar'
+         print *, idies
+         print *, varname
+c TODO         
+         print *, idvar
          print *, NF_STRERROR(ierr)
          ierror = -1
          return

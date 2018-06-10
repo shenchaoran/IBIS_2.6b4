@@ -2,48 +2,41 @@
 
 Compile IBIS by typing '**make ibis**' in the directory which contains the ibis FORTRAN code.  However, before doing so, you may need to edit makefile so that the **F77_OPTIONS**, **INCLUDE_DIRS**, and **LD_OPTIONS_NETCDF** match those on your computer.  The executable will be named 'ibisnetcdf'.  You may move the executable to the directory in which your input/output directories exist.  If so, be sure to move ibis.infile and diag.infile there too.
 
-----------
+IBIS was written and tested on SGI workstations.  We have also successfully run IBIS on a Sun, and on a PC running RedHat Linux.  To our knowledge, only two portions of the code may not be consistent with your platform. The first is the function '**date**'.  The MipsPro compiler on our SGI's returns an 8-character string containing the date.  Some Sun compilers return a 9-character string.  Space is reserved for up to 10 characters (look for the variable cdate in **io.f**).  If your computer's FORTRAN compiler does not have an intrinsic function for date, has a function of a different name, or returns something other than 10 or fewer characters, you'll have to edit io.f accordingly.  Look in wrestart, wdaily, wmonthly, and wyearly for places where you may need to change the code.  If nothing is available for you to use, you may eliminate the reference to the function 'date' and the variable cdate.  It is only used to create a history attribute in the output files.
 
-IBIS was written and tested on SGI workstations.  We have also successfully run IBIS on a Sun, and on a PC running RedHat Linux.  To our knowledge, only two portions of the code may not be consistent with your platform. The first is the function '**date**'.  The MipsPro compiler on our SGI's returns an 8-character string containing the date.  Some Sun compilers return a 9-character string.  Space is reserved for up to 10 characters (look for the variable cdate in io.f).  If your computer's FORTRAN compiler does not have an intrinsic function for date, has a function of a different name, or returns something other than 10 or fewer characters, you'll have to edit io.f accordingly.  Look in wrestart, wdaily, wmonthly, and wyearly for places where you may need to change the code.  If nothing is available for you to use, you may eliminate the reference to the function 'date' and the variable cdate.  It is only used to create a history attribute in the output files.
-
-The second portion of code which may not consistent with your platform is the command '**flush**' in stats.f.  This command is used to update the output in the files 'ibis.out.global' and 'ibis.out.vegtype'.  This prevents your computer from buffering output for these files.  If you do not have a version of flush in your compiler, you may comment out those lines of code.  You may not be able to read output for a particular year in ibis.out.global or ibis.out.vegtype until the program has completed a few extra years.
+The second portion of code which may not consistent with your platform is the command '**flush**' in **stats.f**.  This command is used to update the output in the files 'ibis.out.global' and 'ibis.out.vegtype'.  This prevents your computer from buffering output for these files.  If you do not have a version of flush in your compiler, you may comment out those lines of code.  You may not be able to read output for a particular year in ibis.out.global or ibis.out.vegtype until the program has completed a few extra years.
 
 # input
 
 ## GLOBAL FILES
-------------
 Thirteen input files are required to run IBIS in the standard global mode. These files are not readily available in **netcdf** format. We have them available for redistribution if you agree to properly reference  the original author. Contact us for access to these input files.
 
 ## NETCDF
-------
 NetCDF (network Common Data Form) is an interface for array-oriented data access and a library that provides an implementation of the interface. The netCDF library also defines a machine-independent format for representing scientific data. Together, the interface, library, and format support the creation, access, and sharing of scientific data. The netCDF software was developed at the Unidata Program Center in Boulder, Colorado. The freely available source can be obtained as a compressed tar file or a zip file from Unidata or from other mirror sites.  http://www.unidata.ucar.edu/packages/netcdf
 Version 3.3 or better is needed.
 
 ## RESOLUTION
-----------
 The raw data we use for the global model is at a resolution of 0.5�x 0.5�. We have repackaged it to 1.0�, 2.0� and 4.0� resolutions. You can create your own input data at any resolution.  Some IBIS users have created input data at one-meter resolution to  describe a crop field. 
 
 ## THIRTEEN INPUT FILES
---------------
-| Name | Filename | Description | Units |Source |
-| ----| ----------|----------------------------------    |  ----- |-----------  |
-| cld |  cld.mon.nc   | monthly mean cloudiness | % |CRU |
-| deltat |   deltat.mon.nc   | *(see below) | C  |Oregon |
-| prec |  prec.mon.nc      | monthly mean precipitation rate | mm/day |CRU |
-| rh |  rh.mon.nc    | monthly mean relative humidity | % |CRU |
-| sand |   soita.sand.nc     | percentage of sand | % |IGBP/CONUS |
-| clay |    soita.clay.nc    | percentage of clay | % |IGBP/CONUS	 |
-| surta |  surta.nc     | land mask | 1=land,0=ocean |adapted from ETOPO5 |
-| temp |   temp.mon.nc     | monthly mean temperature | C |CRU |
-| topo |        | topography | m |ETOPO5 |
-| trange |  trange.mon.nc    | monthly mean temperature range | C |CRU |
-| vegtype | vegtype.nc    | initial vegetation types | indexd  |SAGE |
-| wetd | wetd.mon.nc       | mean "wet" days per month | days |CRU |
-| wspd |    wspd.mon.nc    | monthly mean wind speed at sig=0.995 | m/s |CRU |
-> deltat = minimum temp ever recorded at that location minus avg temp of coldest month
+8 met files and 5 site files
+| Name | Filename | Description | Units | Source | Type |
+| ---- | -------- | ----------- | ----- | ------ |-|
+| cld     | cld.mon.nc    | monthly mean cloudiness                                                     | %              | CRU                 | Met |
+| deltat  | deltat.mon.nc | minimum temp ever recorded at that location minus avg temp of coldest month | C              | Oregon              | Met |
+| prec    | prec.mon.nc   | monthly mean precipitation rate                                             | mm/day         | CRU                 | Met |
+| rh      | rh.mon.nc     | monthly mean relative humidity                                              | %              | CRU                 | Met |
+| temp    | temp.mon.nc   | monthly mean temperature                                                    | C              | CRU                 | Met |
+| trange  | trange.mon.nc | monthly mean temperature range                                              | C              | CRU                 | Met |
+| wetd    | wetd.mon.nc   | mean "wet" days per month                                                   | days           | CRU                 | Met |
+| wspd    | wspd.mon.nc   | monthly mean wind speed at sig=0.995                                        | m/s            | CRU                 | Met |
+| sand    | soita.sand.nc | percentage of sand                                                          | %              | IGBP/CONUS          | Site |
+| clay    | soita.clay.nc | percentage of clay                                                          | %              | IGBP/CONUS          | Site |
+| vegtype | vegtype.nc    | initial vegetation types                                                    | indexd         | SAGE                | Site |
+| surta   | surta.nc      | land mask                                                                   | 1=land,0=ocean | adapted from ETOPO5 | Site |
+| topo    | topo.nc       | topography                                                                  | m              | ETOPO5              | Site |
 
 ### CRU - GLOBAL CLIMATE DATASET
-----------------------------
 |-|-|
 |-|-|
 |Institute:|    Climate Research Unit - East Anglia, UK|
@@ -130,7 +123,6 @@ Contact us to download the 13 input files.
 
 Good Luck!
 
-
 # run
 
 1. Set up proper input/output directories in the location from which you will run IBIS:
@@ -142,51 +134,51 @@ Good Luck!
      mkdir restart
      ```
 
-2. Place your input files in input (and input/anom if you have monthly anomalies).  Input files are expected to be in netcdf format and be readable by subroutine readvar (ies-io.f).  Files should have the dimensions of longitude, latitude, an optional 3rd dimension ('level', usually), and time. See subroutines readit, rdanom, rdday, and inird for details.  Subroutine inird is special in that it reads an integer year from the units attribute of the time dimension.  Time units for input, therefore are required to be in the form  'days since yyyy-12-31'.  Optionally, you may have a clock time after the yyyy-mm-dd portion.  Since the yyyy portion of the string is converted to integer with a formatted read statement, it is essential that yyyy sits in the 12th through 15th place in the units string. Also, it is expected that the monthly anomalies begin in January of the year after yyyy (one day since yyyy-12-31) as stored in time's units attribute in all monthly anomaly files, and daily fields begin on January 1st of the year after yyyy as stored in time's units attribute in all daily anomaly files.
+2. Place your input files in input (and input/anom if you have monthly anomalies).  Input files are expected to be in netcdf format and be readable by subroutine **readvar** (ies-io.f).  Files should have the dimensions of longitude, latitude, an optional 3rd dimension ('level', usually), and time. See subroutines readit, rdanom, rdday, and inird for details.  Subroutine inird is special in that it reads an integer year from the units attribute of the time dimension. Time units for input, therefore are required to be in the form  'days since yyyy-12-31'.  Optionally, you may have a clock time after the yyyy-mm-dd portion. Since the yyyy portion of the string is converted to integer with a formatted read statement, it is essential that yyyy sits in the 12th through 15th place in the units string. Also, it is expected that the monthly anomalies begin in January of the year after yyyy (one day since yyyy-12-31) as stored in time's units attribute in all monthly anomaly files, and daily fields begin on January 1st of the year after yyyy as stored in time's units attribute in all daily anomaly files.
 
     *subroutine readit*:
-    |input file name	|     when used|     variable name|  3rd dimension|
-    |-------------------|  ------------|  ------------- | -------------|
-    |input/surta.nc     |  always      |  surta         | layer|
-    |input/topo.nc      |  always      |  topo          | level|
-    |input/vegtype.nc   |  isimveg <= 1|  vegtype       | level|
-    |input/soita.sand.nc|  always      |  sandpct       | layer|
-    |input/soita.clay.nc|  always      |  claypct       | layer|
-    |input/deltat.nc    |  always      |  deltat        | level|
-    |input/wetd.mon.nc  |  always      |  wetd          | level|
-    |input/temp.mon.nc  |  always      |  temp          | level|
-    |input/trange.mon.nc|  always      |  trange        | level|
-    |input/prec.mon.nc  |  always      |  prec          | level|
-    |input/wspd.mon.nc  |  always      |  wspd          | level|
-    |input/cld.mon.nc   |  always      |  cld           | level|
-    input/rh.mon.nc     | always       | rh             |level|
+    | input file name     | **when used** | variable name | 3rd dimension |
+    | ------------------- | ------------- | ------------- | ------------- |
+    | input/surta.nc      | always        | surta         | layer         |
+    | input/topo.nc       | always        | topo          | level         |
+    | input/vegtype.nc    | isimveg <= 1  | vegtype       | level         |
+    | input/soita.sand.nc | always        | sandpct       | layer         |
+    | input/soita.clay.nc | always        | claypct       | layer         |
+    | input/deltat.nc     | always        | deltat        | level         |
+    | input/wetd.mon.nc   | always        | wetd          | level         |
+    | input/temp.mon.nc   | always        | temp          | level         |
+    | input/trange.mon.nc | always        | trange        | level         |
+    | input/prec.mon.nc   | always        | prec          | level         |
+    | input/wspd.mon.nc   | always        | wspd          | level         |
+    | input/cld.mon.nc    | always        | cld           | level         |
+    | input/rh.mon.nc     | always        | rh            | level         |
 
     *subroutine rdanom*:
-    |input file name           |  when used         |  variable name|  3rd dimension|
-    |--------------------------|  ----------------- |  -------------|  -------------|
-    |input/anom/temp.danom.nc  |  monthly anomalies |  temp         |  level|
-    |input/anom/trange.danom.nc|  monthly anomalies |  trange       |  level|
-    |input/anom/prec.danom.nc  |  monthly anomalies |  prec         |  level|
-    |input/anom/cld.danom.nc   |  monthly anomalies |  cld          |  level|
-    |input/anom/rhum.danom.nc  |  monthly anomalies |  rhum         |  level|
-    |input/anom/wspd.danom.nc  |  monthly anomalies |  wspd         |  level|
-    |input/anom/wetd.danom.nc  |  monthly anomalies |  wetd         |  level|
+    | input file name            | **when used**     | variable name | 3rd dimension |
+    | -------------------------- | ----------------- | ------------- | ------------- |
+    | input/anom/temp.danom.nc   | monthly anomalies | temp          | level         |
+    | input/anom/trange.danom.nc | monthly anomalies | trange        | level         |
+    | input/anom/prec.danom.nc   | monthly anomalies | prec          | level         |
+    | input/anom/cld.danom.nc    | monthly anomalies | cld           | level         |
+    | input/anom/rhum.danom.nc   | monthly anomalies | rhum          | level         |
+    | input/anom/wspd.danom.nc   | monthly anomalies | wspd          | level         |
+    | input/anom/wetd.danom.nc   | monthly anomalies | wetd          | level         |
 
     *subroutine rdday*:
-    |input file name        |when used    |variable name  |3rd dimension|
-    |---------------------  |-----------  |-------------  |-------------|
-    |input/prec.daily.nc    |daily means  |prec           |level|
-    |input/temp.daily.nc    |daily means  |temp           |level|
-    |input/trange.daily.nc  |daily means  |trange         |level|
-    |input/cld.daily.nc     |daily means  |cld            |level|
-    |input/wspd.daily.nc    |daily means  |wspd           |level|
-    |input/sphum.daily.nc   |daily means  |sphum          |level|
+    | input file name       | **when used** | variable name | 3rd dimension |
+    | --------------------- | ------------- | ------------- | ------------- |
+    | input/prec.daily.nc   | daily means   | prec          | level         |
+    | input/temp.daily.nc   | daily means   | temp          | level         |
+    | input/trange.daily.nc | daily means   | trange        | level         |
+    | input/cld.daily.nc    | daily means   | cld           | level         |
+    | input/wspd.daily.nc   | daily means   | wspd          | level         |
+    | input/sphum.daily.nc  | daily means   | sphum         | level         |
 
     *subroutine inird*:
-    |input file name        | when used        | variable name | 3rd dimension|
-    |---------------------- | ---------------- | ------------- | -------------|
-    |input/prec.daily.nc    | daily means      | prec          | not used|
-    |input/anom/temp.mon.nc | monthly anomalies| temp          | not used|
+    | input file name        | **when used**     | variable name | 3rd dimension |
+    | ---------------------- | ----------------- | ------------- | ------------- |
+    | input/prec.daily.nc    | daily means       | prec          | not used      |
+    | input/anom/temp.mon.nc | monthly anomalies | temp          | not used      |
 
 3. Edit **compar.h** so that the following parameters are valid for your particular input data:
     - **nlon** - integer number of grid cells in the east-west direction.
@@ -233,11 +225,11 @@ Good Luck!
 
     Each time you run ibis with diagnostics output turned on, you may wish to remove any old diagnostic files.  Any existing diagnostic files will have output appended to them.
 
-6. To run IBIS, type 'ibis' while in the directory which contains the ibis executable and the input/output directories.  To run ibis in the background and capture all screen output to a file, type 'ibisnetcdf >& ibisnetcdf.out &' instead (without the quotes).  All screen output, including system error messages, will be written to ibisnetcdf.out.
+6. To run IBIS, type 'ibis' while in the directory which contains the ibis executable and the input/output directories.  To run ibis in the background and capture all screen output to a file, type 'ibis >& ibis.out &' instead (without the quotes).  All screen output, including system error messages, will be written to ibis.out.
 
-7. You do not need to recompile if you do a restart.  Just edit ibis.infile.  You must recompile if you want to run over a different number of land points (subsetting) or for a different resolution.  In either case, you must change compar.h and therefore recompile.  You may not restart if you change the number of points, location of points, or resolution.  If you run ibis a second time in the same working directory, but do not do a restart, all output files (except diagnostic files) will be overwritten.
+1. You do not need to recompile if you do a restart.  Just edit ibis.infile.  You must recompile if you want to run over a different number of land points (subsetting) or for a different resolution.  In either case, you must change compar.h and therefore recompile.  You may not restart if you change the number of points, location of points, or resolution. If you run ibis a second time in the same working directory, but do not do a restart, all output files (except diagnostic files) will be overwritten.
 
-8. If you wish to change input or output files, read the comments at the end of io.f before making any changes.  Those comments explain the syntax of read/write calls and give examples.
+8. If you wish to change input or output files, read the comments at the end of **io.f** before making any changes.  Those comments explain the syntax of read/write calls and give examples.
 
 # parameter
 ## choice of 'wpudmax' parameter
