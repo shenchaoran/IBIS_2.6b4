@@ -1,4 +1,4 @@
-./debug
-./build
-./IBIS_input
-./params
+./debug/*
+./build/*
+./IBIS_input/*
+./params/*
