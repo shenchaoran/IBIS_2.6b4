@@ -227,7 +227,7 @@ Good Luck!
 
 6. To run IBIS, type 'ibis' while in the directory which contains the ibis executable and the input/output directories.  To run ibis in the background and capture all screen output to a file, type 'ibis >& ibis.out &' instead (without the quotes).  All screen output, including system error messages, will be written to ibis.out.
 
-1. You do not need to recompile if you do a restart.  Just edit ibis.infile.  You must recompile if you want to run over a different number of land points (subsetting) or for a different resolution.  In either case, you must change compar.h and therefore recompile.  You may not restart if you change the number of points, location of points, or resolution. If you run ibis a second time in the same working directory, but do not do a restart, all output files (except diagnostic files) will be overwritten.
+1. You do not need to recompile if you do a restart.  Just edit ibis.infile.  *You must recompile if you want to run over a different number of land points (subsetting) or for a different resolution*.  In either case, you must change compar.h and therefore recompile.  You may not restart if you change the number of points, location of points, or resolution. If you run ibis a second time in the same working directory, but do not do a restart, all output files (except diagnostic files) will be overwritten.
 
 8. *If you wish to change input or output files, read the comments at the end of **io.f** before making any changes*.  Those comments explain the syntax of read/write calls and give examples.
 
