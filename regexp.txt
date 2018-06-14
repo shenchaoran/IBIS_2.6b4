@@ -1,0 +1,2 @@
+event json
+{\n"id": "--$1",\n"name": "$1",\n"schemaId": "netcdf",\n"description": "",\n"ext": ".nc"\n"optional": 0\n},
