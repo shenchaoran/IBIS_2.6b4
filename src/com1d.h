@@ -5,7 +5,7 @@ c -----
 c
 c canopy scaling terms (Ramankutty, 1998 in progress)
 c
-      real    
+      real
      >  terml(npoi,7),     ! term needed in lower canopy scaling
      >  termu(npoi,7)      ! term needed in upper canopy scaling
 c

@@ -932,7 +932,7 @@
 *     ierror - integer - error code = 0 if no error, < 0 if error occurred
 
       character*(*) filen, varname
-      character*10 dates(*)
+      character*50 dates(*)
       integer istart(*), icount(*), ierror
       real values(*), times(*), tweights(*)
 

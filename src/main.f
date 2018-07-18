@@ -17,9 +17,11 @@ c
       include 'compar.h'
       include 'comatm.h'
       include 'comdiag.h'
+      include 'argvs.h'
 c
 c local variables
 c
+
       integer icount,        ! number of times ran2 is called (for restart)
      >        icountdum      !
 c
@@ -95,9 +97,136 @@ c
 c open local input file called 'ibis.infile'
 c and read in pertinent information
 c
-      lun = 12
-      open (lun, status='old', file='ibis.infile')
+      character dirname*100
+      integer status
+
 c
+c tell user about the simulation
+c
+      write (*,*) ' '
+      write (*,*) '****************************************'
+      write (*,*) '* IBIS: Integrated BIosphere Simulator *'
+      write (*,*) '* Version 2.6b3                        *'
+      write (*,*) '* March 2002                           *'
+      write (*,*) '****************************************'
+      write (*,*) ' '
+
+
+      write (*,*) ' '
+      write (*,*) '****************************************'
+      write (*,*) '              parsing argc'
+      call parseArgv
+      write(*,*) 'ini_infile = ', ini_infile_
+      write(*,*) 'diag_infile = ', diag_infile_
+      write(*,*) 'cld_mon = ', cld_mon_
+      write(*,*) 'deltat_mon = ', deltat_mon_
+      write(*,*) 'prec_mon = ', prec_mon_
+      write(*,*) 'rh_mon = ', rh_mon_
+      write(*,*) 'temp_mon = ', temp_mon_
+      write(*,*) 'trange_mon = ', trange_mon_
+      write(*,*) 'wetd_mon = ', wetd_mon_
+      write(*,*) 'wspd_mon = ', wspd_mon_
+      write(*,*) 'soita_sand = ', soita_sand_
+      write(*,*) 'soita_clay = ', soita_clay_
+      write(*,*) 'vegtype = ', vegtype_
+      write(*,*) 'surta = ', surta_
+      write(*,*) 'topo = ', topo_
+      write(*,*) 'params_can = ', params_can_
+      write(*,*) 'params_hyd = ', params_hyd_
+      write(*,*) 'params_soi = ', params_soi_
+      write(*,*) 'params_veg = ', params_veg_
+      write(*,*) 'out_yearly_aet = ', out_yearly_aet_
+      write(*,*) 'out_yearly_biomass = ', out_yearly_biomass_
+      write(*,*) 'out_yearly_co2fluxes = ', out_yearly_co2fluxes_
+      write(*,*) 'out_yearly_csoi = ', out_yearly_csoi_
+      write(*,*) 'out_yearly_disturbf = ', out_yearly_disturbf_
+      write(*,*) 'out_yearly_exist = ', out_yearly_exist_
+      write(*,*) 'out_yearly_fcover = ', out_yearly_fcover_
+      write(*,*) 'out_yearly_npp = ', out_yearly_npp_
+      write(*,*) 'out_yearly_nsoi = ', out_yearly_nsoi_
+      write(*,*) 'out_yearly_plai = ', out_yearly_plai_
+      write(*,*) 'out_yearly_runoff = ', out_yearly_runoff_
+      write(*,*) 'out_yearly_sens = ', out_yearly_sens_
+      write(*,*) 'out_yearly_tsoi = ', out_yearly_tsoi_
+      write(*,*) 'out_yearly_vegtype0 = ', out_yearly_vegtype0_
+      write(*,*) 'out_yearly_wsoi = ', out_yearly_wsoi_
+      write(*,*) 'out_yearly_zcanopy = ', out_yearly_zcanopy_
+      write(*,*) 'out_yearly_sapfrac = ', out_yearly_sapfrac_
+      write(*,*) 'out_yearly_dummyv = ', out_yearly_dummyv_
+      write(*,*) 'out_yearly_solar = ', out_yearly_solar_
+      write(*,*) 'out_yearly_albedo = ', out_yearly_albedo_
+      write(*,*) 'out_yearly_latent = ', out_yearly_latent_
+      write(*,*) 'out_yearly_totfall = ', out_yearly_totfall_
+      write(*,*) 'out_yearly_clitw = ', out_yearly_clitw_
+      write(*,*) 'out_yearly_csoislo = ', out_yearly_csoislo_
+      write(*,*) 'out_yearly_csoipas = ', out_yearly_csoipas_
+      write(*,*) 'out_monthly_aet = ', out_monthly_aet_
+      write(*,*) 'out_monthly_cloud = ', out_monthly_cloud_
+      write(*,*) 'out_monthly_co2ratio = ', out_monthly_co2ratio_
+      write(*,*) 'out_monthly_ir = ', out_monthly_ir_
+      write(*,*) 'out_monthly_lai = ', out_monthly_lai_
+      write(*,*) 'out_monthly_latent = ', out_monthly_latent_
+      write(*,*) 'out_monthly_npptot = ', out_monthly_npptot_
+      write(*,*) 'out_monthly_qa = ', out_monthly_qa_
+      write(*,*) 'out_monthly_rain = ', out_monthly_rain_
+      write(*,*) 'out_monthly_rh = ', out_monthly_rh_
+      write(*,*) 'out_monthly_runoff = ', out_monthly_runoff_
+      write(*,*) 'out_monthly_sens = ', out_monthly_sens_
+      write(*,*) 'out_monthly_snod = ', out_monthly_snod_
+      write(*,*) 'out_monthly_snof = ', out_monthly_snof_
+      write(*,*) 'out_monthly_snow = ', out_monthly_snow_
+      write(*,*) 'out_monthly_solar = ', out_monthly_solar_
+      write(*,*) 'out_monthly_temp = ', out_monthly_temp_
+      write(*,*) 'out_monthly_tsoi = ', out_monthly_tsoi_
+      write(*,*) 'out_monthly_wsoi = ', out_monthly_wsoi_
+      write(*,*) 'out_monthly_albedo = ', out_monthly_albedo_
+      write(*,*) 'out_monthly_dummyv = ', out_monthly_dummyv_
+      write(*,*) 'out_daily_rain = ', out_daily_rain_
+      write(*,*) 'out_daily_cloud = ', out_daily_cloud_
+      write(*,*) 'out_daily_rh = ', out_daily_rh_
+      write(*,*) 'out_daily_snow = ', out_daily_snow_
+      write(*,*) 'out_daily_aet = ', out_daily_aet_
+      write(*,*) 'out_daily_trunoff = ', out_daily_trunoff_
+      write(*,*) 'out_daily_srunoff = ', out_daily_srunoff_
+      write(*,*) 'out_daily_drainage = ', out_daily_drainage_
+      write(*,*) 'out_daily_wsoi = ', out_daily_wsoi_
+      write(*,*) 'out_daily_wisoi = ', out_daily_wisoi_
+      write(*,*) 'out_daily_snod = ', out_daily_snod_
+      write(*,*) 'out_daily_snof = ', out_daily_snof_
+      write(*,*) 'out_daily_co2ratio = ', out_daily_co2ratio_
+      write(*,*) 'out_daily_co2mic = ', out_daily_co2mic_
+      write(*,*) 'out_daily_templ = ', out_daily_templ_
+      write(*,*) 'out_daily_zcanopy = ', out_daily_zcanopy_
+      write(*,*) 'out_daily_laicanopy = ', out_daily_laicanopy_
+      write(*,*) 'out_global = ', out_global_
+      write(*,*) 'out_vegtype = ', out_vegtype_
+      write(*,*) 'out_yearsrun = ', out_yearsrun_
+      write(*,*) 'temp_danom = ', temp_danom_
+      write(*,*) 'trange_danom = ', trange_danom_
+      write(*,*) 'prec_danom = ', prec_danom_
+      write(*,*) 'cld_danom = ', cld_danom_
+      write(*,*) 'rh_danom = ', rh_danom_
+      write(*,*) 'wspd_danom = ', wspd_danom_
+      write(*,*) 'wetd_danom = ', wetd_danom_
+      write(*,*) 'prec_daily = ', prec_daily_
+      write(*,*) 'temp_daily = ', temp_daily_
+      write(*,*) 'trange_daily = ', trange_daily_
+      write(*,*) 'cld_daily = ', cld_daily_
+      write(*,*) 'wspd_daily = ', wspd_daily_
+      write(*,*) 'sphum_daily = ', sphum_daily_
+      write(*,*) 'prec_fanom = ', prec_fanom_
+      write(*,*) 'trange_fanomc = ', trange_fanomc_
+      write(*,*) 'wspd_fanomc = ', wspd_fanomc_
+      write(*,*) 'deltat = ', deltat_
+      write(*,*) 'sphum_fanom = ', sphum_fanom_
+      write (*,*) 'parse argvs finished!'
+      write (*,*) '****************************************'
+      write (*,*) ' '
+
+      lun = 12
+      status = getcwd(dirname)
+      write (*,*) dirname, status
+      open (lun, status='old', file=ini_infile_)
       read (lun,*) irestart
       read (lun,*) iyear0
       read (lun,*) nrun
@@ -119,18 +248,20 @@ c
       read (lun,*,end=99) ssouth
       read (lun,*,end=99) swest
       read (lun,*,end=99) seast
-c
+c     read (lun,*) nlon
+c     read (lun,*) nlat
+c     read (lun,*) npoi
+c     read (lun,*) xres
+c     read (lun,*) yres
+c     read (lun,*) nband
+c     read (lun,*) nsoilay
+c     read (lun,*) nsnolay
+c     read (lun,*) npft
  99   close (lun)
-c
-c tell user about the simulation
-c
-      write (*,*) ' '
-      write (*,*) '****************************************'
-      write (*,*) '* IBIS: Integrated BIosphere Simulator *'
-      write (*,*) '* Version 2.6b3                        *'
-      write (*,*) '* March 2002                           *'
-      write (*,*) '****************************************'
-      write (*,*) ' '
+
+      call testCommon(5)
+c     allocate(garea(npoi))
+c     allocate(vzero(npoi))
 c
       if (irestart .eq. 1) then
         write (*,*) 'running in restart mode'
@@ -175,7 +306,7 @@ c check for restart conditions and set "iyrlast" accordingly, open
 c ibis.annual in append mode
 c
       if (irestart .eq. 1) then
-        open (13, status='old', file='yearsrun.dat', err=9050)
+        open (13, status='old', file= out_yearsrun_, err=9050)
         read (13,*) iyrlast
         close (13)
         goto 9059
@@ -183,8 +314,8 @@ c
      >   //' restart, but yearsrun.dat not found'
         write (*,*) 'beginning from ', iyear0
         iyrlast = iyear0 - 1
- 9059   open(20,file='ibis.out.global',status='unknown',access='append')
-        open(30,file='ibis.out.vegtype',status='unknown',
+ 9059   open(20,file=out_global_,status='unknown',access='append')
+        open(30,file=out_vegtype_,status='unknown',
      >       access='append')
       else
         iyrlast = iyear0 - 1
@@ -223,12 +354,14 @@ c
 c initialize monthly anomalies, daily means if needed
 c
       if(iyranom .le. iyrlast+nrun) then
-        call inird('input/anom/temp.danom.nc',istyrm)
+c       call inird('input/anom/temp.danom.nc',istyrm)
+        call inird(temp_danom_,istyrm)
         if (istyrm .le. 0) istyrm = 9999
       end if
 c
       if (iyrdaily .le. iyrlast+nrun) then
-        call inird('input/anom/daily/prec.fanom.nc',istyrd)
+c       call inird('input/anom/daily/prec.fanom.nc',istyrd)
+        call inird(prec_fanom_,istyrd)
         if (istyrd .le. 0) istyrd = 9999
       end if
 c
@@ -468,6 +601,10 @@ c
               write (*,*) ' '
               call wdaily (nday, iyear, iyear0) 
             endif
+
+            progress_ =  ((iyear-iy1)*365 + (imonth-1) * 30 + iday)
+     >                      / 3.65/(iy2-iy1+1)
+            write (*,920) progress_
 c
 c end of the daily loop
 c
@@ -523,7 +660,7 @@ c
 c update iyrlast value and file yearsrun.dat
 c
         iyrlast = iyrlast + 1
-        open(12,file='yearsrun.dat',status='unknown')
+        open(12,file= out_yearsrun_, status='unknown')
         write(12,*) iyrlast
         close(12)
 c
@@ -534,6 +671,8 @@ c
 c end of the simulation
 c
       write (*,*) ' '
+      progress_=100.0
+      write (*,920) progress_
       write (*,*) '*** end of run ***'
       write (*,*) ' '
 c
@@ -553,6 +692,7 @@ c
       include 'com1d.h'
       include 'comatm.h'
       include 'comsoi.h'
+      include 'argvs.h'
 c
 c Local variables
 c
@@ -637,3 +777,288 @@ c
       return
       end
 c 
+
+      subroutine testCommon(N)
+      integer N
+      real :: X(N)
+
+      return
+      end
+
+      subroutine parseArgv
+
+      include 'argvs.h'
+
+      integer argc_, argcI_, filePathStart_
+      character*100, dimension(50):: argvs_
+      character*100 fileTag_, tempStr_, inputFPath_
+
+      argc_ = iargc()
+      if(argc_ < 13) then
+          print 377, 'invalid argc number, you must input at lease 14 argc'
+          stop
+      end if
+
+      do argcI_=1, argc_
+          tempStr_ = argvs_(argcI_)
+          call getarg(argcI_, tempStr_)
+          filePathStart_ = index(tempStr_, '=')
+          if(filePathStart_ == 0) then
+              print 377, 'invalid file path argvs, the file&
+     & path must as a prefix of "--tag="!'
+              stop
+          end if
+
+          fileTag_ = trim(tempStr_(:filePathStart_))
+          inputFPath_ = tempStr_(filePathStart_+1:)
+
+       if(fileTag_ == '--ini_infile_=') then
+            ini_infile_ = inputFPath_
+       elseif(fileTag_ == '--diag_infile_=') then
+            diag_infile_ = inputFPath_
+       elseif(fileTag_ == '--cld_mon_=') then
+            cld_mon_ = inputFPath_
+       elseif(fileTag_ == '--deltat_mon_=') then
+            deltat_mon_ = inputFPath_
+       elseif(fileTag_ == '--prec_mon_=') then
+            prec_mon_ = inputFPath_
+       elseif(fileTag_ == '--rh_mon_=') then
+            rh_mon_ = inputFPath_
+       elseif(fileTag_ == '--temp_mon_=') then
+            temp_mon_ = inputFPath_
+       elseif(fileTag_ == '--trange_mon_=') then
+            trange_mon_ = inputFPath_
+       elseif(fileTag_ == '--wetd_mon_=') then
+            wetd_mon_ = inputFPath_
+       elseif(fileTag_ == '--wspd_mon_=') then
+            wspd_mon_ = inputFPath_
+       elseif(fileTag_ == '--soita_sand_=') then
+            soita_sand_ = inputFPath_
+       elseif(fileTag_ == '--soita_clay_=') then
+            soita_clay_ = inputFPath_
+       elseif(fileTag_ == '--vegtype_=') then
+            vegtype_ = inputFPath_
+       elseif(fileTag_ == '--surta_=') then
+            surta_ = inputFPath_
+       elseif(fileTag_ == '--topo_=') then
+            topo_ = inputFPath_
+       elseif(fileTag_ == '--params_can_=') then
+            params_can_ = inputFPath_
+       elseif(fileTag_ == '--params_hyd_=') then
+            params_hyd_ = inputFPath_
+       elseif(fileTag_ == '--params_soi_=') then
+            params_soi_ = inputFPath_
+       elseif(fileTag_ == '--params_veg_=') then
+            params_veg_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_aet_=') then
+            out_yearly_aet_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_biomass_=') then
+            out_yearly_biomass_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_co2fluxes_=') then
+            out_yearly_co2fluxes_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_csoi_=') then
+            out_yearly_csoi_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_disturbf_=') then
+            out_yearly_disturbf_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_exist_=') then
+            out_yearly_exist_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_fcover_=') then
+            out_yearly_fcover_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_npp_=') then
+            out_yearly_npp_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_nsoi_=') then
+            out_yearly_nsoi_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_plai_=') then
+            out_yearly_plai_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_runoff_=') then
+            out_yearly_runoff_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_sens_=') then
+            out_yearly_sens_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_tsoi_=') then
+            out_yearly_tsoi_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_vegtype0_=') then
+            out_yearly_vegtype0_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_wsoi_=') then
+            out_yearly_wsoi_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_zcanopy_=') then
+            out_yearly_zcanopy_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_sapfrac_=') then
+            out_yearly_sapfrac_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_dummyv_=') then
+            out_yearly_dummyv_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_solar_=') then
+            out_yearly_solar_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_albedo_=') then
+            out_yearly_albedo_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_latent_=') then
+            out_yearly_latent_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_totfall_=') then
+            out_yearly_totfall_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_clitw_=') then
+            out_yearly_clitw_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_csoislo_=') then
+            out_yearly_csoislo_ = inputFPath_
+       elseif(fileTag_ == '--out_yearly_csoipas_=') then
+            out_yearly_csoipas_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_aet_=') then
+            out_monthly_aet_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_cloud_=') then
+            out_monthly_cloud_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_co2ratio_=') then
+            out_monthly_co2ratio_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_ir_=') then
+            out_monthly_ir_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_lai_=') then
+            out_monthly_lai_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_latent_=') then
+            out_monthly_latent_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_npptot_=') then
+            out_monthly_npptot_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_qa_=') then
+            out_monthly_qa_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_rain_=') then
+            out_monthly_rain_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_rh_=') then
+            out_monthly_rh_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_runoff_=') then
+            out_monthly_runoff_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_sens_=') then
+            out_monthly_sens_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_snod_=') then
+            out_monthly_snod_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_snof_=') then
+            out_monthly_snof_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_snow_=') then
+            out_monthly_snow_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_solar_=') then
+            out_monthly_solar_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_temp_=') then
+            out_monthly_temp_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_tsoi_=') then
+            out_monthly_tsoi_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_wsoi_=') then
+            out_monthly_wsoi_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_albedo_=') then
+            out_monthly_albedo_ = inputFPath_
+       elseif(fileTag_ == '--out_monthly_dummyv_=') then
+            out_monthly_dummyv_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_rain_=') then
+            out_daily_rain_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_cloud_=') then
+            out_daily_cloud_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_rh_=') then
+            out_daily_rh_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_snow_=') then
+            out_daily_snow_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_aet_=') then
+            out_daily_aet_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_trunoff_=') then
+            out_daily_trunoff_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_srunoff_=') then
+            out_daily_srunoff_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_drainage_=') then
+            out_daily_drainage_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_wsoi_=') then
+            out_daily_wsoi_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_wisoi_=') then
+            out_daily_wisoi_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_snod_=') then
+            out_daily_snod_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_snof_=') then
+            out_daily_snof_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_co2ratio_=') then
+            out_daily_co2ratio_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_co2mic_=') then
+            out_daily_co2mic_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_templ_=') then
+            out_daily_templ_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_zcanopy_=') then
+            out_daily_zcanopy_ = inputFPath_
+       elseif(fileTag_ == '--out_daily_laicanopy_=') then
+            out_daily_laicanopy_ = inputFPath_
+       elseif(fileTag_ == '--temp_danom_=') then
+            temp_danom_ = inputFPath_
+       elseif(fileTag_ == '--trange_danom_=') then
+            trange_danom_ = inputFPath_
+       elseif(fileTag_ == '--prec_danom_=') then
+            prec_danom_ = inputFPath_
+       elseif(fileTag_ == '--cld_danom_=') then
+            cld_danom_ = inputFPath_
+       elseif(fileTag_ == '--rh_danom_=') then
+            rh_danom_ = inputFPath_
+       elseif(fileTag_ == '--wspd_danom_=') then
+            wspd_danom_ = inputFPath_
+       elseif(fileTag_ == '--wetd_danom_=') then
+            wetd_danom_ = inputFPath_
+       elseif(fileTag_ == '--prec_daily_=') then
+            prec_daily_ = inputFPath_
+       elseif(fileTag_ == '--temp_daily_=') then
+            temp_daily_ = inputFPath_
+       elseif(fileTag_ == '--trange_daily_=') then
+            trange_daily_ = inputFPath_
+       elseif(fileTag_ == '--cld_daily_=') then
+            cld_daily_ = inputFPath_
+       elseif(fileTag_ == '--wspd_daily_=') then
+            wspd_daily_ = inputFPath_
+       elseif(fileTag_ == '--sphum_daily_=') then
+            sphum_daily_ = inputFPath_
+       elseif(fileTag_ == '--prec_fanom_=') then
+            prec_fanom_ = inputFPath_
+       elseif(fileTag_ == '--trange_fanomc_=') then
+            trange_fanomc_ = inputFPath_
+       elseif(fileTag_ == '--wspd_fanomc_=') then
+            wspd_fanomc_ = inputFPath_
+       elseif(fileTag_ == '--sphum_fanom_=') then
+            sphum_fanom_ = inputFPath_
+       elseif(fileTag_ == '--deltat_=') then
+            deltat_ = inputFPath_
+       elseif(fileTag_ == '--out_global_=') then
+            out_global_ = inputFPath_
+       elseif(fileTag_ == '--out_vegtype_=') then
+            out_vegtype_ = inputFPath_
+       elseif(fileTag_ == '--out_yearsrun_=') then
+            out_yearsrun_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_0_=') then
+            out_diag_0_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_1_=') then
+            out_diag_1_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_2_=') then
+            out_diag_2_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_3_=') then
+            out_diag_3_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_4_=') then
+            out_diag_4_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_5_=') then
+            out_diag_5_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_6_=') then
+            out_diag_6_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_7_=') then
+            out_diag_7_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_8_=') then
+            out_diag_8_ = inputFPath_
+       elseif(fileTag_ == '--out_diag_9_=') then
+            out_diag_9_ = inputFPath_
+       end if
+      end do
+
+      if(len_trim(ini_infile_) == 0 .or.
+     >   len_trim(diag_infile_) == 0 .or.
+     >   len_trim(cld_mon_) == 0 .or.
+     >   len_trim(deltat_mon_) == 0 .or.
+     >   len_trim(prec_mon_) == 0 .or.
+     >   len_trim(rh_mon_) == 0 .or.
+     >   len_trim(temp_mon_) == 0 .or.
+     >   len_trim(trange_mon_) == 0 .or.
+     >   len_trim(wetd_mon_) == 0 .or.
+     >   len_trim(wspd_mon_) == 0 .or.
+     >   len_trim(soita_sand_) == 0 .or.
+     >   len_trim(soita_clay_) == 0 .or.
+     >   len_trim(vegtype_) == 0 .or.
+     >   len_trim(surta_) == 0 .or.
+     >   len_trim(topo_) == 0) then
+          print 377, 'invalid input list!'
+          stop
+      end if
+
+      return
+      end
