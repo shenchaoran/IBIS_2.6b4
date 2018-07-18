@@ -22,6 +22,7 @@ c
       include 'compft.h'    ! PFT parameters incl physiological "constants"
       include 'comtex.h'    ! Soil texture-related parameters
       include 'combgc.h'    ! Soil biogeochemistry parameters
+      include 'argvs.h'
 c  
 c Local variables
 c      
@@ -36,7 +37,7 @@ c
                             ! to be reals. Also use it as a filler when reading 
                             ! non-existent variables in subroutine ReadItems
 
-      character*20 parm_file
+      character*100 parm_file
       
       parameter (parm_unit = 9)
 
@@ -45,6 +46,7 @@ c ******************************************************************************
 c open the parameter file 'params.can' for input; read in canopy parameters...
 
       parm_file = 'params.can'
+      parm_file = params_can_
       open(UNIT=parm_unit, FILE=parm_file, STATUS='OLD', ERR=9001)
 
       call readitem(parm_unit, parm_file, tau15)
@@ -181,6 +183,7 @@ c ******************************************************************************
 c open the parameter file 'params.veg' for input; read in vegetation PFT parameters...
 
       parm_file = 'params.veg'
+      parm_file = params_veg_
       open(UNIT=parm_unit, FILE=parm_file, STATUS='OLD', ERR=9001)
 
       do j = 1, npft
@@ -215,6 +218,7 @@ c ******************************************************************************
 c open the parameter file 'params.soi' for input; read in soil parameters...
 
       parm_file = 'params.soi'
+      parm_file = params_soi_
       open(UNIT=parm_unit, FILE=parm_file, STATUS='OLD', ERR=9001)
 
       do j = 1, nsoilay
@@ -283,7 +287,7 @@ c ******************************************************************************
 c open the parameter file 'params.hyd' for input; read in vegetation PFT parameters...
 
 *      parm_file = 'params.hyd' ! What is this file supposed to contain???
-
+*      parm_file = params_hyd_
 *      open(UNIT=parm_unit, FILE=parm_file, STATUS='OLD', ERR=9001)
 
 *      close (parm_unit) 
@@ -330,7 +334,7 @@ c designed to locate and skip over comment strings buried in the data stream.
       integer*4    funit,
      >             iocode     ! dummy variable required by system for error handling?
       real*4       item
-      character*20 fname
+      character*100 fname
 
  101  read (funit, *, end=999, err=911, iostat=iocode) item
       return
@@ -366,7 +370,7 @@ c reading single values.
 
       real*4       item1, item2, item3, item4, item5,
      >             item6, item7, item8, item9, item10
-      character*20 fname
+      character*100 fname
 
 * Check to see that N is within acceptable range. Stop if not.
 
@@ -453,7 +457,7 @@ c from it.
       integer*4     parm_unit,
      >              iocode    ! dummy variable required by system for error handling?
       integer*2     is_comment
-      character*12  parm_file ! name of file from which input is being read in
+      character*100  parm_file ! name of file from which input is being read in
       character*255 inputline ! arbitrary string. Input lines cannot exceed 255 chars!
 
       backspace(parm_unit)    ! back up to start of field that caused this error

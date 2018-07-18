@@ -6,7 +6,7 @@ c --------------------------------------
 c working directory info for mac version
 c --------------------------------------
 c        
-      character*80 workdir
+      character*100 workdir
       integer      lworkdir ! length of working directory
 c
       common /commac1/

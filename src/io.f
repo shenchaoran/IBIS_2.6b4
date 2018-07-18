@@ -93,6 +93,7 @@ c
       include 'comsum.h'
       include 'comveg.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -113,7 +114,7 @@ c
      >        icount(4)         ! for writing restart vars
 c
       character*21 tunits
-      character*20 fdir         ! used to construct odd/even file names
+      character*50 fdir         ! used to construct odd/even file names
       character*11 cdate        ! date to use in history attribute in files
       character*10 tdate        ! character date for time step
       character*80 dimnames(4)  ! names of dimensions for restart vars
@@ -1500,6 +1501,7 @@ c
       include 'comsum.h'
       include 'comwork.h'
       include 'comveg.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -1622,6 +1624,7 @@ cc
 cc dummy variable example, 3-d - copy & modify for new variable.
 cc
 c      filen = 'output/daily/dummyv.nc'
+c      filen = out_daily_dummyv_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'daily average dummyv',
@@ -1644,7 +1647,8 @@ c      end if
 c
 c rainfall
 c
-      filen = 'output/daily/rain.nc'
+c      filen = 'output/daily/rain.nc'
+      filen = out_daily_rain_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average rainfall',
@@ -1668,7 +1672,8 @@ c
 c
 c cloudiness
 c
-      filen = 'output/daily/cloud.nc'
+c     filen = 'output/daily/cloud.nc'
+      filen = out_daily_cloud_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average cloudiness',
@@ -1692,7 +1697,8 @@ c
 c
 c rh
 c
-      filen = 'output/daily/rh.nc'
+c     filen = 'output/daily/rh.nc'
+      filen = out_daily_rh_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average relative humidity',
@@ -1716,7 +1722,8 @@ c
 c
 c snowfall
 c
-      filen = 'output/daily/snow.nc'
+c     filen = 'output/daily/snow.nc'
+      filen = out_daily_snow_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average snowfall',
@@ -1740,7 +1747,8 @@ c
 cc
 cc aet
 cc
-      filen = 'output/daily/aet.nc'
+c     filen = 'output/daily/aet.nc'
+      filen = out_daily_aet_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average aet',
@@ -1763,7 +1771,8 @@ cc
 cc
 cc trunoff
 cc
-      filen = 'output/daily/trunoff.nc'
+c     filen = 'output/daily/trunoff.nc'
+      filen = out_daily_trunoff_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average total runoff',
@@ -1786,7 +1795,8 @@ cc
 c
 c srunoff
 c
-      filen = 'output/daily/srunoff.nc'
+c     filen = 'output/daily/srunoff.nc'
+      filen = out_daily_srunoff_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average surface runoff',
@@ -1810,7 +1820,8 @@ c
 c
 c drainage
 c
-      filen = 'output/daily/drainage.nc'
+c     filen = 'output/daily/drainage.nc'
+      filen = out_daily_drainage_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average drainage',
@@ -1834,7 +1845,8 @@ c
 cc
 cc wsoi
 cc
-      filen = 'output/daily/wsoi.nc'
+c     filen = 'output/daily/wsoi.nc'
+      filen = out_daily_wsoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average soil moisture',
@@ -1857,7 +1869,8 @@ cc
 cc
 cc wisoi
 cc
-      filen = 'output/daily/wisoi.nc'
+c     filen = 'output/daily/wisoi.nc'
+      filen = out_daily_wisoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average soil ice',
@@ -1880,7 +1893,8 @@ cc
 cc
 cc snod
 cc
-      filen = 'output/daily/snod.nc'
+c     filen = 'output/daily/snod.nc'
+      filen = out_daily_snod_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily average snow depth',
@@ -1904,6 +1918,7 @@ cc
 cc snof
 cc
 c      filen = 'output/daily/snof.nc'
+      filen = out_daily_snof_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'daily average snow fraction',
@@ -1927,6 +1942,7 @@ cc
 cc co2ratio
 cc
 c      filen = 'output/daily/co2ratio.nc'
+      filen = out_daily_co2ratio_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'daily average ratio of root to total soil co2 flux',
@@ -1950,6 +1966,7 @@ cc
 cc co2mic
 cc
 c      filen = 'output/daily/co2mic.nc'
+c     filen = out_daily_co2mic_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'daily flux of carbon due to soil microbe co2 flux',
@@ -1973,6 +1990,7 @@ c
 cc templ 
 cc
 c      filen = 'output/daily/templ.nc'
+c     filen = out_daily_templ_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'index based on gdd for growth/sensecence',
@@ -1996,6 +2014,7 @@ c
 c bottom and top height of lower and upper canopies
 c
 c      filen = 'output/daily/zcanopy.nc'
+c     filen = out_daily_zcanopy_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'daily height of vegetation canopies',
@@ -2042,6 +2061,7 @@ c
 c upper and lower canopy daily lai
 c
       filen = 'output/daily/laicanopy.nc'
+          filen = out_daily_laicanopy_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily lai-leaf area index of upper and lower vegetation canopies',
@@ -2092,6 +2112,7 @@ c
       include 'compar.h'
       include 'comsum.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -2173,6 +2194,7 @@ cc
 cc dummy variable example, 3-d - copy & modify for new variable.
 cc
 c      filen = 'output/monthly/dummyv.nc'
+      filen = out_monthly_dummyv_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'monthly average dummyv',
@@ -2195,7 +2217,8 @@ c      end if
 c
 c temperature
 c
-      filen = 'output/monthly/temp.nc'
+c     filen = 'output/monthly/temp.nc'
+      filen = out_monthly_temp_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average air temperature',
@@ -2219,7 +2242,8 @@ c
 c
 c rainfall
 c
-      filen = 'output/monthly/rain.nc'
+c     filen = 'output/monthly/rain.nc'
+      filen = out_monthly_rain_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average rainfall',
@@ -2243,7 +2267,8 @@ c
 c
 c cloudiness
 c
-      filen = 'output/monthly/cloud.nc'
+c     filen = 'output/monthly/cloud.nc'
+      filen = out_monthly_cloud_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average cloudiness',
@@ -2267,7 +2292,8 @@ c
 c
 c rh
 c
-      filen = 'output/monthly/rh.nc'
+c     filen = 'output/monthly/rh.nc'
+      filen = out_monthly_rh_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average relative humidity',
@@ -2291,7 +2317,8 @@ c
 c
 c snowfall
 c
-      filen = 'output/monthly/snow.nc'
+c     filen = 'output/monthly/snow.nc'
+      filen = out_monthly_snow_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average snowfall',
@@ -2315,7 +2342,8 @@ c
 c
 c specific humidity
 c
-      filen = 'output/monthly/qa.nc'
+c     filen = 'output/monthly/qa.nc'
+      filen = out_monthly_qa_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average specific humidity',
@@ -2339,7 +2367,8 @@ c
 c
 c evapotranspiration
 c
-      filen = 'output/monthly/aet.nc'
+c     filen = 'output/monthly/aet.nc'
+      filen = out_monthly_aet_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average aet',
@@ -2363,7 +2392,8 @@ c
 c
 c trunoff, srunoff, drainage
 c
-      filen = 'output/monthly/runoff.nc'
+c     filen = 'output/monthly/runoff.nc'
+      filen = out_monthly_runoff_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average total runoff',
@@ -2411,7 +2441,8 @@ c
 c
 c soil temperature
 c
-      filen = 'output/monthly/tsoi.nc'
+c     filen = 'output/monthly/tsoi.nc'
+      filen = out_monthly_tsoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average soil temperature',
@@ -2435,7 +2466,8 @@ c
 c
 c soil moisture, ice, volumetric water content, plant available water
 c
-      filen = 'output/monthly/wsoi.nc'
+c     filen = 'output/monthly/wsoi.nc'
+      filen = out_monthly_wsoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average soil moisture',
@@ -2496,7 +2528,8 @@ c
 c
 c snow depth
 c
-      filen = 'output/monthly/snod.nc'
+c     filen = 'output/monthly/snod.nc'
+      filen = out_monthly_snod_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average snow depth',
@@ -2520,7 +2553,8 @@ c
 c
 c snow fraction
 c
-      filen = 'output/monthly/snof.nc'
+c     filen = 'output/monthly/snof.nc'
+      filen = out_monthly_snof_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average snow fraction',
@@ -2544,7 +2578,8 @@ c
 c
 c solar radiation
 c
-      filen = 'output/monthly/solar.nc'
+c     filen = 'output/monthly/solar.nc'
+      filen = out_monthly_solar_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average incident solar radiation',
@@ -2569,6 +2604,7 @@ c
 c albedo
 c
 c     filen = 'output/monthly/albedo.nc'
+      filen = out_monthly_albedo_
 c     if (mstep .eq. 1) then
 c        call inifile(idies,filen,
 c    >    'monthly average albedo',
@@ -2591,7 +2627,8 @@ c     end if
 c
 c downward and upward infrared radiation
 c
-      filen = 'output/monthly/ir.nc'
+c     filen = 'output/monthly/ir.nc'
+      filen = out_monthly_ir_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average infrared radiation',
@@ -2627,7 +2664,8 @@ c
 c
 c sensible heat flux
 c
-      filen = 'output/monthly/sens.nc'
+c     filen = 'output/monthly/sens.nc'
+      filen = out_monthly_sens_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average sensible heat flux',
@@ -2651,7 +2689,8 @@ c
 c
 c latent heat flux
 c
-      filen = 'output/monthly/latent.nc'
+c     filen = 'output/monthly/latent.nc'
+      filen = out_monthly_latent_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly average latent heat flux',
@@ -2676,6 +2715,7 @@ c
 c leaf area index upper and lower
 c
       filen = 'output/monthly/lai.nc'
+          filen = out_monthly_lai_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >   'monthly average leaf area index for upper and lower canopies',
@@ -2712,6 +2752,7 @@ c
 c total net primary productivity
 c
       filen = 'output/monthly/npptot.nc'
+          filen = out_monthly_npptot_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly total net primary productivity of carbon',
@@ -2736,6 +2777,7 @@ c
 c co2ratio
 c
       filen = 'output/monthly/co2ratio.nc'
+          filen = out_monthly_co2ratio_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'monthly ratio of root respiration to total soil respiration',
@@ -2774,6 +2816,7 @@ c
       include 'comsum.h'
       include 'comveg.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -2894,6 +2937,7 @@ cc dummy variable example, 4-d var whose 3rd dim is a character dim (pft)
 cc copy and modify for a new variable
 cc
 c      filen = 'output/yearly/dummyv.nc'
+       filen = out_yearly_dummyv_
 c      if (mstep .eq. 1) then
 c         call inifilec(idies,filen,
 c     >    'annual dummyv',
@@ -2921,6 +2965,7 @@ cc
 cc dummy variable example, 3-d
 cc
 c      filen = 'output/yearly/dummyv.nc'
+       filen = out_yearly_dummyv_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'dummyv','annual dummyv',cdate,nlonsub,lonscale,
@@ -2943,6 +2988,7 @@ c
 c net primary productivity, by pft and total
 c
       filen = 'output/yearly/npp.nc'
+           filen = out_yearly_npp_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual net primary productivity of carbon',
@@ -2996,6 +3042,7 @@ c
 c evapotranspiration
 c
       filen = 'output/yearly/aet.nc'
+           filen = out_yearly_aet_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual average evapotranspiration',
@@ -3020,6 +3067,7 @@ c
 c trunoff, srunoff, drainage, rratio, tratio
 c
       filen = 'output/yearly/runoff.nc'
+           filen = out_yearly_runoff_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual runoff',
@@ -3092,6 +3140,7 @@ c
 c soil moisture, soil ice, volumetric water content, plant available water
 c
       filen = 'output/yearly/wsoi.nc'
+           filen = out_yearly_wsoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual average soil moisture',
@@ -3152,6 +3201,7 @@ c
 c soil temperature
 c
       filen = 'output/yearly/tsoi.nc'
+           filen = out_yearly_tsoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual average soil temperature',
@@ -3176,6 +3226,7 @@ cc
 cc solar radiation
 cc
 c      filen = 'output/yearly/solar.nc'
+       filen = out_yearly_solar_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual average solar incident radiation',
@@ -3199,6 +3250,7 @@ cc
 cc albedo
 cc
 c     filen = 'output/yearly/albedo.nc'
+       filen = out_yearly_albedo_
 c     if (mstep .eq. 1) then
 c        call inifile(idies,filen,
 c    >    'annual average albedo',
@@ -3222,6 +3274,7 @@ cc
 cc upward and downward infrared radiation
 cc
 c      filen = 'output/yearly/ir.nc'
+c      filen = out_yearly_ir_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual average solar infrared radiation',
@@ -3257,6 +3310,7 @@ c
 c sensible heat flux
 c
       filen = 'output/yearly/sens.nc'
+           filen = out_yearly_sens_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual average sensible heat flux',
@@ -3281,6 +3335,7 @@ cc
 cc latent heat flux
 cc
 c      filen = 'output/yearly/latent.nc'
+       filen = out_yearly_latent_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual average latent heat flux',
@@ -3304,6 +3359,7 @@ c
 c lai, by pft, total upper canopy, total lower canopy
 c
       filen = 'output/yearly/plai.nc'
+           filen = out_yearly_plai_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual leaf area index',
@@ -3358,6 +3414,7 @@ c
 c biomass, by pft, upper canopy, lower canopy
 c
       filen = 'output/yearly/biomass.nc'
+           filen = out_yearly_biomass_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual biomass of carbon',
@@ -3412,6 +3469,7 @@ c
 c soil carbon: rootbio, totalit, totrlit, totcsoi, totcmic
 c
       filen = 'output/yearly/csoi.nc'
+           filen = out_yearly_csoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual total soil carbon',
@@ -3484,6 +3542,7 @@ c
 c soil nitrogen: totanlit, totrnlit, totnsoi, nmintot
 c
       filen = 'output/yearly/nsoi.nc'
+           filen = out_yearly_nsoi_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual total soil nitrogen',
@@ -3546,6 +3605,7 @@ cc
 cc total litter
 cc
 c      filen = 'output/yearly/totlit.nc'
+c      filen = out_yearly_totlit_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual total litter carbon',
@@ -3569,6 +3629,7 @@ cc
 cc total wood litter
 cc
 c      filen = 'output/yearly/clitw.nc'
+       filen = out_yearly_clitw_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual total wood litter carbon',
@@ -3592,6 +3653,7 @@ cc
 cc total litterfall
 cc
 c      filen = 'output/yearly/totfall.nc'
+       filen = out_yearly_totfall_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual total litterfall carbon',
@@ -3615,6 +3677,7 @@ cc
 cc total soil carbon in slow pool
 cc
 c      filen = 'output/yearly/csoislo.nc'
+       filen = out_yearly_csoislo_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual total soil carbon in slow pool',
@@ -3638,6 +3701,7 @@ cc
 cc total soil carbon in passive pool
 cc
 c      filen = 'output/yearly/csoipas.nc'
+       filen = out_yearly_csoipas_
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual total soil carbon in pasive pool',
@@ -3661,6 +3725,7 @@ c
 c co2 carbon exchange: net ecosystem, microbial resp, root resp, soil resp
 c
       filen = 'output/yearly/co2fluxes.nc'
+           filen = out_yearly_co2fluxes_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual total carbon from exchange of co2',
@@ -3722,6 +3787,7 @@ c
 c fire disturbance regime
 c
       filen = 'output/yearly/disturbf.nc'
+           filen = out_yearly_disturbf_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual fire disturbance regime',
@@ -3746,6 +3812,7 @@ c
 c vegetation type
 c
       filen = 'output/yearly/vegtype0.nc'
+      filen = out_yearly_vegtype0_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual vegetation type - ibis classification',
@@ -3770,6 +3837,7 @@ c
 c fractional cover of upper and lower canopies
 c
       filen = 'output/yearly/fcover.nc'
+      filen = out_yearly_fcover_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual fractional cover of canopies','ibis wyearly',
@@ -3804,6 +3872,7 @@ cc
 cc sapwood fraction
 cc
 c      filen = 'output/yearly/sapfrac.nc'
+c      filen = out_yearly_sapfrac
 c      if (mstep .eq. 1) then
 c         call inifile(idies,filen,
 c     >    'annual sapwood fraction',
@@ -3827,6 +3896,7 @@ c
 c bottom and top of vegetation canopies
 c
       filen = 'output/yearly/zcanopy.nc'
+      filen = out_yearly_zcanopy_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual height of vegetation canopies',
@@ -3873,6 +3943,7 @@ c
 c existence of pfts
 c
       filen = 'output/yearly/exist.nc'
+      filen = out_yearly_exist_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'annual existence of each plant functional type',
@@ -3917,6 +3988,7 @@ c
       include 'comsoi.h'
       include 'comveg.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -3956,6 +4028,7 @@ c
 c land mask, latitudes, and longitudes
 c
       filen = 'input/surta.nc'
+      filen = surta_
       aname = 'surta'
       call readvar(filen,aname,'level',istart,icount,
      > xmask,lonscale,latscale,cdummy(1),cdummy(ndim4),istat)
@@ -4105,6 +4178,7 @@ cc dummy variable example, 4-d, but 3rd dim ('level') = 1
 cc copy and chanve for a new variable
 cc
 c      filen = 'input/dummyv.nc'
+c      filen = dummyv_
 c      aname = 'dummyv'
 c      call readvar(filen,aname,'level',istart,icount,
 c     > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4118,6 +4192,7 @@ c
 c topography
 c
       filen = 'input/topo.nc'
+      filen = topo_
       aname = 'topo'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4132,6 +4207,7 @@ c fixed vegetation map
 c
       if (isimveg .le. 1) then
          filen = 'input/vegtype.nc'
+         filen = vegtype_
          aname = 'vegtype'
          call readvar(filen,aname,'level',istart,icount,cdummy,
      >    work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4146,6 +4222,7 @@ cc
 cc 2-d soil array
 cc
 c     filen = 'input/soil.nc'
+c     filen = soil_
 c     aname = 'soil'
 c     call readvar(filen,aname,'level',istart,icount,
 c    > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4159,6 +4236,7 @@ c
 c delta t
 c
       filen = 'input/deltat.nc'
+      filen = deltat_
       aname = 'deltat'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4176,6 +4254,7 @@ c
       icount(3) = 6 
       icount(4) = 1
       filen = 'input/soita.sand.nc'
+      filen = soita_sand_
       aname = 'sandpct'
       call readvar(filen,aname,'layer',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4191,6 +4270,7 @@ c
       icount(3) = 6 
       icount(4) = 1
       filen = 'input/soita.clay.nc'
+      filen = soita_clay_
       aname = 'claypct'
       call readvar(filen,aname,'layer',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4209,6 +4289,7 @@ c
       icount(4) = 12
 c
       filen = 'input/wetd.mon.nc'
+      filen = wetd_mon_
       aname = 'wetd'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4223,6 +4304,7 @@ c
  15   continue
 c
       filen = 'input/temp.mon.nc'
+      filen = temp_mon_
       aname = 'temp'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4237,6 +4319,7 @@ c
  20   continue
 c
       filen = 'input/trange.mon.nc'
+      filen = trange_mon_
       aname = 'trange'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4251,6 +4334,7 @@ c
  25   continue
 c
       filen = 'input/prec.mon.nc'
+      filen = prec_mon_
       aname = 'prec'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4265,6 +4349,7 @@ c
  30   continue
 c
       filen = 'input/wspd.mon.nc'
+      filen = wspd_mon_
       aname = 'wspd'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4279,6 +4364,7 @@ c
  35   continue
 c
       filen = 'input/cld.mon.nc'
+      filen = cld_mon_
       aname = 'cld'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4293,6 +4379,7 @@ c
  40   continue
 c
       filen = 'input/rh.mon.nc'
+      filen = rh_mon_
       aname = 'rh'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -4396,6 +4483,7 @@ c
       include 'comsum.h'
       include 'comveg.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -4975,6 +5063,7 @@ c
       include 'compar.h'
       include 'comsoi.h'
       include 'comsno.h'
+      include 'argvs.h'
 c
 c initialize some model variables for cold start conditions
 c
@@ -5018,6 +5107,7 @@ c
       include 'combcs.h'
       include 'comveg.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -5129,6 +5219,7 @@ c     mean temperature
 c
       aname = 'temp'
       filen = 'input/anom/temp.danom.nc'
+      filen = temp_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5145,6 +5236,7 @@ cc     temperature range
 cc
 c      aname = 'trange'
 c      filen = 'input/anom/trange.danom.nc'
+       filen = trange_danom_
 c      call readvar(filen,aname,'level',istart,icount,
 c     > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
 c     > cdummy(3*nlonsub+1),istat)
@@ -5161,6 +5253,7 @@ c     precipitation rate
 c
       aname = 'prec'
       filen = 'input/anom/prec.danom.nc'
+      filen = prec_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5177,6 +5270,7 @@ c     cloudiness
 c
       aname = 'cld'
       filen = 'input/anom/cld.danom.nc'
+      filen = cld_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5193,6 +5287,7 @@ c     relative humidity
 c
       aname = 'rh'
       filen = 'input/anom/rh.danom.nc'
+      filen = rh_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5209,6 +5304,7 @@ c     wind speed
 c
 c     aname = 'wspd'
 c     filen = 'input/anom/wspd.danom.nc'
+      filen = wspd_danom_
 c     call readvar(filen,aname,'level',istart,icount,
 c    > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
 c    > cdummy(3*nlonsub+1),istat)
@@ -5225,6 +5321,7 @@ c     wet days
 c
 c     aname = 'wetd'
 c     filen = 'input/anom/wetd.danom.nc'
+      filen = wetd_danom_
 c     call readvar(filen,aname,'level',istart,icount,
 c    > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
 c    > cdummy(3*nlonsub+1),istat)
@@ -5251,6 +5348,7 @@ c This subroutine obtains the year+1 of the year in the units attribute
 c of a file.  Low-level netcdf commands are used.
 c
       include 'implicit.h'
+      include 'argvs.h'
 c
       include 'netcdf.inc'
 c
@@ -5323,6 +5421,7 @@ c
       include 'compar.h'
       include 'combcs.h'
       include 'comwork.h'
+      include 'argvs.h'
 c
 c Arguments
 c
@@ -5389,6 +5488,7 @@ c read daily precip
 c
       aname = 'prec'
       filen = 'input/anom/daily/prec.fanom.nc'
+      filen = prec_fanom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5405,6 +5505,7 @@ c read daily temp
 c
       aname = 'temp'
       filen = 'input/anom/daily/temp.danom.nc'
+      filen = temp_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5421,6 +5522,7 @@ c read daily trange
 c
       aname = 'trange'
       filen = 'input/anom/daily/trange.fanomc.nc'
+      filen = trange_fanomc_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5437,6 +5539,7 @@ c read daily cloudiness
 c
       aname = 'cld'
       filen = 'input/anom/daily/cld.danom.nc'
+      filen = cld_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5453,6 +5556,7 @@ c read daily windspeed
 c
       aname = 'wspd'
       filen = 'input/anom/daily/wspd.fanomc.nc'
+      filen = wspd_fanomc_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5469,6 +5573,7 @@ c read daily humidity
 c
       aname = 'sphum'
       filen = 'input/anom/daily/sphum.fanom.nc'
+      filen = sphum_fanom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
      > cdummy(3*nlonsub+1),istat)
@@ -5494,6 +5599,7 @@ c that is Y2K-compliant. We also change cdate to 11 characters from 10.
 c the format is now:    15-Mar-2002
 c
       include 'implicit.h'
+      include 'argvs.h'
       character*11 cdate
       character*24 longdate
 c

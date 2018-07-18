@@ -15,6 +15,7 @@ c INPUT
       integer idiag          ! number of diagnostic files
 c COMMON
       include 'comdiag.h'
+      include 'argvs.h'
 c INTERNAL
       integer lun, i, ivar
 c
@@ -22,7 +23,7 @@ c
      >        diaglon(nfiles)        ! longitude of diagnostic point
 c
         lun = 12
-        open (lun, status='old', file='diag.infile')
+        open (lun, status='old', file=diag_infile_)
 c
         do 100 i = 1, 26
           read (lun,*)
@@ -62,13 +63,14 @@ c
       include 'compar.h'
       include 'comwork.h'
       include 'comdiag.h'
+      include 'argvs.h'
 c
 c local variables
 c
-      character*10 filen          ! name of diagnostic file
-      character*10 varname(nvars) ! variable names
+      character*100 filen          ! name of diagnostic file
+      character*50 varname(nvars) ! variable names
 c
-      character*10 header(16,nfiles)  ! column headers for output file
+      character*50 header(16,nfiles)  ! column headers for output file
 c
       integer idiag,              ! number of diganostic files
      >        ifile,              ! counter
@@ -129,12 +131,33 @@ c
  10   continue
 c    
       do 30 i = 1, idiag
-        filen = 'ibis.diag'
-        write(filen(10:10),'(i1)')i-1
-        open (i+20, status='unknown', file=filen, access='append')
-        write (i+20,3000) diaglat(i), diaglon(i)
-        write (i+20,3100) diagstart(i), diagend(i)
-        write (i+20,3200) (header(kolumn,i),kolumn=5,16)
+c       filen = 'ibis.diag'
+        if(i==1) then
+            filen = out_diag_0_
+        elseif(i==2) then
+            filen = out_diag_1_
+        elseif(i==3) then
+            filen = out_diag_2_
+        elseif(i==4) then
+            filen = out_diag_3_
+        elseif(i==5) then
+            filen = out_diag_4_
+        elseif(i==6) then
+            filen = out_diag_5_
+        elseif(i==7) then
+            filen = out_diag_6_
+        elseif(i==8) then
+            filen = out_diag_7_
+        elseif(i==9) then
+            filen = out_diag_8_
+        elseif(i==10) then
+            filen = out_diag_9_
+        endif
+c       write(filen(10:10),'(i1)')i-1
+        open (i+77, status='unknown', file=filen, access='append')
+        write (i+77,3000) diaglat(i), diaglon(i)
+        write (i+77,3100) diagstart(i), diagend(i)
+        write (i+77,3200) (header(kolumn,i),kolumn=5,16)
 c
  3000 format ('%Cell_latitude ', f8.2,1x,' Cell_longitude ',f8.2)
  3100 format ('%Begin_year ',i8,' End_year ',i8)
@@ -339,7 +362,7 @@ c
  40     continue
       end if
 c
-      write(i+20, 3000) rowdata
+      write(i+77, 3000) rowdata
  3000 format(1x,f5.0,2x,f3.0,3x,f7.0,1x,f5.0,1x,12(e12.3,1x))
 c
       return

@@ -56,7 +56,7 @@ c ------------------------------------------------------------------------------
       integer*4 ac_unit,    ! binary file to store age-class data
      >          pt_unit     ! text file to store age-class printouts
      
-      character*12 ac_file, ! name of binary file to store age-class data  
+      character*100 ac_file, ! name of binary file to store age-class data
      >             pt_file, ! name of text file to store age-class printouts
      >           acsum_file ! name of text file to store age-class summary        
      

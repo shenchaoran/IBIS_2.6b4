@@ -1245,6 +1245,7 @@ c
       include 'compar.h'
       include 'comsum.h'
       include 'comveg.h'
+      include 'argvs.h'
 c
 c Arguments (input)
 c
@@ -1381,7 +1382,7 @@ c write some diagnostic output to history file
 c
       if (iyear.eq.iyear0) then
 c
-        open (20,file='ibis.out.global',status='unknown')
+        open (20,file=out_global_,status='unknown')
 c
         write (20,*) ' '
         write (20,*) '* * * annual diagnostic fields * * *'
@@ -1465,6 +1466,7 @@ c
       include 'compar.h'
       include 'comsum.h'
       include 'comveg.h'
+      include 'argvs.h'
 c
 c Arguments (input)
 c
@@ -1541,7 +1543,7 @@ c
 c write some diagnostic output to history file
 c
       if (iyear.eq.iyear0) then
-        open (30,file='ibis.out.vegtype',status='unknown')
+        open (30,file=out_vegtype_,status='unknown')
       endif
 c
       write (30,*) ' '

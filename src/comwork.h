@@ -17,7 +17,7 @@ c
      >            ndim4 = nlon, !max(nlon,nlat,nband,nsoilay,nsnolay,npft),
      >            ndim3 = nlon*nlat*ndim4 )
 c
-      character aname*21       ! use to store short names
+      character aname*100       ! use to store short names
 c
       integer lonindex (npoi), ! i index of nth point in land+sea array (i,j)
      >        latindex (npoi)  ! j index of nth point in land+sea array (i,j)

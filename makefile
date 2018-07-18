@@ -17,7 +17,7 @@ VERSION = 2.6b4
 #   debug mode
 # F77_OPTIONS =   -g -ffixed-line-length-132  
 #  
-  F77_OPTIONS = -C -ffixed-line-length-132 -funroll-loops
+  F77_OPTIONS = -g -o0 -C -ffixed-line-length-132 -funroll-loops
 # 
 # with local include and netcdf files.
   INCLUDE_DIRS  = -I/usr/local/include
@@ -59,20 +59,21 @@ HEADERS = $(wildcard $(SPATH)/*.h)
 SRC = $(wildcard $(SPATH)/*.f)
 SRCNAME = $(notdir $(SRC))
 OBJS = $(patsubst %.f, $(OBJPATH)/%.o, $(SRCNAME))
+EXENAME = IBIS_netcdf
 
-ibis: $(OBJS) $(HEADERS)
+$(EXENAME): $(OBJS) $(HEADERS)
 	@mkdir -p $(DPATH)
-	$(COMPILER) $(OBJS) $(F77_OPTIONS) $(INCLUDE_DIRS) $(LD_OPTIONS_NETCDF) -o $(DPATH)/ibis
+	$(COMPILER) $(OBJS) $(F77_OPTIONS) $(INCLUDE_DIRS) $(LD_OPTIONS_NETCDF) -o $(DPATH)/$(EXENAME)
 
 $(OBJS): $(OBJPATH)/%.o: $(SPATH)/%.f $(HEADERS)
 	@mkdir -p $(OBJPATH)
-	$(COMPILER) $(F77_OPTIONS) $(INCLUDE_DIRS) $(LD_OPTIONS_NETCDF) -c $< -o $@
+	$(COMPILER) $(F77_OPTIONS) $(INCLUDE_DIRS) -c $< -o $@
 
 all:
-	@echo $(OBJS)
+	make $(EXENAME)
 
 clean:
-	rm -rf $(OBJPATH)/*.o $(DPATH)/ibis
+	rm -rf $(OBJPATH)/*.o $(DPATH)/$(EXENAME)
 
 #------------------------------------------------------------------------
 # To put all necessary files in one file ready for distribution,

@@ -17,6 +17,17 @@ c
       real xres,       ! longitude resolution (in degrees)
      >     yres,       ! latitude resolution (in degrees)
      >     pi          ! you know, that constant thingy
+
+c	  common /compar0/ nlon,
+c    >	nlat,
+c    >  npoi,
+c    >  nband,
+c    >  nsoilay,
+c    >  nsnolay,
+c    >  npft,
+c    >  xres,
+c    >  yres
+
 c
 c --------------------------
 c typical ibis configuration
@@ -34,7 +45,7 @@ c
 c South Asia 0.5 x 0.5  grid:  720 by 360 array, with 58920 land points:
 c
        parameter (nlon = 720,
-     >           nlat = 360, 
+     >           nlat = 360,
      >           npoi = 1718,
      >           xres = 0.50,
      >           yres = 0.50)
@@ -116,7 +127,7 @@ c
       common /compar1/ epsilon, dtime, stef, vonk, grav, tmelt, hfus, hvap, hsub,
      >     ch2o,  cice, cair, cvap, rair, rvap, cappa, rhow       
 c
-      real 
+      real
      >  garea(npoi),   ! area of each gridcell (m**2)
      >  vzero(npoi)    ! a real array of zeros, of length npoi
 c
