@@ -111,7 +111,7 @@ The raw data we use for the global model is at a resolution of 0.5�x 0.5�. W
 Arcview, R, PyClimate all can be used to create your own datasets.
 
 ## TEST DATA
-We provide some nonsense test files at 10x10 degree resolution that you may use in order to test whether your compilation of ibis works or not.  Please download input10-nc.tar.gz and ungzip and untar it. 
+We provide some nonsense test files at 10x10 degree resolution that you may use in order to test whether your compilation of ibis works or not.  Please do-wnload input10-nc.tar.gz and ungzip and untar it. 
  
 You'll have the 13 files you need to run ibis (make sure your value for nanom in ibis.infile or ibismac.infile is large). Place the files in the subdirectory 'input'.  Don't expect to have meaningful results from using this data as ibis input - they are just some numbers we made up.  You should not, however, crash the program, core dump, or get NaN's (not-a-number) or Inf's (infinity) using this input.
 
