@@ -100,7 +100,6 @@
       character*100 trange_fanomc_
       character*100 wspd_fanomc_
 	  character*100 sphum_fanom_
-	  character*100 deltat_
 	  character*100 out_global_
 	  character*100 out_vegtype_
 	  character*100 out_yearsrun_
@@ -230,7 +229,6 @@ c
      >   prec_fanom_,
      >   trange_fanomc_,
      >	 wspd_fanomc_,
-     >   deltat_,
      >   sphum_fanom_,
      >   progress_
 

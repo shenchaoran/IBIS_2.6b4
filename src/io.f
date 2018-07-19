@@ -2060,8 +2060,8 @@ c      end if
 c
 c upper and lower canopy daily lai
 c
-      filen = 'output/daily/laicanopy.nc'
-          filen = out_daily_laicanopy_
+c     filen = 'output/daily/laicanopy.nc'
+      filen = out_daily_laicanopy_
       if (mstep .eq. 1) then
          call inifile(idies,filen,
      >    'daily lai-leaf area index of upper and lower vegetation canopies',
@@ -4235,8 +4235,8 @@ c     call arr2vec (cdummy, soita)
 c
 c delta t
 c
-      filen = 'input/deltat.nc'
-      filen = deltat_
+c     filen = 'input/deltat.nc'
+      filen = deltat_mon_
       aname = 'deltat'
       call readvar(filen,aname,'level',istart,icount,
      > cdummy,work(1),work(ndim4),work(2*ndim4),work(3*ndim4),istat)
@@ -5218,7 +5218,7 @@ c
 c     mean temperature
 c
       aname = 'temp'
-      filen = 'input/anom/temp.danom.nc'
+c     filen = 'input/anom/temp.danom.nc'
       filen = temp_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5252,7 +5252,7 @@ c
 c     precipitation rate
 c
       aname = 'prec'
-      filen = 'input/anom/prec.danom.nc'
+c     filen = 'input/anom/prec.danom.nc'
       filen = prec_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5269,7 +5269,7 @@ c
 c     cloudiness
 c
       aname = 'cld'
-      filen = 'input/anom/cld.danom.nc'
+c     filen = 'input/anom/cld.danom.nc'
       filen = cld_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5286,7 +5286,7 @@ c
 c     relative humidity
 c
       aname = 'rh'
-      filen = 'input/anom/rh.danom.nc'
+c     filen = 'input/anom/rh.danom.nc'
       filen = rh_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5487,7 +5487,7 @@ c
 c read daily precip
 c
       aname = 'prec'
-      filen = 'input/anom/daily/prec.fanom.nc'
+c     filen = 'input/anom/daily/prec.fanom.nc'
       filen = prec_fanom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5504,7 +5504,7 @@ c
 c read daily temp
 c
       aname = 'temp'
-      filen = 'input/anom/daily/temp.danom.nc'
+c     filen = 'input/anom/daily/temp.danom.nc'
       filen = temp_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5521,7 +5521,7 @@ c
 c read daily trange
 c
       aname = 'trange'
-      filen = 'input/anom/daily/trange.fanomc.nc'
+c     filen = 'input/anom/daily/trange.fanomc.nc'
       filen = trange_fanomc_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5538,7 +5538,7 @@ c
 c read daily cloudiness
 c
       aname = 'cld'
-      filen = 'input/anom/daily/cld.danom.nc'
+c     filen = 'input/anom/daily/cld.danom.nc'
       filen = cld_danom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5555,7 +5555,7 @@ c
 c read daily windspeed
 c
       aname = 'wspd'
-      filen = 'input/anom/daily/wspd.fanomc.nc'
+c     filen = 'input/anom/daily/wspd.fanomc.nc'
       filen = wspd_fanomc_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),
@@ -5572,7 +5572,7 @@ c
 c read daily humidity
 c
       aname = 'sphum'
-      filen = 'input/anom/daily/sphum.fanom.nc'
+c     filen = 'input/anom/daily/sphum.fanom.nc'
       filen = sphum_fanom_
       call readvar(filen,aname,'level',istart,icount,
      > work,cdummy(1),cdummy(nlonsub+1),cdummy(2*nlonsub+1),

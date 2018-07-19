@@ -217,7 +217,6 @@ c
       write(*,*) 'prec_fanom = ', prec_fanom_
       write(*,*) 'trange_fanomc = ', trange_fanomc_
       write(*,*) 'wspd_fanomc = ', wspd_fanomc_
-      write(*,*) 'deltat = ', deltat_
       write(*,*) 'sphum_fanom = ', sphum_fanom_
       write (*,*) 'parse argvs finished!'
       write (*,*) '****************************************'
@@ -596,7 +595,7 @@ c
 c write out daily output
 c
             if (idailyout.eq.1) then
-              write (*,*) ' '
+c             write (*,*) ' '
               write (*,*) 'writing daily output'
               write (*,*) ' '
               call wdaily (nday, iyear, iyear0) 
@@ -1010,8 +1009,6 @@ c
             wspd_fanomc_ = inputFPath_
        elseif(fileTag_ == '--sphum_fanom_=') then
             sphum_fanom_ = inputFPath_
-       elseif(fileTag_ == '--deltat_=') then
-            deltat_ = inputFPath_
        elseif(fileTag_ == '--out_global_=') then
             out_global_ = inputFPath_
        elseif(fileTag_ == '--out_vegtype_=') then

@@ -241,7 +241,7 @@ A heavy rain event is greater than or equal to 0.6 mm/hr for a clay soil 7 mm/hr
 In this verion, IBIS is set up to run with a 4m soil depth. Although, we find that this gives reasonable results in our global simulation, please change this  to suit your specific region. This version is set up to have only 6 layers of soil:  of depths (variable hsoi), 0.10m,0.15m,0.25m,0.50m,1.0m,2.0m from top to bottom.  However, you can easily choose different depths by modifying 'nsoilay' and/or 'hsoi'.
 
 # HOW TO READ/WRITE NETCDF FILES IN IBIS
-Reading/writing files in ibis is done through subroutines in **ies-io.f**.  The most important concept to understand is the relationship between the locations of points in an n-dimensional array and the values of istart and icount.  In FORTRAN, values in an array are stored so that the first dimension varies the fastest.  In C, the last dimension varies the fastest.  If you were to use ncdump on a netcdf file whose variable 'mydata' has 4 dimensions (latitude, longitude, level, time), the variable would be shown as follows: mydata(time, level, latitude, longitude) because ncdump was written in C and reflects C's ordering of dimensions. In this example time varies the the slowest and longitude the fastest. If you were to define this variable in a FORTRAN program so that time again varies the slowest and longitude the fastest,（高维数组的存放次序可由二维数组类推，即最右边指标（相当于最外层循环变量）变动最慢，最左边的第一个指标变动最快） it would look like this:
+Reading/writing files in ibis is done through subroutines in **ies-io.f**.  The most important concept to understand is the relationship between the locations of points in an n-dimensional array and the values of istart and icount.  In FORTRAN, values in an array are stored so that the first dimension varies the fastest.  In C, the last dimension varies the fastest.  If you were to use ncdump on a netcdf file whose variable 'mydata' has 4 dimensions (latitude, longitude, level, time), the variable would be shown as follows: mydata(time, level, latitude, longitude) because ncdump was written in C and reflects C's ordering of dimensions. In this example time varies the slowest and longitude the fastest. If you were to define this variable in a FORTRAN program so that time again varies the slowest and longitude the fastest,（高维数组的存放次序可由二维数组类推，即最右边指标（相当于最外层循环变量）变动最慢，最左边的第一个指标变动最快） it would look like this:
     real mydata(nlons, nlats, nlevels, ntimes)
 where nlons, nlats, nlevels, and ntimes are integer parameters of some specified size.  Looping through the data in the order of storage in memory would look like this:
     do l = 1, ntimes
@@ -262,7 +262,7 @@ Things get a little more complicated when you want to read/write only a portion 
 4) a subsection of a lat/lon grid, 20 points wide in longitude, 15 points high in latitude, starting at point (ilon,ilat), at one (18th) level and 12 times, beginning at time step itime: istart is (ilon,ilat,18,itime) icount is (20,15,1,12)
 
 HOW TO ADD NEW CODE TO READ A FILE:
-To read a file, use subroutine readvar in ies-io.f. This subroutine assumes that the variable being read has dimensions called longitude, latitude, possibly time, and possibly another dimension, which is named in the call.  Only the bare essentials are returned.
+To read a file, use subroutine readvar in ies-io.f. This subroutine assumes that the variable being read has dimensions called longitude, latitude, possibly time, and possibly another dimension, which is named in the call.  Only the bare are returned.
 
 General call:
     call readvar(filen,varname,name3d,istart,icount,values,
@@ -302,8 +302,7 @@ name is 'pft') and one (24th) time
     icount(2) = nlats
     icount(3) = 1
     icount(4) = 1
-    call readvar('myfile.nc','myvar','pft',istart,icount,x,alons,alats,
-   > xjunk,time,ierr)
+    call readvar('myfile.nc','myvar','pft',istart,icount,x,alons,alats, xjunk,time,ierr)
     if (ierr .lt. 0) then
       print *, 'Error occurred in readvar'
     end if
