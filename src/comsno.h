@@ -12,16 +12,16 @@ c
      >  fimin,               ! minimum fractional snow cover
      >  fimax                ! maximum fractional snow cover
 c
-      common /comsno1/ z0sno, rhos, consno, hsnotop, hsnomin, fimin, fimax
+c     common /comsno1/ z0sno, rhos, consno, hsnotop, hsnomin, fimin, fimax
 c
       real 
      >  fi(npoi)             ! fractional snow cover
 c
-      common /comsno2/ fi
+c     common /comsno2/ fi
 c
       real 
      >  tsno(npoi,nsnolay),  ! temperature of snow layers (K)
      >  hsno(npoi,nsnolay)   ! thickness of snow layers (m)
 c
-      common /comsno3/ tsno, hsno
+c     common /comsno3/ tsno, hsno
 c

@@ -28,7 +28,7 @@ c
      >  wsnoumax,           ! intercepted snow capacity for upper canopy leaves (kg m-2)
      >  woodnorm	    ! value of woody biomass for upper canopy closure (ie when wood = woodnorm fu = 1.0) (kg_C m-2)
 c
-      common /comveg1/ alaiml, alaimu, cgrass, chl, chs, chu, cleaf, cstem, tblowl,
+c     common /comveg1/ alaiml, alaimu, cgrass, chl, chs, chu, cleaf, cstem, tblowl,
      >     tblows, tblowu, tdripl, tdrips, tdripu, wliqmin, wliqlmax,
      >     wliqsmax, wliqumax, wsnomin, wsnolmax, wsnosmax, wsnoumax, 
      >     woodnorm
@@ -54,7 +54,7 @@ c
      >  wsnos(npoi),        ! intercepted frozen h2o (snow) on upper canopy stem area (kg m-2)
      >  wsnou(npoi)         ! intercepted frozen h2o (snow) on upper canopy leaf area (kg m-2)
 c
-      common /comveg2/ q12, q34, sl, ss, su, topparl, topparu, tl, ts, tu, tlsub, 
+c     common /comveg2/ q12, q34, sl, ss, su, topparl, topparu, tl, ts, tu, tlsub, 
      >     t12, t34, wliql, wliqs, wliqu, wsnol, wsnos, wsnou
 c
 c all photosynthesis rates are per unit leaf area
@@ -76,7 +76,7 @@ c
      >  totcondl3(npoi),     !
      >  totcondl4(npoi)      !
 c
-      common /comveg3/ agcub, agcuc, agcls, agcl3, agcl4, 
+c     common /comveg3/ agcub, agcuc, agcls, agcl3, agcl4, 
      >     ancub, ancuc, ancls, ancl3, ancl4, 
      >     totcondub, totconduc, totcondls, totcondl3, totcondl4
 c
@@ -97,7 +97,7 @@ c
      >  gsl3(npoi),         ! lower canopy stomatal conductance - c3 grasses (mol_co2 m-2 s-1)
      >  gsl4(npoi)          ! lower canopy stomatal conductance - c4 grasses (mol_co2 m-2 s-1)
 c
-      common /comveg4/ ciub, ciuc, cils, cil3, cil4, 
+c     common /comveg4/ ciub, ciuc, cils, cil3, cil4, 
      >     csub, csuc, csls, csl3, csl4,
      >     gsub, gsuc, gsls, gsl3, gsl4
 c
@@ -148,7 +148,7 @@ c
      >  dropl3(npoi),       ! drought-phenology trigger for c3 grasses (non-dimensional)
      >  vegtype0(npoi)      ! annual vegetation type - ibis classification
 c
-      common /comveg5/ agddl, agddu, fl, fu, 
+c     common /comveg5/ agddl, agddu, fl, fu, 
      >     gdd0, gdd0this, gdd5, gdd5this, 
      >     sapfrac, tc, tcthis, tcmin, 
      >     totlail, totlaiu, totbiol, totbiou, 
@@ -164,7 +164,7 @@ c
      >  cbior(npoi,npft),   ! carbon in fine root biomass pool (kg_C m-2)
      >  cbiow(npoi,npft)    ! carbon in woody biomass pool (kg_C m-2)
 c
-      common /comveg6/ cbiol, cbior, cbiow
+c     common /comveg6/ cbiol, cbior, cbiow
 c
       real 
      >  clitll(npoi),       ! carbon in leaf litter pool - lignin          (kg_C m-2)
@@ -188,7 +188,7 @@ c
      >  cdisturb(npoi)      ! annual amount of vegetation carbon lost 
                             ! to atmosphere due to fire  (biomass burning) (kg_C m-2/year)
 c
-      common /comveg7/ clitll, clitlm, clitls, clitrl, clitrm, clitrs, clitwl,
+c     common /comveg7/ clitll, clitlm, clitls, clitrl, clitrm, clitrs, clitwl,
      >     clitwm, clitws, csoipas, csoislo, csoislon, csoislop, decompl
      >     , decomps, falll, fallr, fallw, cdisturb
 c
@@ -200,7 +200,7 @@ c
      >  nppdummy(npoi,npft), ! canopy NPP before accounting for stem and root respiration
      >  tgpp(npoi,npft)     ! instantaneous GPP for each pft (mol-CO2 / m-2 / second)
 c
-      common /comveg8/ biomass, frac, plai, tnpp, tgpp
+c     common /comveg8/ biomass, frac, plai, tnpp, tgpp
 c
 c 1: lower canopy
 c 2: upper canopy
@@ -212,7 +212,7 @@ c
      >  ztop(npoi,2),       ! height of plant top above ground (m)
      >  ztopmx(npoi,2)      ! maximum annual height of plant top above ground (m) 
 c
-      common /comveg9/ lai, sai, zbot, ztop, ztopmx
+c     common /comveg9/ lai, sai, zbot, ztop, ztopmx
 c
       real
      >  dleaf(2),           ! typical linear leaf dimension in aerodynamic transfer coefficient (m)
@@ -220,23 +220,23 @@ c
      >  orieh(2),           ! fraction of leaf/stems with horizontal orientation
      >  oriev(2)            ! fraction of leaf/stems with vertical
 c
-      common /comveg10/  dleaf, dstem, orieh, oriev
+c     common /comveg10/  dleaf, dstem, orieh, oriev
 c
       real 
      >  rhoveg(nband,2),    ! reflectance of an average leaf/stem
      >  tauveg(nband,2)     ! transmittance of an average leaf/stem
 c
-      common /comveg11/ rhoveg, tauveg
+c     common /comveg11/ rhoveg, tauveg
 c
       real 
      >  froot(nsoilay,2)    ! fraction of root in soil layer 
 c
-      common /comveg12/ froot
+c     common /comveg12/ froot
 c
       real 
      >  exist(npoi,npft)    ! probability of existence of each plant functional type in a gridcell
 c
-      common /comveg13/ exist
+c     common /comveg13/ exist
 c
       real 
      >  specla(npft),        ! specific leaf area (m**2/kg) 
@@ -244,6 +244,6 @@ c
      >  aroot(npft),         ! carbon allocation fraction to fine roots
      >  awood(npft)          ! carbon allocation fraction to wood 
 c
-      common /comveg14/ specla, aleaf, aroot, awood
+c     common /comveg14/ specla, aleaf, aroot, awood
 c
 

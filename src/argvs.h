@@ -118,7 +118,7 @@
 c
 
 
-      common /inifiles/  ini_infile_,
+c     common /inifiles/  ini_infile_,
      >   diag_infile_,
      >   cld_mon_,
      >   deltat_mon_,

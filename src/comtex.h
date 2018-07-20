@@ -19,7 +19,7 @@ c ----------------------------------------
      >       suctiondat(ndat), ! Air entry potential (m-H20)
      >       hydrauldat(ndat)  ! saturated hydraulic conductivity (m s-1)
 
-      common /comtex1/
+c     common /comtex1/
      >       texdat,           ! sand/silt/clay fractions
      >       porosdat,         ! porosity volume fraction
      >       sfielddat,        ! field capacity volume fraction

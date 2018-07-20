@@ -12,13 +12,13 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
+      use compar
+      use comatm
+      use comsoi
+      use comsum
+      use comveg
 c
 c local variables
 c
@@ -224,14 +224,14 @@ c ---------------------------------------------------------------------
       subroutine dynaveg (isimfire) ! , isim_ac, year)
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'compft.h'
-      include 'comage.h'
+      use compar
+      use comsoi
+      use comsum
+      use comveg
+      use compft
+      use comage
 c
 c Arguments
 c
@@ -591,10 +591,10 @@ c ---------------------------------------------------------------------
       subroutine fire
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comveg.h'
+      use compar
+      use comveg
 c
 c local variables
 c
@@ -622,10 +622,10 @@ c ---------------------------------------------------------------------
       subroutine vegmap
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comveg.h'
+      use compar
+      use comveg
 c
 c local variables
 c

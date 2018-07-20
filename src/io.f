@@ -83,17 +83,17 @@ c (NOTE: a10ancuc is not used at this point, so its wrestart entry
 c is commented out)
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
 c instantaneous output for restarts
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsno.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use comsoi
+      use comsno
+      use comsum
+      use comveg
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -1494,14 +1494,14 @@ c writes out daily files
 c
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsum.h'
-      include 'comwork.h'
-      include 'comveg.h'
-      include 'argvs.h'
+      use compar
+      use comatm
+      use comsum
+      use comwork
+      use comveg
+      use argvs
 c
 c Arguments
 c
@@ -2107,12 +2107,12 @@ c ---------------------------------------------------------------------
 c
 c writes out monthly files
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsum.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use comsum
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -2810,13 +2810,13 @@ c ---------------------------------------------------------------------
 c
 c writes out yearly files
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use comsum
+      use comveg
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -3981,14 +3981,14 @@ c ---------------------------------------------------------------------
 c
 c reads in initialization files and initializes some fields
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use combcs
+      use comsoi
+      use comveg
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -4474,16 +4474,16 @@ c  dropl3  = drought-phenology trigger for c3 grasses
 c (NOTE: a10ancuc is not used at this point, so its restart entry 
 c is commented out)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsno.h'
-      include 'combcs.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use comsoi
+      use comsno
+      use combcs
+      use comsum
+      use comveg
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -5058,12 +5058,12 @@ c ---------------------------------------------------------------------
       subroutine coldstart
 c ---------------------------------------------------------------------
 c  
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsno.h'
-      include 'argvs.h'
+      use compar
+      use comsoi
+      use comsno
+      use argvs
 c
 c initialize some model variables for cold start conditions
 c
@@ -5101,13 +5101,13 @@ c
 c and adds them to the climatological value for the month
 c
 c  
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comveg.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use combcs
+      use comveg
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -5347,8 +5347,8 @@ c
 c This subroutine obtains the year+1 of the year in the units attribute
 c of a file.  Low-level netcdf commands are used.
 c
-      include 'implicit.h'
-      include 'argvs.h'
+      use implicit
+      use argvs
 c
       include 'netcdf.inc'
 c
@@ -5416,12 +5416,12 @@ c ---------------------------------------------------------------------
 c
 c This subroutine reads in daily fields..
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comwork.h'
-      include 'argvs.h'
+      use compar
+      use combcs
+      use comwork
+      use argvs
 c
 c Arguments
 c
@@ -5598,8 +5598,8 @@ c this Y2K-compliant version. It calls another built-in c subroutine fdate()
 c that is Y2K-compliant. We also change cdate to 11 characters from 10.
 c the format is now:    15-Mar-2002
 c
-      include 'implicit.h'
-      include 'argvs.h'
+      use implicit
+      use argvs
       character*11 cdate
       character*24 longdate
 c

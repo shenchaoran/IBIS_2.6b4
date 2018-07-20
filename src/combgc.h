@@ -22,7 +22,7 @@ c
      >     cnroot,     ! average c:n ratio for root turnover
      >     cnwood      ! average c:n ratio for woody debris
 
-      common /combgc1/
+c     common /combgc1/
      >     lig_frac,   ! split of lignified litter material between protected/non-protected slow OM pools
      >     fbsom,      ! protected biomass as a fraction of total soil organic C from Verberne et al., 1990
      >     effac,      ! efficiency of microbial biomass reincorporated into biomass pool. 
@@ -56,7 +56,7 @@ c
      >          kps,          ! protected om      --> passive c
      >          ksb           ! passive c         --> biomass
 
-      common /combgc2/
+c     common /combgc2/
      >          klm,          ! leaf metabolic litter 
      >          kls,          ! leaf structural litter
      >          kll,          ! leaf lignin
@@ -94,7 +94,7 @@ c
      >          yps,          ! protected om to passive c
      >          ysb           ! passive c to biomass
 c
-      common /combgc3/
+c     common /combgc3/
      >          ylm,          ! leaf metabolic litter decomposition 
      >          yls,          ! leaf structural litter decomposition
      >          yll,          ! leaf lignin

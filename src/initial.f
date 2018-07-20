@@ -10,7 +10,7 @@ c ---------------------------------------------------------------------
       subroutine initial (isimveg, irestart, iyrlast)
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'    
+      use implicit    
 c
 c Arguments (input)     
 c
@@ -59,13 +59,13 @@ c ---------------------------------------------------------------------
 c
 c does initialization for model
 c
-      include 'implicit.h'    
+      use implicit    
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comhyd.h'
-      include 'comsum.h'
-      include 'comveg.h'
+      use compar
+      use comatm
+      use comhyd
+      use comsum
+      use comveg
 c
 c Arguments (input)     
 c
@@ -249,14 +249,14 @@ c ---------------------------------------------------------------------
 c CD
 c does initialization for time averaging
 c
-      include 'implicit.h'    
+      use implicit    
 c
-      include 'compar.h'
-      include 'comhyd.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
+      use compar
+      use comhyd
+      use comsno
+      use comsoi
+      use comsum
+      use comveg
 c
 c local variables
 c
@@ -385,10 +385,10 @@ c ---------------------------------------------------------------------
 c
 c does initialization for snow model
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsno.h'
+      use compar
+      use comsno
 c
 c rhos is density of snow
 c
@@ -427,12 +427,12 @@ c ---------------------------------------------------------------------
 c
 c does initialization for soil database
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsno.h'
-      include 'comtex.h'
+      use compar
+      use comsoi
+      use comsno
+      use comtex
 c
 c Arguments (input)     
 c
@@ -1077,14 +1077,14 @@ c ---------------------------------------------------------------------
       subroutine iniveg (isimveg, irestart)
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'compft.h'
+      use compar
+      use combcs
+      use comsoi
+      use comsum
+      use comveg
+      use compft
 c
 c Arguments (input)
 c

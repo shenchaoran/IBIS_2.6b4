@@ -14,7 +14,7 @@ c
      >  gadjust(npoi), ! h2o flux due to adjustments in subroutine wadjust (kg_h2o m-2 s-1)
      >  wtot(npoi)     ! total amount of water stored in snow, soil, puddels, and on vegetation (kg_h2o)
 c
-      common /comhyd1/ ginvap, gsuvap, gtrans, gtransu, gtransl, grunof, gdrain,
+c     common /comhyd1/ ginvap, gsuvap, gtrans, gtransu, gtransl, grunof, gdrain,
      >     gadjust, wtot
 
 

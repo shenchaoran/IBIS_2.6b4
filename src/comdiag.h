@@ -8,7 +8,7 @@ c
 c
       integer ldiag(nvars,nfiles)      ! chosen diagnostic variables
 c
-      common /diag1/ ldiag
+c     common /diag1/ ldiag
 c
 c
       integer diagstart(nfiles),      ! year diagnostic output begins
@@ -16,5 +16,5 @@ c
      >        ndiagpt(nfiles),        ! point in an npoi array
      >        nfreq(nfiles)           ! frequency of diagnostic output
 c
-      common /diag2/diagstart,diagend,ndiagpt,nfreq
+c     common /diag2/diagstart,diagend,ndiagpt,nfreq
 c

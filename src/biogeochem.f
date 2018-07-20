@@ -12,13 +12,13 @@ c --------------------------------------------------------------------------
      >                    spin,spinmax)
 c --------------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'comatm.h'
+      use compar
+      use comsoi
+      use comsum
+      use comveg
+      use comatm
 c
 c Arguments (input)
 c

@@ -29,12 +29,12 @@ c
 c
       real cdummy (ndim3)      ! work space big enough for npft grids
 c
-      common /work1/ lonindex,
+c     common /work1/ lonindex,
      >               latindex
 c
-      common /work2/ lonscale,
+c     common /work2/ lonscale,
      >               latscale
 c
-      common /work3/ work
-      common /work4/ cdummy
+c     common /work3/ work
+c     common /work4/ cdummy
 c

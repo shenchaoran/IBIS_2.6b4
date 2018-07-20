@@ -12,16 +12,16 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
-      include 'comsum.h'
-      include 'compft.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
+      use comsum
+      use compft
       
 c
 c local variables
@@ -150,7 +150,7 @@ c
 c
 c include water vapor functions
 c
-      include 'comsat.h'
+      use comsat
 c
 c ---------------------------------------------------------------------
 c * * * upper canopy physiology calculations * * *
@@ -963,11 +963,11 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comveg.h'
+      use compar
+      use comsoi
+      use comveg
 c
 c local variables
 c
@@ -1034,7 +1034,7 @@ c ---------------------------------------------------------------------
       subroutine co2 (co2init, co2conc, iyear)
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c     include 'comveg.h'
 c
 c Arguments 

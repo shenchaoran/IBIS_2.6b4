@@ -12,12 +12,12 @@ c ---------------------------------------------------------------
 c
 c common blocks
 c 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comdiag.h'
-      include 'argvs.h'
+      use compar
+      use comatm
+      use comdiag
+      use argvs
 c
 c local variables
 c
@@ -685,13 +685,13 @@ c ---------------------------------------------------------------
 c
 c common blocks
 c 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'com1d.h'
-      include 'comatm.h'
-      include 'comsoi.h'
-      include 'argvs.h'
+      use compar
+      use com1d
+      use comatm
+      use comsoi
+      use argvs
 c
 c Local variables
 c
@@ -786,7 +786,7 @@ c
 
       subroutine parseArgv
 
-      include 'argvs.h'
+      use argvs
 
       integer argc_, argcI_, filePathStart_
       character*100, dimension(50):: argvs_

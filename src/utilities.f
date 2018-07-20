@@ -12,7 +12,7 @@ c ---------------------------------------------------------------------
 c
 c copies array arr to brr,for 1st nt words of arr
 c
-      include 'implicit.h'
+      use implicit
 c
 c Arguments
 c
@@ -38,7 +38,7 @@ c ---------------------------------------------------------------------
 c
 c sets all elements of real vector arr to value
 c
-      include 'implicit.h'
+      use implicit
 c
 c Arguments
 c
@@ -75,7 +75,7 @@ c ---------------------------------------------------------------------
 c
 c chooses between two things.  Used in canopy.f
 c
-      include 'implicit.h'
+      use implicit
 c
       logical l
       real x, y
@@ -96,10 +96,10 @@ c ---------------------------------------------------------------------
 c
 c extracts land points from array and puts them into a land-only vector
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
+      use compar
+      use combcs
 c
 c Arguments
 c
@@ -137,10 +137,10 @@ c ---------------------------------------------------------------------
 c
 c puts vector of land-only points back into array
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comwork.h'
+      use compar
+      use comwork
 c
 c Arguments
 c
@@ -174,7 +174,7 @@ c
 c returns position of last non-blank,null character in ch,
 c or 1 if ch is all blanks
 c
-      include 'implicit.h'
+      use implicit
 c
 c Arguments
 c

@@ -19,7 +19,7 @@ c -------------------------
      >       theta4,         ! photosynthesis coupling coefficient for C4 plants (dimensionless) 
      >       vmax_pft(npft)  ! nominal vmax of top leaf at 15 C (mol-co2/m**2/s) [not used]
 
-      common /compft1/ 
+c     common /compft1/ 
      >       tau15,          ! co2/o2 specificity ratio at 15 degrees C (dimensionless)
      >       kc15,           ! co2 kinetic parameter (mol/mol)
      >       ko15,           ! o2 kinetic parameter (mol/mol) 
@@ -38,7 +38,7 @@ c -------------------------
      >       coefbub,        ! 'b' coefficient for stomatal conductance relationship
      >       gsubmin         ! absolute minimum stomatal conductance
 
-      common /pft_broad/ 
+c     common /pft_broad/ 
      >       gammaub,        ! leaf respiration coefficient
      >       coefmub,        ! 'm' coefficient for stomatal conductance relationship
      >       coefbub,        ! 'b' coefficient for stomatal conductance relationship
@@ -50,7 +50,7 @@ c -------------------------
      >       coefbuc,        ! 'b' coefficient for stomatal conductance relationship  
      >       gsucmin         ! absolute minimum stomatal conductance
 
-      common /pft_conif/ 
+c     common /pft_conif/ 
      >       gammauc,        ! leaf respiration coefficient
      >       coefmuc,        ! 'm' coefficient for stomatal conductance relationship  
      >       coefbuc,        ! 'b' coefficient for stomatal conductance relationship  
@@ -62,7 +62,7 @@ c -------------------------
      >       coefmls,        ! 'm' coefficient for stomatal conductance relationship 
      >       gslsmin         ! absolute minimum stomatal conductance
 
-      common /pft_shrub/ 
+c     common /pft_shrub/ 
      >       gammals,        ! leaf respiration coefficient
      >       coefbls,        ! 'b' coefficient for stomatal conductance relationship 
      >       coefmls,        ! 'm' coefficient for stomatal conductance relationship 
@@ -74,7 +74,7 @@ c -------------------------
      >       coefbl3,        ! 'b' coefficient for stomatal conductance relationship 
      >       gsl3min         ! absolute minimum stomatal conductance
 
-      common /pft_c3grass/ 
+c     common /pft_c3grass/ 
      >       gammal3,        ! leaf respiration coefficient
      >       coefml3,        ! 'm' coefficient for stomatal conductance relationship 
      >       coefbl3,        ! 'b' coefficient for stomatal conductance relationship
@@ -86,7 +86,7 @@ c -------------------------
      >       coefbl4,        ! 'b' coefficient for stomatal conductance relationship
      >       gsl4min         ! absolute minimum stomatal conductance
 
-      common /pft_c4grass/ 
+c     common /pft_c4grass/ 
      >       gammal4,        ! leaf respiration coefficient
      >       coefml4,        ! 'm' coefficient for stomatal conductance relationship
      >       coefbl4,        ! 'b' coefficient for stomatal conductance relationship
@@ -98,7 +98,7 @@ c -------------------------
      >       tauwood(npft),  ! wood biomass turnover time constant (years)
      >       tauwood0(npft)  ! normal (unstressed) turnover time for wood biomass (years)
 
-      common /compft2/  
+c     common /compft2/  
      >       tauleaf,        ! foliar biomass turnover time constant (years)
      >       tauroot,        ! fine root biomass turnover time constant (years)
      >       tauwood,        ! wood biomass turnover time constant (years)
@@ -111,7 +111,7 @@ c -------------------------
      >       GDD(npft)       ! minimum GDD needed (base 5 C for upper canopy PFTs, 
                              ! base 0 C for lower canopy PFTs)
 
-      common /compft3/ 
+c     common /compft3/ 
      >       TminL,          ! Absolute minimum temperature -- lower limit (upper canopy PFTs)
      >       TminU,          ! Absolute minimum temperature -- upper limit (upper canopy PFTs)
      >       Twarm,          ! Temperature of warmest month (lower canopy PFTs)
@@ -128,7 +128,7 @@ c -------------------------
      >       beta1,          ! parameter for Jackson rooting profile, lower canopy
      >       beta2           ! parameter for Jackson rooting profile, upper canopy
 
-      common /compft4/ 
+c     common /compft4/ 
      >       plai_init,      ! initial total LAI for each PFT (used in iniveg)
      >       plaiupper,      ! Potental LAI of upper canopy (uniform initial vegetation)
      >       plailower,      ! Potental LAI of lower canopy (uniform initial vegetation)

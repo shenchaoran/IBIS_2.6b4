@@ -13,16 +13,16 @@ c----------------------------------------------------------
 c
 c  Read various parameters from ibis.params
 c 
-      include 'implicit.h'
+      use implicit
 
-      include 'compar.h'    ! npoi, npft
-      include 'comage.h'    ! npftu
-      include 'comveg.h'    ! woodnorm
-      include 'comsoi.h'    ! wpudmax
-      include 'compft.h'    ! PFT parameters incl physiological "constants"
-      include 'comtex.h'    ! Soil texture-related parameters
-      include 'combgc.h'    ! Soil biogeochemistry parameters
-      include 'argvs.h'
+      use compar    ! npoi, npft
+      use comage    ! npftu
+      use comveg    ! woodnorm
+      use comsoi    ! wpudmax
+      use compft    ! PFT parameters incl physiological "constants"
+      use comtex    ! Soil texture-related parameters
+      use combgc    ! Soil biogeochemistry parameters
+      use argvs
 c  
 c Local variables
 c      
@@ -329,7 +329,7 @@ c*******************************************************************************
 c Simple routine to read in data in free format, with a built-in error handler 
 c designed to locate and skip over comment strings buried in the data stream.
 
-      include 'implicit.h'
+      use implicit
      
       integer*4    funit,
      >             iocode     ! dummy variable required by system for error handling?
@@ -362,7 +362,7 @@ c less than or equal to 10 (unless you increase the number of items). Note
 c that N = 1 is allowed, but it is easier to use subroutine ReadItem for 
 c reading single values. 
 
-      include 'implicit.h'
+      use implicit
      
       integer*4    funit,
      >             iocode,   ! dummy variable required by system for error handling?
@@ -452,7 +452,7 @@ c echoed to the screen and execution stops. But if someone were so-inclined,
 c they could write some extra code to analyse the problem and possibly recover
 c from it.
 
-      include 'implicit.h'
+      use implicit
 
       integer*4     parm_unit,
      >              iocode    ! dummy variable required by system for error handling?

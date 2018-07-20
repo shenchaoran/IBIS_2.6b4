@@ -16,11 +16,11 @@ c climate 'history' based on monthly mean values
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comveg.h'
+      use compar
+      use combcs
+      use comveg
 c
 c Local variables
 c
@@ -111,11 +111,11 @@ c warmest temp if monthly anomalies or daily values are used
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comveg.h'
+      use compar
+      use combcs
+      use comveg
 c
 c local variables
 c
@@ -184,11 +184,11 @@ c
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comveg.h'
-      include 'compft.h'
+      use compar
+      use comveg
+      use compft
 c
 c Local variables
 c

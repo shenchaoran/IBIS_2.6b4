@@ -82,24 +82,24 @@ c
      >  cappa,         ! rair/cair
      >  rhow           ! density of liquid water (all types) (kg m-3)
 c
-      common /compar1/ epsilon, dtime, stef, vonk, grav, tmelt, hfus, hvap, hsub,
+c     common /compar1/ epsilon, dtime, stef, vonk, grav, tmelt, hfus, hvap, hsub,
      >     ch2o,  cice, cair, cvap, rair, rvap, cappa, rhow       
 c
       real
      >  garea(npoi),   ! area of each gridcell (m**2)
      >  vzero(npoi)    ! a real array of zeros, of length npoi
 c
-      common /compar2/ garea, vzero
+c     common /compar2/ garea, vzero
 c
       integer 
      >  ndaypy,        ! number of days per year
      >  nlonsub,       ! number of longitude points for subsetting
      >  nlatsub        ! number of latitude points for subsetting
 c
-      common /compar3/ ndaypy, nlonsub, nlatsub
+c     common /compar3/ ndaypy, nlonsub, nlatsub
 c
       integer
      >  ndaypm(12)     ! number of days per month
 c
-      common /compar4/ ndaypm
+c     common /compar4/ ndaypm
 c

@@ -15,13 +15,13 @@ c index for other solar routines. the index indsol, with number
 c of points nsol, points to current 1d strip arrays whose coszen 
 c values are gt 0 (indsol, nsol are in com1d)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsno
+      use comveg
+      use com1d
 c
       integer i
 c
@@ -74,13 +74,13 @@ c solar calculations
 c
 c ib = waveband number
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use com1d
 c
 c input variable
 c
@@ -211,14 +211,14 @@ c the procedure is first to calculate the grass+soil albedos,
 c then the tree + (grass+soil+snow) albedos. the labels
 c (a) to (d) correspond to those in the description doc
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
 c 
 c Arguments
 c 
@@ -309,14 +309,14 @@ c absorbed by the soil and snow
 c
 c ib = waveband number
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
 c 
 c Arguments
 c 
@@ -486,11 +486,11 @@ c
 c the solutions for the twostream approximation follow Sellers (1985),
 c and Bonan (1996) (the latter being the LSM documentation)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comveg
+      use com1d
 c
 c Arguments
 c
@@ -717,11 +717,11 @@ c distributions separately, and allow for the cylindrical
 c shape of stems (norman and jarvis, app.b; the expressions 
 c below are appropriate for flat leaves)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comveg
+      use com1d
 c
 c Arguments (all quantities are returned unless otherwise note)
 c
@@ -883,14 +883,14 @@ c
 c emu, ems, eml  = emissivities of the vegetation planes
 c fup, fdown     = upward and downward fluxes below tree level
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
 c
 c Local arrays:
 c

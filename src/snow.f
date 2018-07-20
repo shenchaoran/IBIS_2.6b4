@@ -12,13 +12,13 @@ c ---------------------------------------------------------------------
 c
 c steps snow model through one timestep
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'comsno.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comsoi
+      use comsno
+      use comveg
+      use com1d
 c
 c local variables:
 c
@@ -308,11 +308,11 @@ c buried-lower-veg layer to the bottom of the snow with
 c conduction coefficient conbur/xl and heat capacity chl*xl
 c
 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsno.h'
-      include 'comsoi.h'
+      use compar
+      use comsno
+      use comsoi
 c
 c Arguments
 c
@@ -483,9 +483,9 @@ c
 c also adjusts profile of tracer field tcur so its vertical
 c integral is conserved (eg, temperature)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
+      use compar
 c
 c Arguments
 c

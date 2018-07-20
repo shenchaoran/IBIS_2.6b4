@@ -47,13 +47,13 @@ c Research 17, 182-190.
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'combcs.h'
-      include 'comatm.h'
-      include 'comsum.h'
-      include 'comveg.h'
+      use compar
+      use combcs
+      use comatm
+      use comsum
+      use comveg
 c
 c Arguments
 c
@@ -159,7 +159,7 @@ c
      >          0.000,  0.500,  0.250, 
      >          0.000,  0.000,  0.500 /
 c
-      include 'comsat.h'
+      use comsat
 c
 c ---------------------------------------------------------------------- 
 c * * * initial setup for daily climate calculations * * *
@@ -920,11 +920,11 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comwork.h'
+      use compar
+      use comatm
+      use comwork
 c
 c Arguments
 c
@@ -973,7 +973,7 @@ c
      >        plenmin,
      >        plenmax
 c
-      include 'comsat.h'
+      use comsat
 c
 
 c ---------------------------------------------------------------------- 

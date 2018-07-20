@@ -11,7 +11,7 @@ c --------------------------------------------------------------------
       real function ran2 (idum)
 c --------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
       integer idum,im1,im2,imm1,ia1,ia2,iq1,iq2,ir1,ir2,ntab,ndiv
 c
@@ -90,9 +90,9 @@ c
 c the first subscript in arr, rhs, vec is over the multiple
 c systems, and the others are the usual row, column subscripts
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
+      use compar
 c
 c Arguments (input-output)
 c
@@ -189,9 +189,9 @@ c ---------------------------------------------------------------------
       subroutine tridia (ns, nd, ne, a, b, c, y, x, alpha, gamma)
 c ---------------------------------------------------------------------
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
+      use compar
 c
 c     purpose:
 c     to compute the solution of many tridiagonal linear systems.

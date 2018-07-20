@@ -34,7 +34,7 @@ c and tu, ts, tl, tg, ti can be adjusted too
 c
 c initialize aerodynamic quantities
 c
-       include 'implicit.h'
+       use implicit
 c
 c Local variables
 c
@@ -87,14 +87,14 @@ c
 c rwork is used throughout as a scratch variable to reduce number of
 c computations
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
 c
 c Local variables
 c
@@ -271,14 +271,14 @@ c and saves them in com1d arrays cu and cl for use by turvap,
 c and similarly for the solid-air transfer coefficients
 c su, ss, sl, sg and si
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsoi.h'
-      include 'comsno.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comsoi
+      use comsno
+      use comveg
+      use com1d
 c
 c Arguments (input)
 c
@@ -501,15 +501,15 @@ c for the agcm, soil, snow models and budget calcs
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comhyd.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comhyd
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
 c
 c Arguments (input)
 c
@@ -627,7 +627,7 @@ c                  ----------------------------------
      >              0,  0,  0,  0,  1,  0,  1,  0,  1  !ti
      >            /
 c
-      include 'comsat.h'
+      use comsat
 c
 c if first iteration, save original canopy temps in t*old
 c (can use tsoi,tsno for original soil/snow skin temps), for
@@ -1324,9 +1324,9 @@ c layer parameterizations,november 1981,59-79 (qc880.4 b65w619)
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
+      use compar
 c
 c input variables
 c
@@ -1490,8 +1490,8 @@ c below attempts to avoid both pitfalls
 c
 c common blocks
 c
-      include 'implicit.h'
-      include 'compar.h'
+      use implicit
+      use compar
 c
 c input/output variables
 c
@@ -1565,8 +1565,8 @@ c vanishing within the timestep
 c
 c wimp   = implicit fraction (0 to 1) (returned)
 c
-      include 'implicit.h'
-      include 'compar.h'
+      use implicit
+      use compar
 c
 c input variables
 c
@@ -1626,11 +1626,11 @@ c by liquid and snow individually.) if fwet is 0, choose rliq
 c = 1 if t[u,s,l] ge tmelt or 0 otherwize, for use by turvap and
 c steph2o in case of initial dew formation on dry surface.
 c 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comveg
+      use com1d
 c
 c local variables
 c
@@ -1708,12 +1708,12 @@ c
 c calls steph2o for upper leaves, upper stems and lower veg in
 c iurn, adjusting precips at each level
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use comveg
+      use com1d
 c
 c local variables
 c
@@ -1874,9 +1874,9 @@ c due to interception and drip,blowoff
 c
 c 
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
+      use compar
 c
 c Arguments (all arguments are supplied (unchanged) unless otherwise noted
 c
@@ -2030,12 +2030,12 @@ c and does final heat-conserving adjustment for any liquid/snow
 c below/above melt point. calls steph2o2 for upper leaves, 
 c upper stems and lower veg in turn.
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsno.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comsno
+      use comveg
+      use com1d
 c
 c local variables
 c
@@ -2091,11 +2091,11 @@ c removes evaporation from intercepted h2o, and does final
 c heat-conserving adjustment for any liquid/snow below/above
 c melt point, for one veg component
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'com1d.h'
+      use compar
+      use comatm
+      use com1d
 c
 c Arguments (all arguments are supplied unless otherwise noted)
 c
@@ -2122,7 +2122,7 @@ c
      >     dw(npoi)    ! correct water flux for liquid below melt point and opposite
 c
 c
-      include 'comsat.h'
+      use comsat
 c
 c ---------------------------------------------------------------------
 c
@@ -2223,9 +2223,9 @@ c
 c will work if some of x1,x2,x3 have opposite signs, but may 
 c give unphysical tm's
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
+      use compar
 c
 c Arguments (input except for xm, tm)
 c
@@ -2281,12 +2281,12 @@ c temperature t[u,s,l], and intercepted liquid, snow amounts
 c wliq[u,s,l], wsno[u,s,l] have been calculated for a unit 
 c leaf/stem surface, whether or not one exists.)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
+      use compar
+      use comsno
+      use comsoi
+      use comveg
 c
 c local variables
 c
@@ -2347,14 +2347,14 @@ c
 c OUTPUT
 c     twet3 - wet bulb temp in K, accuracy?
 c
-      include 'implicit.h'
-      include 'compar.h'
+      use implicit
+      use compar
 c
       integer i
 c
       real tak, q, p, ta, twk, twold, diff
 c
-      include 'comsat.h'
+      use comsat
 c
 c temperatures in twet3 equation must be in C
 c pressure in qsat function must be in Pa

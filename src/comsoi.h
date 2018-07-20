@@ -11,7 +11,7 @@ c
 *                                ! (0.0 = impermeable; 1.0 = fully permeable)
 
 c
-      common /comsoi1/ wpudmax, zwpmax, bperm
+c     common /comsoi1/ wpudmax, zwpmax, bperm
 c
       real 
      >  wpud(npoi),              ! liquid content of puddles per soil area (kg m-2)
@@ -28,13 +28,13 @@ c
      >  tg(npoi),                ! soil skin temperature (K)
      >  ti(npoi)                 ! snow skin temperature (K)
 c
-      common /comsoi2/ wpud, wipud, z0soi, albsav, albsan, stresstl, stresstu, heati,
+c     common /comsoi2/ wpud, wipud, z0soi, albsav, albsan, stresstl, stresstu, heati,
      >     heatg, hvasug, hvasui, tg, ti
 c
       real
      >  hsoi(nsoilay+1)          ! soil layer thickness (m)
 c
-      common /comsoi4/ hsoi
+c     common /comsoi4/ hsoi
 c
       real 
      >  tsoi(npoi,nsoilay),      ! soil temperature for each layer (K)
@@ -59,19 +59,19 @@ c
      >  upsoiu(npoi,nsoilay),    ! soil water uptake from transpiration (kg_h2o m-2 s-1)
      >  upsoil(npoi,nsoilay)     ! soil water uptake from transpiration (kg_h2o m-2 s-1)
 c
-      common /comsoi5/ tsoi, wsoi, wisoi, consoi, csoi, hydraul, suction, bex,
+c     common /comsoi5/ tsoi, wsoi, wisoi, consoi, csoi, hydraul, suction, bex,
      >     sfield, swilt, rhosoi, poros, porosflo, sandpct, claypct, 
      >     sand, clay, stressl, stressu, upsoiu, upsoil
 c
       real 
      >  hflo(npoi,nsoilay+1)     ! downward heat transport through soil layers (W m-2)
 c
-      common /comsoi6/ hflo
+c     common /comsoi6/ hflo
 c
       integer 
      >  ibex(npoi,nsoilay)       ! nint(bex), used for cpu speed
 c
-      common /comsoi7/ ibex
+c     common /comsoi7/ ibex
 c
       real 
      >  qglif(npoi,4)            ! 1: fraction of soil evap (fvapg) from soil liquid
@@ -79,5 +79,5 @@ c
      >                           ! 3: fraction of soil evap (fvapg) from puddle liquid
      >                           ! 4: fraction of soil evap (fvapg) from puddle ice
 c
-      common /comsoi8/ qglif
+c     common /comsoi8/ qglif
 c

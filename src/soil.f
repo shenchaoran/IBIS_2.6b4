@@ -12,13 +12,13 @@ c ---------------------------------------------------------------------
 c
 c sets diagnostic soil quantities
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
+      use compar
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
 c
 c Local variables
 c
@@ -42,7 +42,7 @@ c
      >     rwork1,
      >     rwork2
 c
-      include 'comsat.h'    
+      use comsat    
 c
 c set soil layer quantities
 c
@@ -184,15 +184,15 @@ c ---------------------------------------------------------------------
 c
 c steps soil/seaice model through one timestep
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comhyd.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'com1d.h'
+      use compar
+      use comhyd
+      use comatm
+      use comsno
+      use comsoi
+      use comveg
+      use com1d
 c
       integer i, k          ! loop indices
 c
@@ -219,7 +219,7 @@ c
      >  dw(npoi),               ! '
      >  zporos(npoi)            
 c
-      include 'comsat.h'
+      use comsat
 c
       call const (c0pud, npoi*nsoilay, 0.0)
       call const (c1pud, npoi*nsoilay, 0.0)
@@ -526,11 +526,11 @@ c using soil temperatures in wsoi (in comsoi)
 c
 c lower bc can be no h2o flow or free drainage, set by bperm below
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
-      include 'com1d.h'
+      use compar
+      use comsoi
+      use com1d
 c
 c Arguments : all are supplied except wflo (returned):
 c
@@ -861,10 +861,10 @@ c        in soilh2o is accounted for. lower bc is conductive flux = 0
 c        for soil (although the flux due to liquid drainage flow can
 c        be > 0)
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsoi.h'
+      use compar
+      use comsoi
 c
 c Arguments
 c
@@ -1019,12 +1019,12 @@ c ice-liquid transformations in soilctl loop 400 can produce very
 c small -ve amounts due to roundoff error, and very small -ve or +ve
 c amounts can cause (harmless) "underflow" fpes in soilh2o
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comhyd.h'
-      include 'comsoi.h'
-      include 'com1d.h'
+      use compar
+      use comhyd
+      use comsoi
+      use com1d
 c 
 c local variables
 c

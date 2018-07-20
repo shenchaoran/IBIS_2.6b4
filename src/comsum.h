@@ -8,7 +8,7 @@ c
      >  nmtimes,            ! counter for monthly average calculations
      >  nytimes             ! counter for yearly average calculations
 c
-      common /comsum1/ ndtimes, nmtimes, nytimes
+c     common /comsum1/ ndtimes, nmtimes, nytimes
 c
 c daily average fields
 c
@@ -36,7 +36,7 @@ c
      >  adwlaysoi(npoi),    ! daily average soil moisture of top layer(fraction)
      >     adneetot(npoi)       ! daily accumulated net ecosystem exchange of co2 in ecosystem (kg-C/m**2/day)
 c
-      common /comsum3/ adrain, adsnow, adaet, adtrunoff, adsrunoff, addrainage,
+c     common /comsum3/ adrain, adsnow, adaet, adtrunoff, adsrunoff, addrainage,
      >     adrh, adsnod, adsnof, adwsoi, adwisoi, adtsoi, adwsoic, adtsoic,
      >     adco2mic, adco2root, adco2soi, adco2ratio, adnmintot,
      >     adtlaysoi, adwlaysoi, adneetot
@@ -77,7 +77,7 @@ c
      >  amco2ratio(npoi),   ! monthly ratio of root to total co2 flux
      >  amnmintot(npoi)     ! monthly total N mineralization from microbes (kg-N/m**2/month)
 c
-      common /comsum4/ amtemp, amrain, amsnow, amcloud, amrh, amqa, amaet,
+c     common /comsum4/ amtemp, amrain, amsnow, amcloud, amrh, amqa, amaet,
      >     amtrunoff, amsrunoff, 
      >     amdrainage, amwsoi, amwisoi, amvwc, amawc, amtsoi, amsnod,
      >     amsnof, amlaiu, amlail, amsolar, amalbedo, amirdown, amirup, 
@@ -87,7 +87,7 @@ c
       real
      >  amnpp(npoi,npft)    ! monthly total npp for each plant type (kg-C/m**2/month)
 c
-      common /comsum5/ amnpp
+c     common /comsum5/ amnpp
 c
 c annual average fields
 c
@@ -132,7 +132,7 @@ c
      >  aynmintot(npoi),    ! annual total nitrogen mineralization (kg-N/m**2/yr)
      >  ayrootbio(npoi)     ! annual average live root biomass (kg-C / m**2)
 c
-      common /comsum6/ ayprcp, ayaet, aytrans, aytrunoff, aysrunoff, aydrainage, aydwtot,
+c     common /comsum6/ ayprcp, ayaet, aytrans, aytrunoff, aysrunoff, aydrainage, aydwtot,
      >     aywsoi, aywisoi, ayvwc, ayawc, aytsoi, ayrratio, aytratio,
      >     aysolar, ayalbedo, ayirdown, ayirup, aysens, aylatent,
      >     aystresstu, aystresstl, ayanpptot, aynpptot, aygpptot, 
@@ -144,7 +144,7 @@ c
      >  aynpp(npoi,npft),   ! annual total npp for each plant type(kg-c/m**2/yr)
      >  aygpp(npoi,npft)    ! annual gross npp for each plant type(kg-c/m**2/yr)
 c
-      common /comsum7/ ayanpp, aynpp, aygpp
+c     common /comsum7/ ayanpp, aynpp, aygpp
 c
 c other time average fields
 c
@@ -160,7 +160,7 @@ c
      >  a10daylightu(npoi),    ! 10-day average day-time PAR - upper canopy (micro-Ein m-2 s-1)
      >  a10daylightl(npoi)     ! 10-day average day-time PAR - lower canopy (micro-Ein m-2 s-1)
 c
-      common /comsum8/ a10td, a10ancub, a10ancuc, a10ancls, a10ancl3, a10ancl4, 
+c     common /comsum8/ a10td, a10ancub, a10ancuc, a10ancls, a10ancl3, a10ancl4, 
      >     a10scalparamu, a10scalparaml, a10daylightu, a10daylightl
 c
 c biogeochem summations
@@ -169,5 +169,5 @@ c
      >  storedn(npoi),      ! total storage of N in soil profile (kg_N m-2) 
      >  yrleach(npoi)       ! annual total amount C leached from soil profile (kg_C m-2/yr)
 c
-      common /comsum9/ storedn, yrleach
+c     common /comsum9/ storedn, yrleach
 c

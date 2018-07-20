@@ -9,12 +9,12 @@ c
      >  deltat(npoi)      ! absolute minimum temperature -
      >                    ! temp on average of coldest month (C)
 c
-      common /combcs1/ xintopo, xinveg, deltat
+c     common /combcs1/ xintopo, xinveg, deltat
 c
       integer
      >  lmask(nlon,nlat)  ! landmask 0=water, 1=land
 c
-      common /combcs2/ lmask
+c     common /combcs2/ lmask
 c
       real
      >  xint(npoi,12),    ! climatological temp + anomaly (C)
@@ -25,7 +25,7 @@ c
      >  xinwet(npoi,12),  ! climatological wet days + anomaly (days/month)
      >  xintrng(npoi,12)  ! climatological temp range + anomaly(C)
 c
-      common /combcs3/ xint, xinq, xinprec, xinwind, xincld, xinwet, xintrng
+c     common /combcs3/ xint, xinq, xinprec, xinwind, xincld, xinwet, xintrng
 c
       real
      >  clmt(npoi,12),    ! climatological temperature (C)
@@ -36,7 +36,7 @@ c
      >  clmcld(npoi,12),  ! climatological cloudiness (%)
      >  clmtrng(npoi,12)  ! climatological temp range (C)
 c
-      common /combcs4/ clmt, clmq, clmprec, clmw, clmwet, clmcld, clmtrng
+c     common /combcs4/ clmt, clmq, clmprec, clmw, clmwet, clmcld, clmtrng
 c
       real
      >  xintd(npoi),      ! daily climatological temperature (C) +
@@ -52,4 +52,4 @@ c
      >  xintrngd(npoi)    ! daily climatological temp range (C) +
      >                    !   anomaly (C) * daily anomaly (C)
 c
-      common /combcs5/ xintd, xinqd, xinprecd, xinwindd, xincldd, xintrngd
+c     common /combcs5/ xintd, xinqd, xinprecd, xinwindd, xincldd, xintrngd

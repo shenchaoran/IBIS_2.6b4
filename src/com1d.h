@@ -9,13 +9,13 @@ c
      >  terml(npoi,7),     ! term needed in lower canopy scaling
      >  termu(npoi,7)      ! term needed in upper canopy scaling
 c
-      common /com1d1/ termu,   terml
+c     common /com1d1/ termu,   terml
 c
       real 
      >  scalcoefl(npoi,4), ! term needed in lower canopy scaling
      >  scalcoefu(npoi,4)  ! term needed in upper canopy scaling
 c
-      common /com1d2/ scalcoefl,scalcoefu
+c     common /com1d2/ scalcoefl,scalcoefu
 c
 c variables for internal fluxes: passed to soil and snow models
 c
@@ -58,7 +58,7 @@ c
      >  tsnowl(npoi),      ! snowfall temperature below upper canopy (K)
      >  tsnowu(npoi)       ! snowfall temperature above upper canopy (K)
 c
-      common /com1d3/ firb,  firg,  firi,  firl,  firs, firu, fsena, fseng, fseni,
+c     common /com1d3/ firb,  firg,  firi,  firl,  firs, firu, fsena, fseng, fseni,
      >     fsenl, fsens, fsenu, fvapa, fvapg, fvapi, fvaplt, fvaplw,
      >     fvaps, fvaput, fvapuw, soli, solg, soll, sols, solu,
      >     raing, rainl, rainu, snowg, snowl, snowu, traing, trainl,
@@ -71,7 +71,7 @@ c (i.e., already including a factor of cos(zen angle))
 c
       integer nsol               ! number of points in indsol
 c
-      common /com1d4/ nsol
+c     common /com1d4/ nsol
 c
       real 
      >  abupd(npoi),       ! fraction of direct  radiation absorbed by upper canopy
@@ -98,13 +98,13 @@ c
      >  sol3d(npoi),       ! direct downward radiation  out of upper canopy + gaps per unit grid cell area (W m-2)
      >  sol3i(npoi)        ! diffuse downward radiation out of upper canopy + gaps per unit grid cell area (W m-2)
 c
-      common /com1d5/ abupd, abupi, ablod, abloi, albsnd, albsni, albsod, albsoi,
+c     common /com1d5/ abupd, abupi, ablod, abloi, albsnd, albsni, albsod, albsoi,
      >     dummy, flodd, flodi, floii, fupdd, fupdi, fupii, relod,  
      >     reloi, reupd, reupi, sol2d, sol2i, sol3d, sol3i
 c
       integer indsol(npoi)         ! index of current strip for points with positive coszen
 c
-      common /com1d6/ indsol
+c     common /com1d6/ indsol
 c
 c variables for aerodynamic calculations
 c 
@@ -158,7 +158,7 @@ c
      >  z34(npoi),         ! effective middle of the lower canopy (for momentum) (m)
      >  z4(npoi)           ! effective bottom of the lower canopy (for momentum) (m)
 c
-      common /com1d8/ aloga, alogav, alogg, alogi, alogl, alogu, alog1, alog2,
+c     common /com1d8/ aloga, alogav, alogg, alogi, alogl, alogu, alog1, alog2,
      >     alog3, alog4, bdl, bdu, cl, cp, cu, dil, displ, dispu, diu,
      >     expl, expu,
      >     exphl, exphu, pfluxl, pfluxs, pfluxu, rhoa, richl, richu, sg
@@ -167,7 +167,7 @@ c
 c
       real tfac            ! (ps/p) ** (rair/cair) for atmospheric level  (const)
 c
-      common /com1d9/ tfac               
+c     common /com1d9/ tfac               
 c
 c variables for intercepted water
 c
@@ -182,7 +182,7 @@ c
      >  rliqs (npoi),      ! proportion of fwets due to liquid
      >  rliqu (npoi)       ! proportion of fwetu due to liquid
 c
-      common /com1d10/ fwetl, fwets, fwetu, fwetlx, fwetsx, fwetux, rliql, rliqs,
+c     common /com1d10/ fwetl, fwets, fwetu, fwetlx, fwetsx, fwetux, rliql, rliqs,
      >     rliqu
 
 c

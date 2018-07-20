@@ -67,8 +67,8 @@ c ------------------------------------------------------------------------------
      >           pt_file = 'ageclass.txt',
      >           acsum_file = 'ac_summ.dat')
       
-      common /comage1/ fu_acmin, cbiow_init, cbiol_init, cbior_init
-      common /comage2/ f_Aveg, cbiow_ac, cbiol_ac, cbior_ac
+c     common /comage1/ fu_acmin, cbiow_init, cbiol_init, cbior_init
+c     common /comage2/ f_Aveg, cbiow_ac, cbiol_ac, cbior_ac
                                             
 c ------------------------------------------------------------------------------
 c Variables needed to do summaries across landclasses.
@@ -85,4 +85,4 @@ c ------------------------------------------------------------------------------
 
 c ------------------------------------------------------------------------------
    
-      common /comage3/ used 
+c     common /comage3/ used 

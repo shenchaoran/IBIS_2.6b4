@@ -14,8 +14,8 @@ c
 c INPUT
       integer idiag          ! number of diagnostic files
 c COMMON
-      include 'comdiag.h'
-      include 'argvs.h'
+      use comdiag
+      use argvs
 c INTERNAL
       integer lun, i, ivar
 c
@@ -60,10 +60,10 @@ c CALLED BY inidiag
 c CALLS nothing
 c Initialize diagnostic output files
 c
-      include 'compar.h'
-      include 'comwork.h'
-      include 'comdiag.h'
-      include 'argvs.h'
+      use compar
+      use comwork
+      use comdiag
+      use argvs
 c
 c local variables
 c
@@ -201,15 +201,15 @@ c CALLS nothing
 c
 c This subroutine writes diagnostic output to the "diag" files
 c
-      include 'compar.h'
-      include 'com1d.h'
-      include 'comveg.h'
-      include 'comhyd.h'
-      include 'comatm.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comdiag.h'
+      use compar
+      use com1d
+      use comveg
+      use comhyd
+      use comatm
+      use comsno
+      use comsoi
+      use comsum
+      use comdiag
 c
       real      diag(nvars)              ! diagnostic variables
 c

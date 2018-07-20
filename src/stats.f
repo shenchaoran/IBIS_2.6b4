@@ -13,15 +13,15 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'comhyd.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'comsum.h'
+      use compar
+      use comatm
+      use comhyd
+      use comsno
+      use comsoi
+      use comveg
+      use comsum
 c
 c local variables
 c
@@ -302,16 +302,16 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'com1d.h'
-      include 'comhyd.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
+      use compar
+      use comatm
+      use com1d
+      use comhyd
+      use comsno
+      use comsoi
+      use comsum
+      use comveg
 c
 c Arguments
 c
@@ -653,16 +653,16 @@ c   - redefine upwd directed heat fluxes as positive
 c
 c common blocks
 c 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'com1d.h'
-      include 'comhyd.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comveg.h'
-      include 'comsum.h'
+      use compar
+      use comatm
+      use com1d
+      use comhyd
+      use comsno
+      use comsoi
+      use comveg
+      use comsum
 c
 c Arguments (input)
 c
@@ -906,16 +906,16 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comatm.h'
-      include 'com1d.h'
-      include 'comhyd.h'
-      include 'comsno.h'
-      include 'comsoi.h'
-      include 'comsum.h'
-      include 'comveg.h'
+      use compar
+      use comatm
+      use com1d
+      use comhyd
+      use comsno
+      use comsoi
+      use comsum
+      use comveg
 c
 c Arguments (input)
 c
@@ -1240,12 +1240,12 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'argvs.h'
+      use compar
+      use comsum
+      use comveg
+      use argvs
 c
 c Arguments (input)
 c
@@ -1461,12 +1461,12 @@ c ---------------------------------------------------------------------
 c
 c common blocks
 c 
-      include 'implicit.h'
+      use implicit
 c
-      include 'compar.h'
-      include 'comsum.h'
-      include 'comveg.h'
-      include 'argvs.h'
+      use compar
+      use comsum
+      use comveg
+      use argvs
 c
 c Arguments (input)
 c
