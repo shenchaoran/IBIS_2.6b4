@@ -1,3 +1,5 @@
 .project
 debug
 build
+node_modules
+src/format.module.f

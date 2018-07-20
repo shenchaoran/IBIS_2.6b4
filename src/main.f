@@ -799,243 +799,241 @@ c
       end if
 
       do argcI_=1, argc_
-          tempStr_ = argvs_(argcI_)
-          call getarg(argcI_, tempStr_)
-          filePathStart_ = index(tempStr_, '=')
-          if(filePathStart_ == 0) then
-              print 377, 'invalid file path argvs, the file&
-     & path must as a prefix of "--tag="!'
-              stop
-          end if
+        tempStr_ = argvs_(argcI_)
+        call getarg(argcI_, tempStr_)
+        filePathStart_ = index(tempStr_, '=')
+        if(filePathStart_ == 0) then
+            cycle
+        end if
 
-          fileTag_ = trim(tempStr_(:filePathStart_))
-          inputFPath_ = tempStr_(filePathStart_+1:)
+        fileTag_ = trim(tempStr_(:filePathStart_))
+        inputFPath_ = tempStr_(filePathStart_+1:)
 
-       if(fileTag_ == '--ini_infile_=') then
-            ini_infile_ = inputFPath_
-       elseif(fileTag_ == '--diag_infile_=') then
-            diag_infile_ = inputFPath_
-       elseif(fileTag_ == '--cld_mon_=') then
-            cld_mon_ = inputFPath_
-       elseif(fileTag_ == '--deltat_mon_=') then
-            deltat_mon_ = inputFPath_
-       elseif(fileTag_ == '--prec_mon_=') then
-            prec_mon_ = inputFPath_
-       elseif(fileTag_ == '--rh_mon_=') then
-            rh_mon_ = inputFPath_
-       elseif(fileTag_ == '--temp_mon_=') then
-            temp_mon_ = inputFPath_
-       elseif(fileTag_ == '--trange_mon_=') then
-            trange_mon_ = inputFPath_
-       elseif(fileTag_ == '--wetd_mon_=') then
-            wetd_mon_ = inputFPath_
-       elseif(fileTag_ == '--wspd_mon_=') then
-            wspd_mon_ = inputFPath_
-       elseif(fileTag_ == '--soita_sand_=') then
-            soita_sand_ = inputFPath_
-       elseif(fileTag_ == '--soita_clay_=') then
-            soita_clay_ = inputFPath_
-       elseif(fileTag_ == '--vegtype_=') then
-            vegtype_ = inputFPath_
-       elseif(fileTag_ == '--surta_=') then
-            surta_ = inputFPath_
-       elseif(fileTag_ == '--topo_=') then
-            topo_ = inputFPath_
-       elseif(fileTag_ == '--params_can_=') then
-            params_can_ = inputFPath_
-       elseif(fileTag_ == '--params_hyd_=') then
-            params_hyd_ = inputFPath_
-       elseif(fileTag_ == '--params_soi_=') then
-            params_soi_ = inputFPath_
-       elseif(fileTag_ == '--params_veg_=') then
-            params_veg_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_aet_=') then
-            out_yearly_aet_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_biomass_=') then
-            out_yearly_biomass_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_co2fluxes_=') then
-            out_yearly_co2fluxes_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_csoi_=') then
-            out_yearly_csoi_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_disturbf_=') then
-            out_yearly_disturbf_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_exist_=') then
-            out_yearly_exist_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_fcover_=') then
-            out_yearly_fcover_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_npp_=') then
-            out_yearly_npp_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_nsoi_=') then
-            out_yearly_nsoi_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_plai_=') then
-            out_yearly_plai_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_runoff_=') then
-            out_yearly_runoff_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_sens_=') then
-            out_yearly_sens_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_tsoi_=') then
-            out_yearly_tsoi_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_vegtype0_=') then
-            out_yearly_vegtype0_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_wsoi_=') then
-            out_yearly_wsoi_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_zcanopy_=') then
-            out_yearly_zcanopy_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_sapfrac_=') then
-            out_yearly_sapfrac_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_dummyv_=') then
-            out_yearly_dummyv_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_solar_=') then
-            out_yearly_solar_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_albedo_=') then
-            out_yearly_albedo_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_latent_=') then
-            out_yearly_latent_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_totfall_=') then
-            out_yearly_totfall_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_clitw_=') then
-            out_yearly_clitw_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_csoislo_=') then
-            out_yearly_csoislo_ = inputFPath_
-       elseif(fileTag_ == '--out_yearly_csoipas_=') then
-            out_yearly_csoipas_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_aet_=') then
-            out_monthly_aet_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_cloud_=') then
-            out_monthly_cloud_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_co2ratio_=') then
-            out_monthly_co2ratio_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_ir_=') then
-            out_monthly_ir_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_lai_=') then
-            out_monthly_lai_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_latent_=') then
-            out_monthly_latent_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_npptot_=') then
-            out_monthly_npptot_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_qa_=') then
-            out_monthly_qa_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_rain_=') then
-            out_monthly_rain_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_rh_=') then
-            out_monthly_rh_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_runoff_=') then
-            out_monthly_runoff_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_sens_=') then
-            out_monthly_sens_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_snod_=') then
-            out_monthly_snod_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_snof_=') then
-            out_monthly_snof_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_snow_=') then
-            out_monthly_snow_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_solar_=') then
-            out_monthly_solar_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_temp_=') then
-            out_monthly_temp_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_tsoi_=') then
-            out_monthly_tsoi_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_wsoi_=') then
-            out_monthly_wsoi_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_albedo_=') then
-            out_monthly_albedo_ = inputFPath_
-       elseif(fileTag_ == '--out_monthly_dummyv_=') then
-            out_monthly_dummyv_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_rain_=') then
-            out_daily_rain_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_cloud_=') then
-            out_daily_cloud_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_rh_=') then
-            out_daily_rh_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_snow_=') then
-            out_daily_snow_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_aet_=') then
-            out_daily_aet_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_trunoff_=') then
-            out_daily_trunoff_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_srunoff_=') then
-            out_daily_srunoff_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_drainage_=') then
-            out_daily_drainage_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_wsoi_=') then
-            out_daily_wsoi_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_wisoi_=') then
-            out_daily_wisoi_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_snod_=') then
-            out_daily_snod_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_snof_=') then
-            out_daily_snof_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_co2ratio_=') then
-            out_daily_co2ratio_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_co2mic_=') then
-            out_daily_co2mic_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_templ_=') then
-            out_daily_templ_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_zcanopy_=') then
-            out_daily_zcanopy_ = inputFPath_
-       elseif(fileTag_ == '--out_daily_laicanopy_=') then
-            out_daily_laicanopy_ = inputFPath_
-       elseif(fileTag_ == '--temp_danom_=') then
-            temp_danom_ = inputFPath_
-       elseif(fileTag_ == '--trange_danom_=') then
-            trange_danom_ = inputFPath_
-       elseif(fileTag_ == '--prec_danom_=') then
-            prec_danom_ = inputFPath_
-       elseif(fileTag_ == '--cld_danom_=') then
-            cld_danom_ = inputFPath_
-       elseif(fileTag_ == '--rh_danom_=') then
-            rh_danom_ = inputFPath_
-       elseif(fileTag_ == '--wspd_danom_=') then
-            wspd_danom_ = inputFPath_
-       elseif(fileTag_ == '--wetd_danom_=') then
-            wetd_danom_ = inputFPath_
-       elseif(fileTag_ == '--prec_daily_=') then
-            prec_daily_ = inputFPath_
-       elseif(fileTag_ == '--temp_daily_=') then
-            temp_daily_ = inputFPath_
-       elseif(fileTag_ == '--trange_daily_=') then
-            trange_daily_ = inputFPath_
-       elseif(fileTag_ == '--cld_daily_=') then
-            cld_daily_ = inputFPath_
-       elseif(fileTag_ == '--wspd_daily_=') then
-            wspd_daily_ = inputFPath_
-       elseif(fileTag_ == '--sphum_daily_=') then
-            sphum_daily_ = inputFPath_
-       elseif(fileTag_ == '--prec_fanom_=') then
-            prec_fanom_ = inputFPath_
-       elseif(fileTag_ == '--trange_fanomc_=') then
-            trange_fanomc_ = inputFPath_
-       elseif(fileTag_ == '--wspd_fanomc_=') then
-            wspd_fanomc_ = inputFPath_
-       elseif(fileTag_ == '--sphum_fanom_=') then
-            sphum_fanom_ = inputFPath_
-       elseif(fileTag_ == '--out_global_=') then
-            out_global_ = inputFPath_
-       elseif(fileTag_ == '--out_vegtype_=') then
-            out_vegtype_ = inputFPath_
-       elseif(fileTag_ == '--out_yearsrun_=') then
-            out_yearsrun_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_0_=') then
-            out_diag_0_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_1_=') then
-            out_diag_1_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_2_=') then
-            out_diag_2_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_3_=') then
-            out_diag_3_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_4_=') then
-            out_diag_4_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_5_=') then
-            out_diag_5_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_6_=') then
-            out_diag_6_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_7_=') then
-            out_diag_7_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_8_=') then
-            out_diag_8_ = inputFPath_
-       elseif(fileTag_ == '--out_diag_9_=') then
-            out_diag_9_ = inputFPath_
-       end if
+        if(fileTag_ == '--ini_infile_=') then
+                ini_infile_ = inputFPath_
+        elseif(fileTag_ == '--diag_infile_=') then
+                diag_infile_ = inputFPath_
+        elseif(fileTag_ == '--cld_mon_=') then
+                cld_mon_ = inputFPath_
+        elseif(fileTag_ == '--deltat_mon_=') then
+                deltat_mon_ = inputFPath_
+        elseif(fileTag_ == '--prec_mon_=') then
+                prec_mon_ = inputFPath_
+        elseif(fileTag_ == '--rh_mon_=') then
+                rh_mon_ = inputFPath_
+        elseif(fileTag_ == '--temp_mon_=') then
+                temp_mon_ = inputFPath_
+        elseif(fileTag_ == '--trange_mon_=') then
+                trange_mon_ = inputFPath_
+        elseif(fileTag_ == '--wetd_mon_=') then
+                wetd_mon_ = inputFPath_
+        elseif(fileTag_ == '--wspd_mon_=') then
+                wspd_mon_ = inputFPath_
+        elseif(fileTag_ == '--soita_sand_=') then
+                soita_sand_ = inputFPath_
+        elseif(fileTag_ == '--soita_clay_=') then
+                soita_clay_ = inputFPath_
+        elseif(fileTag_ == '--vegtype_=') then
+                vegtype_ = inputFPath_
+        elseif(fileTag_ == '--surta_=') then
+                surta_ = inputFPath_
+        elseif(fileTag_ == '--topo_=') then
+                topo_ = inputFPath_
+        elseif(fileTag_ == '--params_can_=') then
+                params_can_ = inputFPath_
+        elseif(fileTag_ == '--params_hyd_=') then
+                params_hyd_ = inputFPath_
+        elseif(fileTag_ == '--params_soi_=') then
+                params_soi_ = inputFPath_
+        elseif(fileTag_ == '--params_veg_=') then
+                params_veg_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_aet_=') then
+                out_yearly_aet_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_biomass_=') then
+                out_yearly_biomass_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_co2fluxes_=') then
+                out_yearly_co2fluxes_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_csoi_=') then
+                out_yearly_csoi_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_disturbf_=') then
+                out_yearly_disturbf_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_exist_=') then
+                out_yearly_exist_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_fcover_=') then
+                out_yearly_fcover_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_npp_=') then
+                out_yearly_npp_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_nsoi_=') then
+                out_yearly_nsoi_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_plai_=') then
+                out_yearly_plai_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_runoff_=') then
+                out_yearly_runoff_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_sens_=') then
+                out_yearly_sens_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_tsoi_=') then
+                out_yearly_tsoi_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_vegtype0_=') then
+                out_yearly_vegtype0_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_wsoi_=') then
+                out_yearly_wsoi_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_zcanopy_=') then
+                out_yearly_zcanopy_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_sapfrac_=') then
+                out_yearly_sapfrac_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_dummyv_=') then
+                out_yearly_dummyv_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_solar_=') then
+                out_yearly_solar_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_albedo_=') then
+                out_yearly_albedo_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_latent_=') then
+                out_yearly_latent_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_totfall_=') then
+                out_yearly_totfall_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_clitw_=') then
+                out_yearly_clitw_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_csoislo_=') then
+                out_yearly_csoislo_ = inputFPath_
+        elseif(fileTag_ == '--out_yearly_csoipas_=') then
+                out_yearly_csoipas_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_aet_=') then
+                out_monthly_aet_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_cloud_=') then
+                out_monthly_cloud_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_co2ratio_=') then
+                out_monthly_co2ratio_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_ir_=') then
+                out_monthly_ir_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_lai_=') then
+                out_monthly_lai_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_latent_=') then
+                out_monthly_latent_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_npptot_=') then
+                out_monthly_npptot_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_qa_=') then
+                out_monthly_qa_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_rain_=') then
+                out_monthly_rain_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_rh_=') then
+                out_monthly_rh_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_runoff_=') then
+                out_monthly_runoff_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_sens_=') then
+                out_monthly_sens_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_snod_=') then
+                out_monthly_snod_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_snof_=') then
+                out_monthly_snof_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_snow_=') then
+                out_monthly_snow_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_solar_=') then
+                out_monthly_solar_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_temp_=') then
+                out_monthly_temp_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_tsoi_=') then
+                out_monthly_tsoi_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_wsoi_=') then
+                out_monthly_wsoi_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_albedo_=') then
+                out_monthly_albedo_ = inputFPath_
+        elseif(fileTag_ == '--out_monthly_dummyv_=') then
+                out_monthly_dummyv_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_rain_=') then
+                out_daily_rain_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_cloud_=') then
+                out_daily_cloud_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_rh_=') then
+                out_daily_rh_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_snow_=') then
+                out_daily_snow_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_aet_=') then
+                out_daily_aet_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_trunoff_=') then
+                out_daily_trunoff_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_srunoff_=') then
+                out_daily_srunoff_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_drainage_=') then
+                out_daily_drainage_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_wsoi_=') then
+                out_daily_wsoi_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_wisoi_=') then
+                out_daily_wisoi_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_snod_=') then
+                out_daily_snod_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_snof_=') then
+                out_daily_snof_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_co2ratio_=') then
+                out_daily_co2ratio_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_co2mic_=') then
+                out_daily_co2mic_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_templ_=') then
+                out_daily_templ_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_zcanopy_=') then
+                out_daily_zcanopy_ = inputFPath_
+        elseif(fileTag_ == '--out_daily_laicanopy_=') then
+                out_daily_laicanopy_ = inputFPath_
+        elseif(fileTag_ == '--temp_danom_=') then
+                temp_danom_ = inputFPath_
+        elseif(fileTag_ == '--trange_danom_=') then
+                trange_danom_ = inputFPath_
+        elseif(fileTag_ == '--prec_danom_=') then
+                prec_danom_ = inputFPath_
+        elseif(fileTag_ == '--cld_danom_=') then
+                cld_danom_ = inputFPath_
+        elseif(fileTag_ == '--rh_danom_=') then
+                rh_danom_ = inputFPath_
+        elseif(fileTag_ == '--wspd_danom_=') then
+                wspd_danom_ = inputFPath_
+        elseif(fileTag_ == '--wetd_danom_=') then
+                wetd_danom_ = inputFPath_
+        elseif(fileTag_ == '--prec_daily_=') then
+                prec_daily_ = inputFPath_
+        elseif(fileTag_ == '--temp_daily_=') then
+                temp_daily_ = inputFPath_
+        elseif(fileTag_ == '--trange_daily_=') then
+                trange_daily_ = inputFPath_
+        elseif(fileTag_ == '--cld_daily_=') then
+                cld_daily_ = inputFPath_
+        elseif(fileTag_ == '--wspd_daily_=') then
+                wspd_daily_ = inputFPath_
+        elseif(fileTag_ == '--sphum_daily_=') then
+                sphum_daily_ = inputFPath_
+        elseif(fileTag_ == '--prec_fanom_=') then
+                prec_fanom_ = inputFPath_
+        elseif(fileTag_ == '--trange_fanomc_=') then
+                trange_fanomc_ = inputFPath_
+        elseif(fileTag_ == '--wspd_fanomc_=') then
+                wspd_fanomc_ = inputFPath_
+        elseif(fileTag_ == '--sphum_fanom_=') then
+                sphum_fanom_ = inputFPath_
+        elseif(fileTag_ == '--out_global_=') then
+                out_global_ = inputFPath_
+        elseif(fileTag_ == '--out_vegtype_=') then
+                out_vegtype_ = inputFPath_
+        elseif(fileTag_ == '--out_yearsrun_=') then
+                out_yearsrun_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_0_=') then
+                out_diag_0_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_1_=') then
+                out_diag_1_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_2_=') then
+                out_diag_2_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_3_=') then
+                out_diag_3_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_4_=') then
+                out_diag_4_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_5_=') then
+                out_diag_5_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_6_=') then
+                out_diag_6_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_7_=') then
+                out_diag_7_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_8_=') then
+                out_diag_8_ = inputFPath_
+        elseif(fileTag_ == '--out_diag_9_=') then
+                out_diag_9_ = inputFPath_
+        end if
       end do
 
       if(len_trim(ini_infile_) == 0 .or.
@@ -1058,4 +1056,21 @@ c
       end if
 
       return
+      end
+
+      subroutine mallocFun
+        use argvs
+        use malloc
+
+        allocate(myarray(nlon, nlat))
+
+        return
+      end
+
+      subroutine demallocFun
+        use argvs
+        use malloc
+
+        
+        return
       end

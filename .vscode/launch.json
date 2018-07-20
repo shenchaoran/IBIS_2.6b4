@@ -6,6 +6,12 @@
     "configurations": [
 
         {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch make Module",
+            "program": "${workspaceFolder}/script/makeModule.js"
+        },
+        {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",

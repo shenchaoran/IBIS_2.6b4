@@ -1,0 +1,23 @@
+{
+  "name": "ibis_linux_2.6b4",
+  "version": "1.0.0",
+  "description": "Compile IBIS by typing '**make ibis**' in the directory which contains the ibis FORTRAN code.  However, before doing so, you may need to edit makefile so that the **F77_OPTIONS**, **INCLUDE_DIRS**, and **LD_OPTIONS_NETCDF** match those on your computer.  The executable will be named 'ibisnetcdf'.  You may move the executable to the directory in which your input/output directories exist.  If so, be sure to move ibis.infile and diag.infile there too.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./script/makeModule.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shenchaoran/IBIS_2.6b4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shenchaoran/IBIS_2.6b4/issues"
+  },
+  "homepage": "https://github.com/shenchaoran/IBIS_2.6b4#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1"
+  }
+}
