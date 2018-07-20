@@ -19,3 +19,5 @@ build/stats.o
 build/utilities.o
 build/vegetation.o
 build/weather.o
+**/*.o
+**/*.mod
