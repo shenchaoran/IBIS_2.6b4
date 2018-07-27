@@ -789,8 +789,8 @@ c
       include 'argvs.h'
 
       integer argc_, argcI_, filePathStart_
-      character*100, dimension(50):: argvs_
-      character*100 fileTag_, tempStr_, inputFPath_
+      character*200, dimension(50):: argvs_
+      character*300 fileTag_, tempStr_, inputFPath_
 
       argc_ = iargc()
       if(argc_ < 13) then

@@ -15,6 +15,9 @@
 |诊断输出|out_diag_0_<br>out_diag_1_<br>out_diag_2_<br>out_diag_3_<br>out_diag_4_<br>out_diag_5_<br>out_diag_6_<br>out_diag_7_<br>out_diag_8_<br>out_diag_9_<br>|指定需要数据的项目路径，不指定的不予输出|
 |其他输出|out_global_<br>out_vegtype_<br>out_yearsrun_<br>|指定需要数据的项目路径，不指定的不予输出|
 
+## 无奈之举
+又有目前fortran 的代码不太友好，一大波的数组不能动态分配内存。所以有5个参数没有提取出来，目前的策略是每次参数不同时，通过 nodejs 修改源代码，在调用 make 编译，并对编译好的程序列表做一个数据库列表存储，前台调用模型时调用对应参数版本的那一个。这样既解决了参数不同的问题，又不至于每次都要编译模型。
+
 # 编译
 ## makefile
 - make ibis
