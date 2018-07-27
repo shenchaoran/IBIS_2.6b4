@@ -18,70 +18,20 @@ c
      >     yres,       ! latitude resolution (in degrees)
      >     pi          ! you know, that constant thingy
 
-c	  common /compar0/ nlon,
-c    >	nlat,
-c    >  npoi,
-c    >  nband,
-c    >  nsoilay,
-c    >  nsnolay,
-c    >  npft,
-c    >  xres,
-c    >  yres
-
 c
 c --------------------------
 c typical ibis configuration
 c --------------------------
 c
-c
-c global 10.0 x 10.0 TEST grid: 36 by 18 array, with 147 land points:
-c
-c     parameter (nlon = 36,
-c    >           nlat = 18, 
-c    >           npoi = 147,
-c    >           xres = 10.00,
-c    >           yres = 10.00)
-c
 c South Asia 0.5 x 0.5  grid:  720 by 360 array, with 58920 land points:
 c
+c---modify_flag_of_auto_compile---
        parameter (nlon = 720,
      >           nlat = 360,
      >           npoi = 1718,
      >           xres = 0.50,
      >           yres = 0.50)
-c
-c global 0.5 x 0.5  grid:  720 by 360 array, with 58920 land points:
-c
-c      parameter (nlon = 720,
-c     >           nlat = 360, 
-c     >           npoi = 58920,
-c     >           xres = 0.50,
-c     >           yres = 0.50)
-c
-c
-c global 1.0 x 1.0  grid:  360 by 180 array, with 14545 land points:
-c
-c      parameter (nlon = 360,
-c     >           nlat = 180, 
-c     >           npoi = 14545,
-c     >           xres = 1.00, 
-c     >           yres = 1.00)
-c
-c global 2.0 x 2.0  grid:  180 by  90 array, with  3728 land points:
-c
-c      parameter (nlon = 180,
-c     >           nlat = 90, 
-c     >           npoi = 3728,
-c     >           xres = 2.00,
-c     >           yres = 2.00)
-c
-c global 4.0 x 4.0  grid:   90 by  45 array, with   912 land points:
-c
-c     parameter (nlon = 90,
-c    >           nlat = 45, 
-c    >           npoi = 912,
-c    >           xres = 4.00,
-c    >           yres = 4.00)
+c---modify_flag_of_auto_compile---
 c
 c -------------------------------
 c state description configuration

@@ -1,33 +1,9 @@
 VERSION = 2.6b4
 
-# SGI                       ** make ibis **
-#
-# COMPILER = f77
-# F77_OPTIONS = -O2 -col120    
-#  WARNING - DO NOT USE -Ofast OPTION DURING COMPILING
-#  Useful options for debugging on SGI:
-#  F77_OPTIONS = -col120 -c -O0 -g -C -trapuv
-#INCLUDE_DIRS  = -I/usr/local/include
-#LD_OPTIONS_NETCDF  = -L/usr/local/lib -lnetcdf
-
-  COMPILER = gfortran
-  F77_OPTIONS = -g -o0 -C -ffixed-line-length-132 -funroll-loops
-  INCLUDE_DIRS  = -I/usr/local/include
-  LD_OPTIONS_NETCDF  = /usr/local/lib/libnetcdff.so
-
-
-
-# Linux on a PIII using g77   ** make ibis **
-#
-# COMPILER = g77 -fdebug-kludge -mcpu=pentiumpro -ffixed-line-length-132
-# F77_OPTIONS = -mcpu=pentiumpro -ffast-math -malign-double -O5 -ffixed-line-length-132 -funroll-loops
-# F77_OPTIONS = -mpentiumpro -ffast-math -malign-double -O5 -ffixed-line-length-132 -funroll-loops
-# F77_OPTIONS = -mpentiumpro -O1 -malign-double -ffixed-line-length-132 -funroll-loops
-# F77_OPTIONS = -mpentiumpro -O2 -malign-double -ffixed-line-length-132 -funroll-loops
-# F77_OPTIONS = -g -ffixed-line-length-132
-#
-#INCLUDE_DIRS  = -I/usr/local/include
-#LD_OPTIONS_NETCDF  = -L/usr/local/lib -lnetcdf
+COMPILER = gfortran
+F77_OPTIONS = -g -o0 -C -ffixed-line-length-132 -funroll-loops
+INCLUDE_DIRS  = -I/usr/local/include
+LD_OPTIONS_NETCDF  = /usr/local/lib/libnetcdff.so
 
 SPATH = ./src
 OBJPATH = ./build
